@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="android:textColorPrimary">@color/blanco</item>
+    <item name="android:textColorSecondary">@color/blanco</item>
+    <item name="actionMenuTextColor">@color/blanco</item>
+
+
+    </style>
+
+    <style name="TitleMainActivity" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#E14207</item>
+
+    </style>
+
+    <style name="TextViewRegitre" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#FAFAF6</item>
+        <item name="android:textStyle">bold|italic</item>
+
+
+    </style>
+</resources>
