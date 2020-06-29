@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +28,7 @@ import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private UsuarioViewModel mUsuarioViewModel;
 
-EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,contraseñatxt;
+EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,passwordtxt,repitPasswordtxt;
 
     private Usuario usuario;
     private UsuarioViewModel usuarioViewModel ;
@@ -54,14 +56,7 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,c
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nametext=(EditText)findViewById(R.id.name);
-       phonetext=(EditText)findViewById(R.id.phone);
-      direccionTxt = (EditText)findViewById(R.id.direccion);
-       mascotaTxt = (EditText)findViewById(R.id.mascota);
-      alimentoTxt = (EditText)findViewById(R.id.alimento);
-     diaTxt = (EditText)findViewById(R.id.dia);
-      mailTxt = (EditText)findViewById(R.id.mail);
-     contraseñatxt= (EditText)findViewById(R.id.contraseña);
+        SetValuesIU();
 
         setValuesToolbar();
 
@@ -69,6 +64,18 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,c
 
         usuarioViewModel = new UsuarioViewModel(getApplication());
 
+    }
+
+    private void SetValuesIU() {
+        nametext=(EditText)findViewById(R.id.name);
+        phonetext=(EditText)findViewById(R.id.phone);
+        direccionTxt = (EditText)findViewById(R.id.direccion);
+        mascotaTxt = (EditText)findViewById(R.id.mascota);
+        alimentoTxt = (EditText)findViewById(R.id.alimento);
+        diaTxt = (EditText)findViewById(R.id.dia);
+        mailTxt = (EditText)findViewById(R.id.mail);
+        passwordtxt= (EditText)findViewById(R.id.contraseña);
+        repitPasswordtxt= (EditText)findViewById(R.id.RepetPassword);
     }
 
     @Override
@@ -91,17 +98,40 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,c
         }
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.ingresarMenuBar:
+                goLogin();
+                return true;
+            case R.id.helpMenuBar:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void goLogin()
+    {
+        Intent LoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(LoginActivity);
+    }
+
     public void loginUser(View view) {
         try {
 
-            String nombre = nametext.getText().toString();
-            String phone = phonetext.getText().toString();
-            String direccion = direccionTxt.getText().toString();
-            String mascota = mascotaTxt.getText().toString();
-            String alimento = alimentoTxt.getText().toString();
-            String mail = mailTxt.getText().toString();
+           String nombre = nametext.getText().toString();
+           String phone = phonetext.getText().toString();
+           String direccion = direccionTxt.getText().toString();
+           String mascota = mascotaTxt.getText().toString();
+           String alimento = alimentoTxt.getText().toString();
+           String mail = mailTxt.getText().toString();
             String dia = diaTxt.getText().toString();
-            String contraseña = contraseñatxt.getText().toString();
+            String password = passwordtxt.getText().toString();
+            String repetPassword= repitPasswordtxt.getText().toString();
 
 
 
@@ -110,34 +140,40 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,c
             AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
 
 
+
+
+
             //set timer you want alarm to work (here I have set it to 7.20pm)
 
             Calendar dayOfNotification = Calendar.getInstance();
 
             long time= System.currentTimeMillis();
             long timeseconf=1000*10;
-             dayOfNotification.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dia));
-             long time2=dayOfNotification.getTimeInMillis();
+             //dayOfNotification.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dia));
+             //long time2=dayOfNotification.getTimeInMillis();
             //Date after adding the days to the given date
 
             //Displaying the new Date after addition of Days
 
 
-            alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
+           // alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
+            alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
 
 
-            if (!Validation.IsEmptyRegister(nombre, direccion, phone, alimento, dia, mail,contraseña)) {
-                Toast.makeText(this, "Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos", Toast.LENGTH_SHORT).show();
+           if (!Validation.IsEmptyRegister(nombre, direccion, phone, alimento, dia, mail,contraseña)) {
+                Toast.makeText(this,R.string.requeridField, Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            if(!Validation.ValidatePassword(contraseña,repetPassword))
+
             if (!Validation.isEmailValid(mail)) {
-                Toast.makeText(this, "El Mail es Invalido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,R.string.passwordEqual, Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!Validation.IsNumeric(dia)) {
-                Toast.makeText(this, "día es un valor numerico", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.errorDia, Toast.LENGTH_SHORT).show();
                 return;
             }
 

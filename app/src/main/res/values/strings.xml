@@ -16,8 +16,12 @@
     <string name="channel_description">Notificación de nueva compra</string>
     <string name="userName">Usuario</string>
     <string name="password">clave</string>
+    <string name="RepitPassword">Repita Conttraseña</string>
     <string name="login">Inicio</string>
     <string name="contraseña">contraseña</string>
-
-
+    <string name="registrar">Registrar</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="errorDia">día es un valor numerico</string>
+    <string name="requeridField"> Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos</string>
+    <string name="passwordEqual"> Las password no cinciden</string>
 </resources>

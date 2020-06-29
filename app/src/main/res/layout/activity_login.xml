@@ -11,18 +11,16 @@
     tools:context=".activity_login">
 
 
+    <EditText
+        android:id="@+id/mailLogin"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content" />
 
     <EditText
-        android:id = "@+id/userName"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        />
-
-    <EditText
-        android:id = "@+id/password"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        />
+        android:id="@+id/passwordLogin"
+        android:inputType="textPassword"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/buttonLogin"

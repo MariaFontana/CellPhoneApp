@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/inicio"
+    <item android:id="@+id/inicioMenuBar"
         android:title="@string/inicio"/>
-    <item android:id="@+id/ingresar"
+    <item android:id="@+id/ingresarMenuBar"
         android:title="@string/ingresar" />
+    <item android:id="@+id/helpMenuBar"
+
+        android:title="@string/ayuda" />
 </menu>

@@ -1,8 +1,8 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
@@ -27,8 +27,17 @@
 
     <style name="TextViewRegitre" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#FAFAF6</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="TextEdiRegitre" parent="TextAppearance.AppCompat">
+        <item name=  "android:layout_alignParentRight">true</item>
 
+    </style>
+
+    <style name="Widget.MaterialComponents.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">?attr/textAppearanceButton</item>
+        <item name="android:textColor">@color/mtrl_btn_text_color_selector</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
     </style>
 </resources>

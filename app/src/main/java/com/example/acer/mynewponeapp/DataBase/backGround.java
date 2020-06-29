@@ -26,24 +26,24 @@ public class backGround extends AsyncTask< String ,Void,String> {
 
     try{
         String nombre = strings[0];
-        String telefono = strings[1];
-        String direccion =strings[2];
+        String telephone = strings[1];
+        String adress =strings[2];
         String  mascota =strings[3];
         String alimento = strings[4];
         String mail = strings[5];
         String dia = strings[6];
-        String contraseña = strings[7];
+        String password = strings[7];
 
 
-        String link = "http://192.168.0.107:8080/conectionDataBase.php";
+        String link = "http://192.168.0.109:8080/insertUser.php";
 
 
         String data  = URLEncoder.encode("nombre", "UTF-8") + "=" +
                 URLEncoder.encode(nombre, "UTF-8");
-        data += "&" + URLEncoder.encode("telefono", "UTF-8") + "=" +
-                URLEncoder.encode(telefono, "UTF-8");
-        data += "&" + URLEncoder.encode("direccion", "UTF-8") + "=" +
-                URLEncoder.encode(direccion, "UTF-8");
+        data += "&" + URLEncoder.encode("telephone", "UTF-8") + "=" +
+                URLEncoder.encode(telephone, "UTF-8");
+        data += "&" + URLEncoder.encode("adress", "UTF-8") + "=" +
+                URLEncoder.encode(adress, "UTF-8");
         data += "&" + URLEncoder.encode("mascota", "UTF-8") + "=" +
                 URLEncoder.encode(mascota, "UTF-8");
         data += "&" + URLEncoder.encode("alimento", "UTF-8") + "=" +
@@ -52,8 +52,8 @@ public class backGround extends AsyncTask< String ,Void,String> {
                 URLEncoder.encode(dia, "UTF-8");
         data += "&" + URLEncoder.encode("mail", "UTF-8") + "=" +
                 URLEncoder.encode(mail, "UTF-8");
-        data += "&" + URLEncoder.encode("contraseña", "UTF-8") + "=" +
-                URLEncoder.encode(contraseña, "UTF-8");
+        data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                URLEncoder.encode(password, "UTF-8");
 
 
         URL url = new URL(link);

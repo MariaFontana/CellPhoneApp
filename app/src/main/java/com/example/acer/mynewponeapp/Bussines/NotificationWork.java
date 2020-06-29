@@ -112,7 +112,7 @@ public class NotificationWork extends Worker {
         {
             try{
 
-                String link = "http://192.168.0.107:8080/CheckNotification.php";
+                String link = "http://192.168.0.109:8080/CheckNotification.php";
 
 
                 String data  = URLEncoder.encode("mail", "UTF-8") + "=" +

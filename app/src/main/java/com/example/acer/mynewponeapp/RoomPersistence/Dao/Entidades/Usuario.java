@@ -20,12 +20,12 @@ public class Usuario implements Serializable {
         private int id;
     @ColumnInfo(name = "nombre")
         private String mNombre;
-    @ColumnInfo(name = "direccion")
-        private String mDireccion;
-    @ColumnInfo(name = "telefono")
-        private String mTelefono;
-    @ColumnInfo(name = "mascota")
-        private String mMascota;
+    @ColumnInfo(name = "adress")
+        private String madress;
+    @ColumnInfo(name = "telephone")
+        private String mTelephone;
+    @ColumnInfo(name = "pet")
+        private String mPet;
     @ColumnInfo(name = "alimento")
         private String mAlimento;
     @ColumnInfo(name = "mail")
@@ -38,12 +38,12 @@ public class Usuario implements Serializable {
 
 
     @Ignore
-        public Usuario(@NonNull String nombre,@NonNull String telefono,@NonNull String direccion,@NonNull String mascota, @NonNull String alimento,  @NonNull String mail,@NonNull String password) {
+        public Usuario(@NonNull String nombre,@NonNull String telephone,@NonNull String adress,@NonNull String pet, @NonNull String alimento,  @NonNull String mail,@NonNull String password) {
             this.mNombre = nombre;
             this.mAlimento=alimento;
-            this.mDireccion=direccion;
-            this.mMascota=mascota;
-            this.mTelefono=telefono;
+            this.madress=adress;
+            this.mPet=pet;
+            this.mTelephone=telephone;
             this.mMail=mail;
             this.mpassword=password;
 
@@ -57,9 +57,9 @@ public class Usuario implements Serializable {
             return this.mNombre;
         }
     @NonNull
-        public String getDireccion() { return this.mDireccion;}
+        public String getAdress() { return this.madress;}
     @NonNull
-        public String getMascota() { return this.mMascota;}
+        public String getPet() { return this.mPet;}
     @NonNull
         public String getAlimento() {return this.mAlimento;}
     @NonNull
@@ -67,7 +67,7 @@ public class Usuario implements Serializable {
     @NonNull
         public String getDia(){return this.mDia;}
     @NonNull
-        public String getTelefono() {return this.mTelefono;}
+        public String getTelephone() {return this.mTelephone;}
     @NonNull
         public int getId(){return this.id;}
 
@@ -79,15 +79,15 @@ public class Usuario implements Serializable {
         this.mNombre = nombre;
     }
 
-    public void setMascota(String mascota) {
-        this.mMascota = mascota;
+    public void setPet(String pet) {
+        this.mPet = pet;
     }
-    public void setDireccion(String direccion) {
-        this.mDireccion = direccion;
+    public void setDireccion(String adress) {
+        this.madress = adress;
     }
 
-    public void setTelefono(String telefono) {
-        this.mTelefono = telefono;
+    public void setTelefono(String telephone) {
+        this.mTelephone = telephone;
     }
 
     public void setAlimento(String alimento) {

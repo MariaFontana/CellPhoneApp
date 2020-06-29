@@ -24,6 +24,15 @@ public final class Validation {
         return isValid;
     }
 
+    public static boolean ValidatePassword(String password,String repetPassword) {
+        boolean isValid = false;
+
+        if (password.equals(repetPassword)) {
+            isValid = true;
+        }
+        return isValid;
+    }
+
     public static boolean IsEmptyRegister(String nombre, String direccion, String celphone, String alimento, String dia, String mail,String contraseña) {
         boolean isValid = true;
         if (nombre.isEmpty() || direccion.isEmpty() || celphone.equals(0) || alimento.isEmpty() || dia.equals(0) || contraseña.isEmpty()) {

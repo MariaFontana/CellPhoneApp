@@ -37,11 +37,6 @@ public class UsuarioViewModel extends AndroidViewModel {
     {
         mRepository.GetUserById(id);
     }
-  // public Usuario GetUserByLogin(String  mail, String password)
-  //  {
-    //   Usuario user =mRepository.GetUserByLogin(mail,password);
-      // return user;
-    //}
 
 
 }

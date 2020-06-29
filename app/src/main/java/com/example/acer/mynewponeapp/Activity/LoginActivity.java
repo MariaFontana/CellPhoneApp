@@ -1,5 +1,7 @@
 package com.example.acer.mynewponeapp.Activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Bussines.Validation;
+import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
+import com.example.acer.mynewponeapp.DataBase.backGround;
 import com.example.acer.mynewponeapp.R;
 
 
@@ -16,9 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
 
-    private EditText user;
+    private EditText mail;
     private EditText password;
     private Button loginButton;
+    private String mailUser ="";
+    private String passwordUser="";
+
 
 
     TextView resul;
@@ -30,31 +38,41 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-       // user = (EditText) findViewById(R.id.name);
-        //    //    password = (EditText) findViewById(R.id.password);
-        //     //   loginButton=(Button)findViewById(R.id.buttonLogin);
+        mail = (EditText)findViewById(R.id.mailLogin);
+        password = (EditText) findViewById(R.id.passwordLogin);
+        loginButton=(Button)findViewById(R.id.buttonLogin);
 
     }
 
     public void login(View view) {
 
+        mailUser = mail.getText().toString();
+        passwordUser = password.getText().toString();
 
-        if (user.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-
-            Toast.makeText(getApplicationContext(),
-                    "Redirecting...", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
-            user.setVisibility(View.VISIBLE);
-            user.setBackgroundColor(Color.RED);
-            counter--;
-            resul.setText(Integer.toString(counter));
-
-            if (counter == 0) {
-                loginButton.setEnabled(false);
-            }
+        if (!Validation.isEmailValid(mailUser)) {
+            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            return;
         }
 
 
+        GetUserByLogin loginUser = new GetUserByLogin(this);
+        loginUser.execute(mailUser,passwordUser);
+        SaveSharedPreferencesLogin(mailUser,passwordUser);
+
+        }
+
+
+        private void SaveSharedPreferencesLogin(String mailUser,String passwordUser)
+        {
+            SharedPreferences sharedPref =getSharedPreferences("loginPreferences",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("mailUser", mailUser);
+            editor.putString("passwordUser", passwordUser);
+            editor.apply();
+        }
+
+
+
+
     }
-}
+

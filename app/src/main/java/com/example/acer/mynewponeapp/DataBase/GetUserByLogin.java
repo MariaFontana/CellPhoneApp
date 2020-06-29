@@ -2,6 +2,10 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,25 +14,32 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class GetUserByID extends AsyncTask< String ,Void,String> {
+public class GetUserByLogin extends AsyncTask< String ,Void,String>
+{
 
     Context contextService;
 
-    //flag 0 means get and 1 means post.(By default it is get.)
-    public GetUserByID(Context context) {
+
+    public GetUserByLogin(Context context) {
         contextService = context;
     }
+
 
     @Override
     protected String doInBackground(String... strings) {
 
         try {
-            String idUsuario = strings[0];
-            String link = "http://192.168.0.104:8080/conectionDataBase.php";
+            String mail = strings[0];
+            String password = strings[1];
 
 
-            String data = URLEncoder.encode("idUsuario", "UTF-8") + "=" +
-                    URLEncoder.encode(idUsuario, "UTF-8");
+            String link = "http://192.168.0.109:8080/getUserLogin.php";
+
+
+            String data = URLEncoder.encode("mail", "UTF-8") + "=" +
+                    URLEncoder.encode(mail, "UTF-8");
+            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                    URLEncoder.encode(password, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -48,13 +59,23 @@ public class GetUserByID extends AsyncTask< String ,Void,String> {
             // Read Server Response
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-                break;
+                sb.append(line + "\n");
+
+                sb.toString();
             }
 
-            return sb.toString();
-        } catch (Exception e) {
+
+            return null;
+        }
+        catch(Exception e){
             return new String("Exception: " + e.getMessage());
 
         }
+    }
+
+    @Override
+    protected void onPostExecute(String result){
+
+        Toast.makeText(contextService,   "Redirecting...", Toast.LENGTH_SHORT).show();
     }
 }
