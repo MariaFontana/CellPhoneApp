@@ -2,6 +2,7 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class backGround extends AsyncTask< String ,Void,String> {
     protected String doInBackground(String... strings) {
 
     try{
+
         String nombre = strings[0];
         String telephone = strings[1];
         String adress =strings[2];
@@ -35,16 +37,16 @@ public class backGround extends AsyncTask< String ,Void,String> {
         String password = strings[7];
 
 
-        String link = "http://192.168.0.109:8080/insertUser.php";
+        String link = "http://192.168.0.102:8080/insertUser.php";
 
 
-        String data  = URLEncoder.encode("nombre", "UTF-8") + "=" +
+        String data  = URLEncoder.encode("name", "UTF-8") + "=" +
                 URLEncoder.encode(nombre, "UTF-8");
         data += "&" + URLEncoder.encode("telephone", "UTF-8") + "=" +
                 URLEncoder.encode(telephone, "UTF-8");
         data += "&" + URLEncoder.encode("adress", "UTF-8") + "=" +
                 URLEncoder.encode(adress, "UTF-8");
-        data += "&" + URLEncoder.encode("mascota", "UTF-8") + "=" +
+        data += "&" + URLEncoder.encode("pet", "UTF-8") + "=" +
                 URLEncoder.encode(mascota, "UTF-8");
         data += "&" + URLEncoder.encode("alimento", "UTF-8") + "=" +
                 URLEncoder.encode(alimento, "UTF-8");
@@ -82,14 +84,10 @@ public class backGround extends AsyncTask< String ,Void,String> {
         return new String("Exception: " + e.getMessage());
 
     }
-
-
     }
-
-
     @Override
     protected void onPostExecute(String result){
-        Toast.makeText(contextService, "Los Datos fueron ",   Toast.LENGTH_SHORT).show();
+        Toast.makeText(contextService, "Los Datos fueron ", Toast.LENGTH_SHORT).show();
     }
 }
 

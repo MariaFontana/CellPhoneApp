@@ -17,14 +17,12 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
          />
-
     <TextView
-
         android:id="@+id/textViewRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="¡Registrate en Animalias!"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
@@ -42,7 +40,7 @@
             android:text="@string/mail" />
         <EditText
             android:id="@+id/mail"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:layout_alignParentRight="true"
@@ -58,7 +56,7 @@
 
         <EditText
         android:id="@+id/contraseña"
-        android:layout_width="250dp"
+            style="@style/TextEditRegitre"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
             android:inputType="textPassword"
@@ -71,16 +69,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/RepitPassword"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:layout_marginTop="100dp"/>
 
         <EditText
             android:id="@+id/RepetPassword"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
-            android:inputType="text"
             android:singleLine="true"
+            android:inputType="textPassword"
             android:layout_alignParentRight="true"/>
 
         <TextView
@@ -94,8 +92,8 @@
 
         <EditText
             android:id="@+id/name"
-            style="@style/TitleMainActivity"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
+
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="140dp"
@@ -114,7 +112,8 @@
 
         <EditText
             android:id="@+id/direccion"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
+
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
             android:layout_marginTop="180dp"
@@ -130,11 +129,10 @@
 
         <com.santalu.maskedittext.MaskEditText
             android:id="@+id/phone"
-            style="@style/TextEdiRegitre"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:layout_marginTop="230dp"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             app:met_mask="+54 (###)### ## ##" />
 
         <TextView
@@ -148,9 +146,8 @@
         <EditText
             android:id="@+id/mascota"
             android:layout_height="wrap_content"
-            style="@style/TextEdiRegitre"
             android:layout_marginTop="280dp"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             android:inputType="text" />
 
         <TextView
@@ -164,9 +161,8 @@
         <EditText
             android:id="@+id/alimento"
             android:layout_height="wrap_content"
-            style="@style/TextEdiRegitre"
             android:layout_marginTop="340dp"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             android:inputType="text" />
 
         <TextView
@@ -180,18 +176,16 @@
         <EditText
             android:id="@+id/dia"
             android:layout_height="wrap_content"
-            style="@style/TextEdiRegitre"
+
             android:layout_marginTop="390dp"
-            android:layout_width="250dp"
+            style="@style/TextEditRegitre"
             android:inputType="text" />
-
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/regitrar"
         android:layout_width="173dp"
         android:layout_height="30dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="470dp"
         android:layout_marginLeft="90dp"
         app:iconTint="@color/colorPrimaryDark"
         android:gravity="center"
@@ -199,8 +193,6 @@
         android:text="@string/registrar">
 
     </com.google.android.material.button.MaterialButton>
-
-
 
     </RelativeLayout>
 

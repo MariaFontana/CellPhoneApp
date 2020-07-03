@@ -2,7 +2,7 @@
     <string name="app_name">Animalias</string>
     <string name="text_Main">Hellow Animalias</string>
     <string name="LoginStatus">loginStatus</string>
-    <string name="alimento">Alimento</string>
+    <string name="alimento">Marca Alimneto</string>
     <string name="direccion">Dirección</string>
     <string name="nombre">Nombre Completo</string>
     <string name="mascota">Mascota</string>
@@ -17,6 +17,7 @@
     <string name="userName">Usuario</string>
     <string name="password">clave</string>
     <string name="RepitPassword">Repita Conttraseña</string>
+    <string name="emailIsInvalid">El Mail no es válido</string>
     <string name="login">Inicio</string>
     <string name="contraseña">contraseña</string>
     <string name="registrar">Registrar</string>
@@ -24,4 +25,7 @@
     <string name="errorDia">día es un valor numerico</string>
     <string name="requeridField"> Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos</string>
     <string name="passwordEqual"> Las password no cinciden</string>
+    <string name="messageWhatsApp">Podrias contactarte conmigo para acordar horariio y día en la entrega del alimento.Muchas Gracias!!!</string>
+    <string name="phoneNumber">542615568504</string>
+
 </resources>

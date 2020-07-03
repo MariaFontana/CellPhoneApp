@@ -32,8 +32,12 @@
 
     <style name="TextEdiRegitre" parent="TextAppearance.AppCompat">
         <item name=  "android:layout_alignParentRight">true</item>
-
     </style>
+    <style name="TextEditRegitre" parent="TextAppearance.AppCompat">
+        <item name=  "android:layout_alignParentRight">true</item>
+        <item name=  "android:layout_width">200dp</item>
+    </style>
+
 
     <style name="Widget.MaterialComponents.Button" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">?attr/textAppearanceButton</item>

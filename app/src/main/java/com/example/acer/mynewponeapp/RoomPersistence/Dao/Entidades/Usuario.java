@@ -20,9 +20,11 @@ public class Usuario implements Serializable {
         private int id;
     @ColumnInfo(name = "nombre")
         private String mNombre;
+    @Ignore
     @ColumnInfo(name = "adress")
-        private String madress;
+        private String mAdress;
     @ColumnInfo(name = "telephone")
+    @Ignore
         private String mTelephone;
     @ColumnInfo(name = "pet")
         private String mPet;
@@ -41,7 +43,7 @@ public class Usuario implements Serializable {
         public Usuario(@NonNull String nombre,@NonNull String telephone,@NonNull String adress,@NonNull String pet, @NonNull String alimento,  @NonNull String mail,@NonNull String password) {
             this.mNombre = nombre;
             this.mAlimento=alimento;
-            this.madress=adress;
+            this.mAdress=adress;
             this.mPet=pet;
             this.mTelephone=telephone;
             this.mMail=mail;
@@ -57,7 +59,7 @@ public class Usuario implements Serializable {
             return this.mNombre;
         }
     @NonNull
-        public String getAdress() { return this.madress;}
+        public String getAdress() { return this.mAdress;}
     @NonNull
         public String getPet() { return this.mPet;}
     @NonNull
@@ -83,7 +85,7 @@ public class Usuario implements Serializable {
         this.mPet = pet;
     }
     public void setDireccion(String adress) {
-        this.madress = adress;
+        this.mAdress = adress;
     }
 
     public void setTelefono(String telephone) {

@@ -6,9 +6,12 @@ import android.app.RemoteInput;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+
+import com.example.acer.mynewponeapp.R;
 
 import androidx.core.app.NotificationCompat;
 
@@ -19,15 +22,13 @@ public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        String message = String.valueOf(R.string.messageWhatsApp) ;// Replace with your message.
 
+        String toNumber =  String.valueOf(R.string.phoneNumber) ;;
 
-
-
-        Intent sendIntent = new Intent(String.valueOf(Intent.FLAG_GRANT_READ_URI_PERMISSION));
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.setPackage("com.whatsapp");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Sahre");
-        sendIntent.setType("text/plain");
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+       // Uri uri = Uri.parse("smsto:" + "");
+        sendIntent.setData(Uri.parse("http://api.whatsapp.com/send?phone="+ toNumber +"&text="+ message));
 
         //Intent shareIntent = new Intent(Intent.ACTION_SEND);
 
@@ -62,6 +63,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                //     getSystemService(Context.NOTIFICATION_SERVICE);
            // notificationManager.notify(Channel.NOTIFICATION_ID, mBuilder.build());
         }
+
+
+
 
         //if help button is clicked
        // if (intent.getIntExtra(Channel.KEY_INTENT_HELP, -1) == Channel.REQUEST_CODE_HELP) {

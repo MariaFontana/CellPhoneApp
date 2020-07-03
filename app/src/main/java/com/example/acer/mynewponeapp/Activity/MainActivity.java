@@ -7,6 +7,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,12 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
-import com.example.acer.mynewponeapp.Bussines.NotificationWork;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter.UsuarioViewModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
 import com.example.acer.mynewponeapp.R;
@@ -28,17 +29,6 @@ import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import androidx.work.Constraints;
-import androidx.work.Data;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-
-import static com.example.acer.mynewponeapp.Bussines.NotificationWork.contraseña;
-import static com.example.acer.mynewponeapp.Bussines.NotificationWork.mail;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private UsuarioViewModel mUsuarioViewModel;
 
 EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,passwordtxt,repitPasswordtxt;
+private Button buttonRegistre;
 
     private Usuario usuario;
     private UsuarioViewModel usuarioViewModel ;
@@ -76,6 +67,7 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,p
         mailTxt = (EditText)findViewById(R.id.mail);
         passwordtxt= (EditText)findViewById(R.id.contraseña);
         repitPasswordtxt= (EditText)findViewById(R.id.RepetPassword);
+        buttonRegistre=findViewById(R.id.buttonLogin);
     }
 
     @Override
@@ -160,15 +152,19 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,p
             alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
 
 
-           if (!Validation.IsEmptyRegister(nombre, direccion, phone, alimento, dia, mail,contraseña)) {
+           if (!Validation.IsEmptyRegister(nombre, direccion, phone, alimento, dia, mail,password)) {
                 Toast.makeText(this,R.string.requeridField, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if(!Validation.ValidatePassword(contraseña,repetPassword))
+            if(!Validation.ValidatePassword(password,repetPassword)) {
+                Toast.makeText(this,R.string.passwordEqual, Toast.LENGTH_SHORT).show();
+                return;
+
+            }
 
             if (!Validation.isEmailValid(mail)) {
-                Toast.makeText(this,R.string.passwordEqual, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,R.string.emailIsInvalid, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -176,34 +172,34 @@ EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,p
                 Toast.makeText(this, R.string.errorDia, Toast.LENGTH_SHORT).show();
                 return;
             }
+           // createUserRoom(nombre, phone, direccion, mascota, alimento, mail,dia,password);
 
-            createUserRoom(nombre, phone, direccion, mascota, alimento, mail,dia,contraseña);
+            insertUserDataBase(nombre, phone, direccion, mascota, alimento, mail,dia,password);
 
-            insertUserDataBase(nombre, phone, direccion, mascota, alimento, mail,dia,contraseña);
-
-
-          // Usuario user = usuarioViewModel.GetUserByLogin("ma@gmail.com","123456");
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-        private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String alimento,String mail ,String dia,String contraseña)
+
+
+
+        private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String alimento,String mail ,String dia,String password)
         {
             try {
                 backGround bc = new backGround(this);
-                bc.execute(nombre, telefono, direccion ,mascota , alimento,mail, dia,contraseña);
+                bc.execute(nombre, telefono, direccion ,mascota , alimento,mail, dia,password);
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
-        private void createUserRoom(String nombre,String phone,String direccion,String mascota,String alimento,String mail,String dia,String contraseña)
+        private void createUserRoom(String nombre,String phone,String direccion,String mascota,String alimento,String mail,String dia,String password)
         {
             try {
-                    usuario = new Usuario(nombre, phone, direccion, mascota, alimento, mail,contraseña);
+                    usuario = new Usuario(nombre, phone, direccion, mascota, alimento, mail,password);
                     usuarioViewModel.insert(usuario);
                 }
               catch (Exception e)
