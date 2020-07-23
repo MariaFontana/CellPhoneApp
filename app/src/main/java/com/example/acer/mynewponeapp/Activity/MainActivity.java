@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
+import com.example.acer.mynewponeapp.Bussines.CheckUserName;
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter.UsuarioViewModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
@@ -40,13 +41,16 @@ private Button buttonRegistre;
 
     private Usuario usuario;
     private UsuarioViewModel usuarioViewModel ;
+    private CheckUserName checkUserName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         SetValuesIU();
 
         setValuesToolbar();
@@ -54,6 +58,8 @@ private Button buttonRegistre;
         Channel.createNotificationChannel(this);
 
         usuarioViewModel = new UsuarioViewModel(getApplication());
+
+
 
     }
 
@@ -124,6 +130,7 @@ private Button buttonRegistre;
             String dia = diaTxt.getText().toString();
             String password = passwordtxt.getText().toString();
             String repetPassword= repitPasswordtxt.getText().toString();
+
 
 
 
@@ -207,6 +214,9 @@ private Button buttonRegistre;
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
         }
+
+
+
 
 
 

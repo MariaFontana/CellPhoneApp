@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.Validation;
 import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
 import com.example.acer.mynewponeapp.DataBase.backGround;
@@ -26,8 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private String mailUser ="";
     private String passwordUser="";
-
-
+    private Session session;
 
     TextView resul;
     int counter = 3;
@@ -41,10 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         mail = (EditText)findViewById(R.id.mailLogin);
         password = (EditText) findViewById(R.id.passwordLogin);
         loginButton=(Button)findViewById(R.id.buttonLogin);
+        session = new Session(this);
 
     }
 
     public void login(View view) {
+
 
         mailUser = mail.getText().toString();
         passwordUser = password.getText().toString();
@@ -57,7 +60,9 @@ public class LoginActivity extends AppCompatActivity {
 
         GetUserByLogin loginUser = new GetUserByLogin(this);
         loginUser.execute(mailUser,passwordUser);
-        SaveSharedPreferencesLogin(mailUser,passwordUser);
+        session.setUserName(mailUser);
+        session.setPassword(passwordUser);
+       // SaveSharedPreferencesLogin(mailUser,passwordUser);
 
         }
 
@@ -70,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("passwordUser", passwordUser);
             editor.apply();
         }
+
+
+
 
 
 

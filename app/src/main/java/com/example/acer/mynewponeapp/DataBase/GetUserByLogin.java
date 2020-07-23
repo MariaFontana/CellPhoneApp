@@ -1,5 +1,6 @@
 package com.example.acer.mynewponeapp.DataBase;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -16,15 +17,23 @@ import java.net.URLEncoder;
 
 public class GetUserByLogin extends AsyncTask< String ,Void,String>
 {
-
+    ProgressDialog progressDialog;
     Context contextService;
-
+    String  result1="";
 
     public GetUserByLogin(Context context) {
         contextService = context;
+        progressDialog= new ProgressDialog(contextService);
+
     }
 
 
+@Override
+    protected void onPreExecute() {
+        this.progressDialog.setMessage("Loading...");
+        this.progressDialog.setCancelable(false);
+        this.progressDialog.show();
+    }
     @Override
     protected String doInBackground(String... strings) {
 
@@ -33,7 +42,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             String password = strings[1];
 
 
-            String link = "http://192.168.0.109:8080/getUserLogin.php";
+            String link = "http://192.168.0.111:8080/getUserLogin.php";
 
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
@@ -61,11 +70,12 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 sb.append(line);
                 sb.append(line + "\n");
 
-                sb.toString();
+
+               result1= sb.toString();
             }
 
 
-            return null;
+            return result1;
         }
         catch(Exception e){
             return new String("Exception: " + e.getMessage());
@@ -75,7 +85,22 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
     @Override
     protected void onPostExecute(String result){
+        if(result1 !="")
+        {
+            Toast.makeText(contextService,   "Redirecting...", Toast.LENGTH_SHORT).show();
+            if (this.progressDialog.isShowing()) {
+                this.progressDialog.dismiss();
+            }
+        }
+        else {
+            Toast.makeText(contextService,   "El usuario no existe", Toast.LENGTH_SHORT).show();
+            if (this.progressDialog.isShowing()) {
+                this.progressDialog.dismiss();
+            }
+        }
 
-        Toast.makeText(contextService,   "Redirecting...", Toast.LENGTH_SHORT).show();
+
     }
+
+
 }
