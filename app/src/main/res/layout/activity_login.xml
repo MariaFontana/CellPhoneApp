@@ -7,26 +7,62 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
     tools:context=".activity_login">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="150dp"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:src="@drawable/animaliaLogo">
 
+    </androidx.appcompat.widget.AppCompatImageView>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textViewMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        style="@style/TextViewRegitre"
+        android:text="@string/mail" />
 
     <EditText
         android:id="@+id/mailLogin"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content" />
+        android:layout_marginLeft="80dp"
+        android:layout_width="500px"
+        android:paddingTop="20dp"
+        android:layout_height="wrap_content"
+         />
 
-    <EditText
-        android:id="@+id/passwordLogin"
-        android:inputType="textPassword"
-        android:layout_width="228dp"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textViewPassword"
+            style="@style/TextViewRegitre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:layout_marginTop="60dp"/>
+
+        <EditText
+            android:id="@+id/passwordLogin"
+           android:layout_marginLeft="80dp"
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="150dp"
         android:onClick="login"
         android:text="@string/login" />
-
+    </RelativeLayout>
 </LinearLayout >

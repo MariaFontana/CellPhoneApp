@@ -2,8 +2,11 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -85,12 +88,15 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
     @Override
     protected void onPostExecute(String result){
-        if(result1 !="")
+      if(result1 !="")
         {
-            Toast.makeText(contextService,   "Redirecting...", Toast.LENGTH_SHORT).show();
-            if (this.progressDialog.isShowing()) {
-                this.progressDialog.dismiss();
-            }
+
+            //super.onPostExecute(result);
+            //Intent intent = new Intent(contextService, ListProductActivity.class);
+
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            contextService.startActivity(new Intent(contextService, ListProductActivity.class));
+            //contextService.startActivity(intent);
         }
         else {
             Toast.makeText(contextService,   "El usuario no existe", Toast.LENGTH_SHORT).show();

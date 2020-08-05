@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.acer.mynewponeapp.Bussines.Channel;
 import com.example.acer.mynewponeapp.Bussines.CheckUserName;
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
+import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter.UsuarioViewModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
 import com.example.acer.mynewponeapp.R;
@@ -30,6 +31,7 @@ import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +44,7 @@ private Button buttonRegistre;
     private Usuario usuario;
     private UsuarioViewModel usuarioViewModel ;
     private CheckUserName checkUserName;
+    private Session sessionUser ;
 
 
     @Override
@@ -59,8 +62,7 @@ private Button buttonRegistre;
 
         usuarioViewModel = new UsuarioViewModel(getApplication());
 
-
-
+        ValidateUserSession();
     }
 
     private void SetValuesIU() {
@@ -132,14 +134,9 @@ private Button buttonRegistre;
             String repetPassword= repitPasswordtxt.getText().toString();
 
 
-
-
             Intent intent = new Intent(MainActivity.this, NotificationReceiver.class);
             PendingIntent pending=  PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
             AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
-
-
-
 
 
             //set timer you want alarm to work (here I have set it to 7.20pm)
@@ -213,6 +210,18 @@ private Button buttonRegistre;
                 {
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+        }
+
+        private void ValidateUserSession()
+        {
+            sessionUser= new Session(this);
+            String user=sessionUser.getUserName();
+            if(!user.isEmpty())
+            {
+                Intent listProduct = new Intent(this, ListProductActivity.class);
+                startActivity(listProduct);
+            }
+
         }
 
 
