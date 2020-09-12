@@ -4,11 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
+import com.example.acer.mynewponeapp.Activity.ProductAdapter;
+import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,17 +23,28 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetUserByLogin extends AsyncTask< String ,Void,String>
 {
     ProgressDialog progressDialog;
     Context contextService;
     String  result1="";
+    private Session session;
+    private String mailUser;
+    private String passwordUser;
+    private String nombreUser;
+    static JSONArray userJsonArray = null;
+    UserModel  userModel ;
+    String json = "";
+    boolean IsParse=false;
 
-    public GetUserByLogin(Context context) {
+    public GetUserByLogin(Context context,String mailUser,String passwordUser) {
         contextService = context;
         progressDialog= new ProgressDialog(contextService);
-
+        this.passwordUser=passwordUser;
+        this.mailUser=mailUser;
     }
 
 
@@ -45,7 +62,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             String password = strings[1];
 
 
-            String link = "http://192.168.0.111:8080/getUserLogin.php";
+            String link = "http://192.168.0.114:8080/getUserLogin.php";
 
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
@@ -72,10 +89,12 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append(line + "\n");
-
-
-               result1= sb.toString();
+                json = sb.toString();
             }
+                userJsonArray   = CreateJson();
+                parse();
+
+
 
 
             return result1;
@@ -86,19 +105,63 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
         }
     }
 
-    @Override
-    protected void onPostExecute(String result){
-      if(result1 !="")
+
+    protected JSONArray CreateJson() {
+        try {
+
+            userJsonArray = new JSONArray(json);
+
+        } catch (JSONException e) {
+            Log.e("JSON Parser", "Error parsing data " + e.toString());
+        }
+
+        // return JSON String
+        return userJsonArray;
+    }
+
+    private Boolean parse()
+    {
+        try
         {
 
-            //super.onPostExecute(result);
-            //Intent intent = new Intent(contextService, ListProductActivity.class);
+            JSONObject UserJson;
 
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            contextService.startActivity(new Intent(contextService, ListProductActivity.class));
-            //contextService.startActivity(intent);
+
+            for (int i=0;i< userJsonArray.length();i++)
+            {
+                UserJson=userJsonArray.getJSONObject(i);
+
+                String name=UserJson.getString("name");
+                String password =UserJson.getString("password");
+                String mail = UserJson.getString("mail");
+                String productName = UserJson.getString("product");
+                String productPrecio = UserJson.getString("precio");
+                String productImage = UserJson.getString("image");
+
+                ProductModel product=new ProductModel(productName,Double.parseDouble(productPrecio),null,0,productImage,null);
+
+                userModel=new UserModel(name,mail,password,product);
+
+
+            }
+
+            return IsParse=true;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return IsParse=false;
         }
-        else {
+    }
+
+    @Override
+    protected void onPostExecute(String result){
+
+        if( IsParse) {
+            session=new Session(contextService,userModel.getMail(),userModel.getPassword(),userModel.getName(), userModel.getProduct().getName(),userModel.getProduct().getPrecio());
+            session.SaveSharedPreferencesLogin();
+            contextService.startActivity(new Intent(contextService, ListProductActivity.class));
+        }
+
             Toast.makeText(contextService,   "El usuario no existe", Toast.LENGTH_SHORT).show();
             if (this.progressDialog.isShowing()) {
                 this.progressDialog.dismiss();
@@ -109,4 +172,3 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     }
 
 
-}

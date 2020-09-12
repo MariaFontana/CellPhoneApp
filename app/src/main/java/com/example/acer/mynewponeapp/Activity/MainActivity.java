@@ -1,13 +1,13 @@
 package com.example.acer.mynewponeapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,27 +26,47 @@ import com.example.acer.mynewponeapp.Bussines.Channel;
 import com.example.acer.mynewponeapp.Bussines.CheckUserName;
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.DataBase.BussinessMysql;
+import com.example.acer.mynewponeapp.DataBase.GetBrand;
+import com.example.acer.mynewponeapp.DataBase.GetProductByIdBrand;
+import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
+import com.example.acer.mynewponeapp.Model.BrandModel;
+import com.example.acer.mynewponeapp.Model.BreedModel;
+import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter.UsuarioViewModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
 import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private UsuarioViewModel mUsuarioViewModel;
 
 EditText nametext,phonetext,direccionTxt,mascotaTxt,alimentoTxt,diaTxt,mailTxt,passwordtxt,repitPasswordtxt;
 private Button buttonRegistre;
-
+    AppCompatSpinner spinnerBrand;
+    AppCompatSpinner spinnerProduct;
+    AppCompatSpinner breedSpinner;
     private Usuario usuario;
     private UsuarioViewModel usuarioViewModel ;
     private CheckUserName checkUserName;
     private Session sessionUser ;
+    private int position;
+    private String selection;
+    ProductModel productItem;
+    BreedModel breedItem;
+    BrandModel brandItem;
+    private UserModel user;
+
 
 
     @Override
@@ -52,17 +74,25 @@ private Button buttonRegistre;
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        sessionUser = new Session(this);
 
-        SetValuesIU();
+        if (sessionUser.ValidateUserSession()) {
 
-        setValuesToolbar();
+            this.startActivity(new Intent(this, ListProductActivity.class));
+        } else {
 
-        Channel.createNotificationChannel(this);
+            setContentView(R.layout.activity_main);
 
-        usuarioViewModel = new UsuarioViewModel(getApplication());
+            SetValuesIU();
 
-        ValidateUserSession();
+            GetBrand();
+
+            setValuesToolbar();
+
+            Channel.createNotificationChannel(this);
+        }
+       // usuarioViewModel = new UsuarioViewModel(getApplication());
+
     }
 
     private void SetValuesIU() {
@@ -70,12 +100,17 @@ private Button buttonRegistre;
         phonetext=(EditText)findViewById(R.id.phone);
         direccionTxt = (EditText)findViewById(R.id.direccion);
         mascotaTxt = (EditText)findViewById(R.id.mascota);
-        alimentoTxt = (EditText)findViewById(R.id.alimento);
         diaTxt = (EditText)findViewById(R.id.dia);
         mailTxt = (EditText)findViewById(R.id.mail);
         passwordtxt= (EditText)findViewById(R.id.contraseña);
         repitPasswordtxt= (EditText)findViewById(R.id.RepetPassword);
         buttonRegistre=findViewById(R.id.buttonLogin);
+       spinnerBrand = (AppCompatSpinner) findViewById(R.id.brandSpinner);
+        breedSpinner = (AppCompatSpinner) findViewById(R.id.breedSpinner);
+       spinnerProduct = (AppCompatSpinner) findViewById(R.id.productSpinner);
+        spinnerBrand.setOnItemSelectedListener(this);
+        spinnerProduct.setOnItemSelectedListener(this);
+        breedSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -88,13 +123,16 @@ private Button buttonRegistre;
     private void setValuesToolbar()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("APPANIMALIAS");
+        //toolbar.setTitle("Registrate en Animalias");
 
         setSupportActionBar(toolbar);
+
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#0D357C"));
+            window.setStatusBarColor(this.getResources().getColor(R.color.ColorPrimary));
         }
     }
 
@@ -106,8 +144,8 @@ private Button buttonRegistre;
             case R.id.ingresarMenuBar:
                 goLogin();
                 return true;
-            case R.id.helpMenuBar:
-
+            case R.id.salirMenuBar:
+                cerrarSession();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -120,6 +158,14 @@ private Button buttonRegistre;
         startActivity(LoginActivity);
     }
 
+    private void cerrarSession()
+    {
+        sessionUser.setUserName("");
+        sessionUser.setPassword("");
+        Intent LoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(LoginActivity);
+    }
+
     public void loginUser(View view) {
         try {
 
@@ -127,7 +173,6 @@ private Button buttonRegistre;
            String phone = phonetext.getText().toString();
            String direccion = direccionTxt.getText().toString();
            String mascota = mascotaTxt.getText().toString();
-           String alimento = alimentoTxt.getText().toString();
            String mail = mailTxt.getText().toString();
             String dia = diaTxt.getText().toString();
             String password = passwordtxt.getText().toString();
@@ -156,7 +201,7 @@ private Button buttonRegistre;
             alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
 
 
-           if (!Validation.IsEmptyRegister(nombre, direccion, phone, alimento, dia, mail,password)) {
+           if (!Validation.IsEmptyRegister(nombre, direccion, phone, dia, mail,password)) {
                 Toast.makeText(this,R.string.requeridField, Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -178,7 +223,8 @@ private Button buttonRegistre;
             }
            // createUserRoom(nombre, phone, direccion, mascota, alimento, mail,dia,password);
 
-            insertUserDataBase(nombre, phone, direccion, mascota, alimento, mail,dia,password);
+            insertUserDataBase(nombre, phone, direccion, mascota, mail,dia,password);
+
 
 
         } catch (Exception e) {
@@ -187,13 +233,27 @@ private Button buttonRegistre;
     }
 
 
+    private void GetBrand()
+    {
+        try {
 
+            GetBrand brand = new GetBrand(this,spinnerBrand);
+            brand.execute();
+        }
+        catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String alimento,String mail ,String dia,String password)
+        private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String mail ,String dia,String password)
         {
             try {
-                backGround bc = new backGround(this);
-                bc.execute(nombre, telefono, direccion ,mascota , alimento,mail, dia,password);
+                backGround bc = new backGround(this,mail,password,nombre);
+
+               UserModel user = new UserModel(0,nombre,mail, parseInt(dia),productItem, password, mascota,telefono,direccion,brandItem,breedItem);
+
+                bc.execute(user.getName().toString(), user.getTelephone().toString(), user.getAdress().toString() , user.getProduct().getIdProduct().toString(), user.getMail().toString(),user.getPassword().toString(),
+                        String.valueOf(user.getDiasCount()),user.getPet(),String.valueOf( brandItem.idBrand),String.valueOf(breedItem.breedId) );
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -212,30 +272,55 @@ private Button buttonRegistre;
                 }
         }
 
-        private void ValidateUserSession()
+        private void GetProductByBrand(Integer idBrand)
         {
-            sessionUser= new Session(this);
-            String user=sessionUser.getUserName();
-            if(!user.isEmpty())
-            {
-                Intent listProduct = new Intent(this, ListProductActivity.class);
-                startActivity(listProduct);
-            }
+            try {
 
+                GetProductByIdBrand prod = new GetProductByIdBrand(this,spinnerProduct,breedSpinner);
+                prod.execute(idBrand.toString());
+            }
+            catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+        switch(parent.getId()) {
 
+            case  R.id.brandSpinner: // for item 1
+                this.position = position;
 
+                selection = parent.getItemAtPosition(position).toString();
+                brandItem =(BrandModel)parent.getSelectedItem();
+                GetProductByBrand(brandItem.idBrand);
 
+              //
+                //  Toast.makeText(getApplicationContext(), categoriesList.get(position).getId() + " Selected" , Toast.LENGTH_LONG).show();
 
+                break;
+            case R.id.productSpinner:
+              productItem=  (ProductModel)parent.getSelectedItem();
+                break;
 
+            case R.id.breedSpinner:
+                breedItem=  (BreedModel)parent.getSelectedItem();
+                break;
 
+            /* you can have any number of case statements */
+            default :
 
-
+        }
 
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
 
 
 

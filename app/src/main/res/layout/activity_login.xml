@@ -8,61 +8,60 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical">
-    tools:context=".activity_login">
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_marginTop="20px"
-        android:layout_marginLeft="150dp"
-        android:layout_width="200px"
-        android:layout_height="200px"
-        android:src="@drawable/animaliaLogo">
+    tools:context=".activity_login"/>
 
-    </androidx.appcompat.widget.AppCompatImageView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="60px"
+            android:src="@drawable/animalia_logo">
+        </androidx.appcompat.widget.AppCompatImageView>
 
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/textViewMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        style="@style/TextViewRegitre"
-        android:text="@string/mail" />
 
-    <EditText
-        android:id="@+id/mailLogin"
-        android:layout_marginLeft="80dp"
-        android:layout_width="500px"
-        android:paddingTop="20dp"
-        android:layout_height="wrap_content"
-         />
-
-        <TextView
-            android:id="@+id/textViewPassword"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/mailLogin"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
             android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:hint="@string/mail"
+            android:paddingTop="20dp" />
+
 
         <EditText
             android:id="@+id/passwordLogin"
-           android:layout_marginLeft="80dp"
-            android:layout_width="500px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="80dp"
             android:inputType="textPassword"
-            android:singleLine="true"
-            />
+            android:hint="@string/password"
+            android:singleLine="true" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:layout_marginLeft="150dp"
-        android:onClick="login"
-        android:text="@string/login" />
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="359dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_width="359dp"
+            android:layout_marginRight="10px"
+
+            android:background="@drawable/button"
+
+            android:onClick="login"
+            android:padding="15dp"
+            android:text="@string/login"
+            android:textColor="#FFFFFF" />
     </RelativeLayout>
 </LinearLayout >

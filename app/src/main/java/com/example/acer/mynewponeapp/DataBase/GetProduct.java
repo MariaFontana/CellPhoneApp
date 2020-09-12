@@ -45,7 +45,7 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
     protected String doInBackground(String... strings) {
 
         try {
-            String link = "http://192.168.0.111:8080/getProduct.php";
+            String link = "http://192.168.0.114:8080/getProduct.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -65,7 +65,6 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 sb.append(line + "\n");
 
                 json = sb.toString();
-
 
                 ProductJsonArray   = CreateJson();
                 parse();
@@ -100,7 +99,6 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
 
             JSONObject productJson;
 
-
             for (int i=0;i< ProductJsonArray.length();i++)
             {
                 productJson=ProductJsonArray.getJSONObject(i);
@@ -109,11 +107,11 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 String description =productJson.getString("description");
                 Double precio = Double.parseDouble(productJson.getString("precio"));
                 int cantidad = Integer.parseInt(productJson.getString("cantidad"));
-                String marca =productJson.getString("marca");
                 String image =productJson.getString("image");
+                int idBrand = Integer.parseInt(productJson.getString("idBrand"));
                 
 
-                ProductModel product=new ProductModel(name,precio,description,cantidad,image);
+                ProductModel product=new ProductModel(name,precio,description,cantidad,image,idBrand);
 
                 listProduct.add(product);
             }
@@ -128,25 +126,28 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
 
     @Override
     protected void onPostExecute(String result){
+        try {
+            super.onPostExecute(result);
+            if (IsParse) {
 
-        super.onPostExecute(result);
-        if( IsParse) {
-            mAdapter = new ProductAdapter(listProduct,contextService);
-            recyclerViewProduct.setAdapter(mAdapter);
-        }
-        else
-        {
-            Toast.makeText(contextService, "Unable To Parse,Check Your Log output", Toast.LENGTH_SHORT).show();
-        }
+                mAdapter = new ProductAdapter(listProduct, contextService);
+                recyclerViewProduct.setAdapter(mAdapter);
+            } else {
+                Toast.makeText(contextService, "Unable To Parse,Check Your Log output", Toast.LENGTH_SHORT).show();
+            }
 
             //super.onPostExecute(result);
             //Intent intent = new Intent(contextService, ListProductActivity.class);
             //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          //  contextService.startActivity(new Intent(contextService, ListProductActivity.class));
+            //  contextService.startActivity(new Intent(contextService, ListProductActivity.class));
             //contextService.startActivity(intent);
-
-
         }
-
-
+        catch (Exception e) {
+            e.getMessage();
+        }
     }
+
+}
+
+    
+

@@ -2,12 +2,16 @@ package com.example.acer.mynewponeapp.Model;
 
 import android.content.Intent;
 
+import java.math.BigInteger;
+
 public class ProductModel {
-    String name;
-    double precio;
-    String photoId;
-    String description;
-    int cantidad;
+    public String name;
+    public double precio;
+    public String photoId;
+    public String description;
+    public int cantidad;
+    public Integer idBrand;
+    public BigInteger idProduct;
 
     public String getPhotoId() {
         return photoId;
@@ -23,17 +27,27 @@ public class ProductModel {
     {
 
     }
-    public ProductModel(String name, double precio, String description,int cantidad,String photoId ) {
+
+    public ProductModel(String name, double precio, String description,int cantidad,String photoId,Integer idBrand ) {
         this.name = name;
         this.precio = precio;
         this.description = description;
         this.photoId=photoId;
         this.cantidad=cantidad;
+        this.idBrand=idBrand;
     }
+
+
 
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    public void setIdBrand(Integer idBrand) {
+        this.idBrand = idBrand;
+    }
+    public void setIdProduct(BigInteger idProduct) {
+        this.idProduct = idProduct;
     }
 
     public void setName(String name) {
@@ -52,10 +66,17 @@ public class ProductModel {
         return cantidad;
     }
 
+
+
     public String getName() {
         return name;
     }
-
+    public Integer getIdBrand() {
+        return idBrand;
+    }
+    public BigInteger getIdProduct() {
+        return this.idProduct;
+    }
     public Double getPrecio() {
         return precio;
     }
@@ -64,5 +85,12 @@ public class ProductModel {
         return description;
     }
 
+   @Override
+    public String toString()
+   {
+      return name;
+   }
+
 
 }
+

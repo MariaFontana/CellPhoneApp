@@ -1,5 +1,8 @@
 package com.example.acer.mynewponeapp.Bussines;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,9 +44,9 @@ public final class Validation {
         return isValid;
     }
 
-    public static boolean IsEmptyRegister(String nombre, String direccion, String celphone, String alimento, String dia, String mail,String contraseña) {
+    public static boolean IsEmptyRegister(String nombre, String direccion, String celphone, String dia, String mail,String contraseña) {
         boolean isValid = true;
-        if (nombre.isEmpty() || direccion.isEmpty() || celphone.equals(0) || alimento.isEmpty() || dia.equals(0) || contraseña.isEmpty()) {
+        if (nombre.isEmpty() || direccion.isEmpty() || celphone.equals(0) || dia.equals(0) || contraseña.isEmpty()) {
             isValid = false;
         }
         return isValid;
@@ -60,6 +63,8 @@ public final class Validation {
         }
         return isNumerc;
     }
+
+
 
 
 }

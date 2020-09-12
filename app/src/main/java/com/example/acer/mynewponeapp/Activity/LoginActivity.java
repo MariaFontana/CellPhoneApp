@@ -1,6 +1,7 @@
 package com.example.acer.mynewponeapp.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mail;
     private EditText password;
     private Button loginButton;
-    private String mailUser ="";
-    private String passwordUser="";
+    private String mailUser = "";
+    private String passwordUser = "";
     private Session session;
 
     TextView resul;
@@ -35,19 +36,23 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        mail = (EditText)findViewById(R.id.mailLogin);
-        password = (EditText) findViewById(R.id.passwordLogin);
-        loginButton=(Button)findViewById(R.id.buttonLogin);
         session = new Session(this);
+        if (session.ValidateUserSession()) {
+
+            this.startActivity(new Intent(this, ListProductActivity.class));
+        } else {
+
+            setContentView(R.layout.activity_login);
+            mail = (EditText) findViewById(R.id.mailLogin);
+            password = (EditText) findViewById(R.id.passwordLogin);
+            loginButton = (Button) findViewById(R.id.buttonLogin);
+
+        }
 
     }
 
     public void login(View view) {
-
 
         mailUser = mail.getText().toString();
         passwordUser = password.getText().toString();
@@ -57,30 +62,12 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-
-        GetUserByLogin loginUser = new GetUserByLogin(this);
-        loginUser.execute(mailUser,passwordUser);
-        session.setUserName(mailUser);
-        session.setPassword(passwordUser);
-       // SaveSharedPreferencesLogin(mailUser,passwordUser);
-
-        }
-
-
-        private void SaveSharedPreferencesLogin(String mailUser,String passwordUser)
-        {
-            SharedPreferences sharedPref =getSharedPreferences("loginPreferences",Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("mailUser", mailUser);
-            editor.putString("passwordUser", passwordUser);
-            editor.apply();
-        }
-
-
-
+            GetUserByLogin loginUser = new GetUserByLogin(this,mailUser, passwordUser);
+            loginUser.execute(mailUser, passwordUser);
 
 
 
 
     }
 
+}

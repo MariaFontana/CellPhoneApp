@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="false">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
@@ -16,7 +16,7 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
-         />
+        />
     <TextView
         android:id="@+id/textViewRegistro"
         android:layout_width="wrap_content"
@@ -29,30 +29,20 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp">
 
-        <TextView
-            android:id="@+id/textViewMail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            style="@style/TextViewRegitre"
-            android:text="@string/mail" />
+
         <EditText
             android:id="@+id/mail"
             style="@style/TextEditRegitre"
-            android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:layout_alignParentRight="true"
-
-            android:inputType="text" />
-        <TextView
-            android:id="@+id/textViewPassword"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
             android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:layout_marginTop="60dp"/>
+            android:hint="@string/mail"
+            android:inputType="text" />
 
         <EditText
         android:id="@+id/contraseña"
@@ -60,17 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
             android:inputType="textPassword"
-        android:singleLine="true"
-            android:layout_alignParentRight="true"/>
+            android:singleLine="true"
+            android:hint="@string/contraseña"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true" />
 
-        <TextView
-            android:id="@+id/textRepetPassword"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/RepitPassword"
-            android:inputType="text"
-            android:layout_marginTop="100dp"/>
 
         <EditText
             android:id="@+id/RepetPassword"
@@ -79,121 +64,124 @@
             android:layout_marginTop="90dp"
             android:singleLine="true"
             android:inputType="textPassword"
-            android:layout_alignParentRight="true"/>
-
-        <TextView
-            android:id="@+id/textViewNombre"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nombre"
-            android:layout_marginTop="150dp"/>
-
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:hint="@string/RepitPassword"/>
 
         <EditText
             android:id="@+id/name"
             style="@style/TextEditRegitre"
-
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
             android:layout_marginTop="140dp"
             android:inputType="text"
             android:singleLine="true"
+            android:hint="@string/nombre"
             android:textAppearance="?android:attr/textAppearanceSmallInverse" />
-
-
-        <TextView
-            android:id="@+id/textDireccion"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/direccion"
-            android:layout_marginTop="200dp"/>
 
         <EditText
             android:id="@+id/direccion"
             style="@style/TextEditRegitre"
-
+            android:layout_marginTop="180dp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
+            android:hint="@string/direccion"
+            android:layout_width="match_parent"
             android:inputType="text" />
-
-        <TextView
-            android:id="@+id/textViewCellPhone"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/telefono"
-            android:layout_marginTop="250dp"/>
 
         <com.santalu.maskedittext.MaskEditText
             android:id="@+id/phone"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:layout_marginTop="230dp"
             style="@style/TextEditRegitre"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="230dp"
+
+            android:hint="@string/phoneNumber"
+            android:inputType="phone"
             app:met_mask="+54 (###)### ## ##" />
 
-        <TextView
-            android:id="@+id/texViewMascota"
-            android:layout_marginTop="300dp"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mascota" />
 
         <EditText
             android:id="@+id/mascota"
             android:layout_height="wrap_content"
             android:layout_marginTop="280dp"
             style="@style/TextEditRegitre"
+            android:layout_width="match_parent"
+            android:hint="@string/mascota"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:inputType="text" />
 
-        <TextView
-            android:id="@+id/texViewAlimento"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
-            android:text="@string/alimento" />
-
-        <EditText
-            android:id="@+id/alimento"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="340dp"
-            style="@style/TextEditRegitre"
-            android:inputType="text" />
-
-        <TextView
-            android:id="@+id/texViewDia"
-            style="@style/TextViewRegitre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
-            android:text="@string/dia" />
 
         <EditText
             android:id="@+id/dia"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="390dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="320dp"
             style="@style/TextEditRegitre"
+            android:hint="@string/dia"
             android:inputType="text" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/regitrar"
-        android:layout_width="173dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="470dp"
-        android:layout_marginLeft="90dp"
-        app:iconTint="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:onClick="loginUser"
-        android:text="@string/registrar">
+      <androidx.appcompat.widget.AppCompatSpinner
+          android:id="@+id/brandSpinner"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="380dp"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
 
-    </com.google.android.material.button.MaterialButton>
+          android:hint="@string/marca" />
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/productSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:hint="@string/product" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/breedSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="510dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:hint="@string/breed" />
+
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/regitrar"
+                android:layout_width="173dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="600dp"
+                android:background="@drawable/button"
+                android:onClick="loginUser"
+                android:padding="15dp"
+                android:text="@string/registrar"
+                android:textColor="#FFFFFF" />
+
+
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

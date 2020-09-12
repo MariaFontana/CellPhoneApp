@@ -1,19 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/coordinator_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:orientation="vertical"
     tools:context=".Activity.ListProductActivity">
+  <!--  android:fitsSystemWindows="true"
+    android:fitsSystemWindows="true"
+            app:contentScrim="@color/ColorPrimaryDark"-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/CollapsedAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="166dp"
+        android:background="@color/ColorPrimaryDark"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ColorPrimaryDark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true">
+
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/ColorAccent" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewProduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycleViewProduct"
-         />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="390px"
+        android:layout_marginLeft="800px"
+
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/whatss" />
+
+ </androidx.coordinatorlayout.widget.CoordinatorLayout>

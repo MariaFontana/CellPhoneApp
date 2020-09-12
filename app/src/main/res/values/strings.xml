@@ -1,27 +1,23 @@
 <resources>
     <string name="app_name">Animalias</string>
-    <string name="text_Main">Hellow Animalias</string>
-    <string name="LoginStatus">loginStatus</string>
-    <string name="alimento">Marca Alimneto</string>
     <string name="direccion">Dirección</string>
     <string name="nombre">Nombre Completo</string>
     <string name="mascota">Mascota</string>
 
-    <string name="telefono">Telefono</string>
     <string name="dia">Días</string>
     <string name="mail">Mail</string>
-    <string name="inicio">Inicio</string>
     <string name="ingresar">Ingresar</string>
-    <string name="channel_name">Animalia compra</string>
-    <string name="channel_description">Notificación de nueva compra</string>
-    <string name="userName">Usuario</string>
     <string name="password">clave</string>
     <string name="RepitPassword">Repita Conttraseña</string>
     <string name="emailIsInvalid">El Mail no es válido</string>
     <string name="login">Inicio</string>
     <string name="contraseña">contraseña</string>
     <string name="registrar">Registrar</string>
-    <string name="ayuda">Ayuda</string>
+    <string name="marca">Marca</string>
+    <string name="breed">Mordida</string>
+    <string name="product">Producto</string>
+
+    <string name="Salir">salir</string>
     <string name="errorDia">día es un valor numerico</string>
     <string name="requeridField"> Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos</string>
     <string name="passwordEqual"> Las password no cinciden</string>
