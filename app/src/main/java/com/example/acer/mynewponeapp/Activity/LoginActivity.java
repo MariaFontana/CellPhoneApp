@@ -57,16 +57,39 @@ public class LoginActivity extends AppCompatActivity {
         mailUser = mail.getText().toString();
         passwordUser = password.getText().toString();
 
-        if (!Validation.isEmailValid(mailUser)) {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+       if(!Validation.passwordValidateStringEmpty(passwordUser))
+       {
+           Toast.makeText(this, "La contraseña no puede estar vacio", Toast.LENGTH_SHORT).show();
+           return;
+       }
+
+        if(!Validation.UserNameValidateStringEmpty(mailUser))
+        {
+            Toast.makeText(this, "el usuaario no puede estar vacio", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if (!Validation.isEmailValid(mailUser)) {
+            Toast.makeText(this, "El formato del mail es inválido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LoginUserDatabase();
+
+    }
+
+
+    private void LoginUserDatabase()
+    {
+        try {
+
             GetUserByLogin loginUser = new GetUserByLogin(this,mailUser, passwordUser);
             loginUser.execute(mailUser, passwordUser);
+        }
 
-
-
+      catch (Exception e) {
+            Toast.makeText(this, "El usuario o la password no son correctos", Toast.LENGTH_LONG).show();
+        }
 
     }
 

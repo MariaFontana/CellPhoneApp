@@ -24,7 +24,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         String message = String.valueOf(R.string.messageWhatsApp) ;// Replace with your message.
 
-        String toNumber =  String.valueOf(R.string.phoneNumber) ;;
+        String toNumber =  "542615568504" ;
 
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
        // Uri uri = Uri.parse("smsto:" + "");
@@ -33,11 +33,11 @@ public class NotificationReceiver extends BroadcastReceiver {
         //Intent shareIntent = new Intent(Intent.ACTION_SEND);
 
 
-        PendingIntent pendingShareIntent = PendingIntent.getActivity(context, 0, Intent.createChooser(sendIntent, "share..."),
+        PendingIntent pendingShareIntent = PendingIntent.getActivity(context, 0, Intent.createChooser(sendIntent, "Comunicate con nosotros!!!"),
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, Channel.CHANNNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_email)
+                .setSmallIcon(android.R.drawable.btn_star_big_on)
                 .setContentTitle("Hola, el alimento de tu mascota esta por terminarse, mandanos tu pedido.Gracias!!!!!")
                 .setAutoCancel(true)
                 .addAction(android.R.drawable.ic_menu_share, "share...", pendingShareIntent);

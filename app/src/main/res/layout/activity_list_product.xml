@@ -14,10 +14,8 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
-        style="@style/CollapsedAppBar"
         android:layout_width="match_parent"
-        android:layout_height="166dp"
-        android:background="@color/ColorPrimaryDark"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -25,15 +23,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/ColorPrimaryDark"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="true">
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleEnabled="false">
 
+            <ImageView
+                android:id="@+id/imageCollapse"
+                android:layout_width="147dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_phone_locked_black_24dp"
+                android:tag="image_tag"
+                app:layout_collapseMode="pin" />
 
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar"
-                app:layout_collapseMode="pin"
-                app:titleTextColor="@color/ColorAccent" />
+                app:layout_scrollFlags="scroll|enterAlways"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -50,10 +58,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="390px"
-        android:layout_marginLeft="800px"
-
+        android:layout_gravity="end|bottom"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/whatss" />
+        app:srcCompat="@drawable/whatssappp"
+        android:layout_margin="16dp"
+        app:fabSize="normal"/>
 
  </androidx.coordinatorlayout.widget.CoordinatorLayout>

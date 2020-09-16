@@ -64,7 +64,27 @@ public final class Validation {
         return isNumerc;
     }
 
+    public static boolean UserNameValidateStringEmpty(String userName)
+    {
+        if(userName.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
 
+    }
+
+    public static boolean passwordValidateStringEmpty(String userPassword)
+    {
+        if(userPassword.isEmpty()) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
 
 
 }

@@ -162,6 +162,9 @@ private Button buttonRegistre;
     {
         sessionUser.setUserName("");
         sessionUser.setPassword("");
+        sessionUser.setUserImage("");
+        sessionUser.setuserProduct("");
+        sessionUser.setuserProductPrecio(0);
         Intent LoginActivity = new Intent(this, LoginActivity.class);
         startActivity(LoginActivity);
     }

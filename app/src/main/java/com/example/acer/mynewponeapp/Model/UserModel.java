@@ -64,9 +64,11 @@ public class UserModel {
     public String getName() {
         return name;
     }
+
     public int getDiasCount() {
         return this.diasCount;
     }
+
     public String getPassword() {
         return password;
     }
@@ -99,6 +101,7 @@ public class UserModel {
     {
             this.product = product;
     }
+
     public void setDiasCount(int diasCount)
     {
         this.diasCount = diasCount;

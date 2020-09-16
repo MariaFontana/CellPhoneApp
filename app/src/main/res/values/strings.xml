@@ -4,7 +4,7 @@
     <string name="nombre">Nombre Completo</string>
     <string name="mascota">Mascota</string>
 
-    <string name="dia">Días</string>
+    <string name="dia">¿Cuantos días te quedan de alimento?</string>
     <string name="mail">Mail</string>
     <string name="ingresar">Ingresar</string>
     <string name="password">clave</string>
@@ -21,7 +21,7 @@
     <string name="errorDia">día es un valor numerico</string>
     <string name="requeridField"> Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos</string>
     <string name="passwordEqual"> Las password no cinciden</string>
-    <string name="messageWhatsApp">Podrias contactarte conmigo para acordar horariio y día en la entrega del alimento.Muchas Gracias!!!</string>
+    <string name="messageWhatsApp">Hola necesito comprar el alimento de mi mascota.Muchas Gracias!!!</string>
     <string name="phoneNumber">542615568504</string>
 
 </resources>

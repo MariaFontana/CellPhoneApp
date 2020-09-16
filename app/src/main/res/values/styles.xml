@@ -3,24 +3,24 @@
 
     <!-- ToolBar -->
 
-    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+    <!--<style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">50px</item>
         <item name="android:textColor">@color/ColorAccent</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">60px</item>
+        <item name="android:textSize">50px</item>
         <item name="android:textColor">@color/ColorAccent</item>
         <item name="android:textStyle">bold</item>
-    </style>
+    </style>-->
 
     <style name="Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/ColorPrimary</item>
-        <item name="android:textColor">@color/ColorAccent</item>
+        <item name="titleTextColor">@color/ColorAccent</item>
         <item name="subtitleTextColor">@color/ColorAccent</item>
-        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
-        <item name="statusBarBackground">@color/ColorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/ColorPrimary</item>
+        <item name="statusBarBackground">@color/ColorPrimary</item>
     </style>
 
     <style name="TextEditRegitre" parent="TextAppearance.AppCompat">

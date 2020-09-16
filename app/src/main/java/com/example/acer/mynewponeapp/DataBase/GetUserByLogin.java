@@ -47,7 +47,6 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
         this.mailUser=mailUser;
     }
 
-
 @Override
     protected void onPreExecute() {
         this.progressDialog.setMessage("Loading...");
@@ -85,24 +84,22 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             StringBuilder sb = new StringBuilder();
             String line = null;
 
-            // Read Server Response
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append(line + "\n");
+
                 json = sb.toString();
-            }
-                userJsonArray   = CreateJson();
+
+                userJsonArray = CreateJson();
                 parse();
 
-
-
-
-            return result1;
+            }
         }
         catch(Exception e){
             return new String("Exception: " + e.getMessage());
 
         }
+        return userJsonArray.toString();
     }
 
 
@@ -141,11 +138,11 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 ProductModel product=new ProductModel(productName,Double.parseDouble(productPrecio),null,0,productImage,null);
 
                 userModel=new UserModel(name,mail,password,product);
-
+                return IsParse=true;
 
             }
 
-            return IsParse=true;
+            return IsParse=false;
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -153,16 +150,17 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
         }
     }
 
+
     @Override
     protected void onPostExecute(String result){
 
         if( IsParse) {
-            session=new Session(contextService,userModel.getMail(),userModel.getPassword(),userModel.getName(), userModel.getProduct().getName(),userModel.getProduct().getPrecio());
+            session=new Session(contextService,userModel.getMail(),userModel.getPassword(),userModel.getName(), userModel.getProduct().getName(),userModel.getProduct().getPrecio(),userModel.getProduct().photoId);
             session.SaveSharedPreferencesLogin();
             contextService.startActivity(new Intent(contextService, ListProductActivity.class));
         }
 
-            Toast.makeText(contextService,   "El usuario no existe", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService,   "El usuario y la contraseña no son válidos", Toast.LENGTH_SHORT).show();
             if (this.progressDialog.isShowing()) {
                 this.progressDialog.dismiss();
             }
