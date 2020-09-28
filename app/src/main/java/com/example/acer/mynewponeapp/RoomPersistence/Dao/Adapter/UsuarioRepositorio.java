@@ -2,17 +2,19 @@ package com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter;
 
 import android.app.Application;
 
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.UsuarioDao;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.UserDao;
 
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
 
 public class UsuarioRepositorio {
-    private UsuarioDao mUsuarioDao;
-    private LiveData<List<Usuario>> mAllUsuario;
-    private LiveData<Usuario> usuarioLiveData;
+
+    private UserDao userDao;
+    private LiveData<List<user>> users;
+    private LiveData<user> usuarioLiveData;
 
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
@@ -20,25 +22,25 @@ public class UsuarioRepositorio {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     UsuarioRepositorio(Application application) {
-        UsuarioDataBase db = UsuarioDataBase.getDatabase(application);
-        mUsuarioDao = db.UsuarioDao();
-        mAllUsuario = mUsuarioDao.getAlphabetizedWords();
+        AnimaliaDataBase db = AnimaliaDataBase.getDatabase(application);
+        userDao = db.UserDao();
+
     }
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    LiveData<List<Usuario>> getAllUsuario() {
-        return mAllUsuario;
+    LiveData<List<user>> getAllUser() {
+        return   users = userDao.getUserAll();
     }
 
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
-    void insert(Usuario usuario) {
+    void insert(user usuario) {
         try {
-            UsuarioDataBase.databaseWriteExecutor.execute(() -> {
+            AnimaliaDataBase.databaseWriteExecutor.execute(() -> {
 
-                mUsuarioDao.insert(usuario);
+                userDao.insert(usuario);
             });
         } catch (Exception e) {
             e.getMessage();
@@ -47,9 +49,9 @@ public class UsuarioRepositorio {
 
     void GetUserById(int id) {
         try {
-            UsuarioDataBase.databaseWriteExecutor.execute(() -> {
+            AnimaliaDataBase.databaseWriteExecutor.execute(() -> {
 
-                mUsuarioDao.GetUserById(id);
+                userDao.GetUserById(id);
             });
         } catch (Exception e) {
             e.getMessage();
@@ -60,9 +62,9 @@ public class UsuarioRepositorio {
     void  GetUserByLogin(String mail, String password) {
 
         try {
-            UsuarioDataBase.databaseWriteExecutor.execute(() -> {
+            AnimaliaDataBase.databaseWriteExecutor.execute(() -> {
 
-                 mUsuarioDao.GetUserLogin(mail, password);
+                 userDao.GetUserLogin(mail, password);
             });
         } catch (Exception e) {
             e.getMessage();

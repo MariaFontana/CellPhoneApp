@@ -2,7 +2,7 @@ package com.example.acer.mynewponeapp.Model;
 
 import java.math.BigInteger;
 
-public class BrandModel {
+public class BrandModel  {
 
     public int idBrand;
     public String name;

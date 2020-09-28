@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
 import com.example.acer.mynewponeapp.R;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class UsuarioListAdapter extends RecyclerView.Adapter<UsuarioListAdapter.
         }
 
         private final LayoutInflater mInflater;
-        private List<Usuario> mUsuario; // Cached copy of words
+        private List<user> mUsuario; // Cached copy of words
 
         UsuarioListAdapter(Context context) {
             mInflater = LayoutInflater.from(context);
@@ -42,15 +42,15 @@ public class UsuarioListAdapter extends RecyclerView.Adapter<UsuarioListAdapter.
         @Override
         public void onBindViewHolder(UsuarioViewHolder holder, int position) {
             if (mUsuario != null) {
-                Usuario current = mUsuario.get(position);
-                holder.usuarioItemView.setText(current.getNombre());
+                user current = mUsuario.get(position);
+                holder.usuarioItemView.setText(current.getName());
             } else {
                 // Covers the case of data not being ready yet.
                 holder.usuarioItemView.setText("No Word");
             }
         }
 
-        void setWords(List<Usuario> usuario) {
+        void setWords(List<user> usuario) {
             mUsuario = usuario;
             notifyDataSetChanged();
         }

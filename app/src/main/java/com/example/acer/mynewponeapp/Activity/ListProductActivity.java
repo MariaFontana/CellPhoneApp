@@ -88,8 +88,8 @@ public class ListProductActivity extends AppCompatActivity implements FloatingAc
 
                 Picasso.with(this).load(urlImage).into(imageViewCollapse);
 
-               // collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
-             //   collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+               //collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+               //collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
                 recyclerViewProduct = (RecyclerView) findViewById(R.id.recycleViewProduct);
 
@@ -172,9 +172,6 @@ public class ListProductActivity extends AppCompatActivity implements FloatingAc
 
         //Intent shareIntent = new Intent(Intent.ACTION_SEND);
         try {
-
-
-
 
             String message = String.valueOf(R.string.messageWhatsApp);// Replace with your message.
 

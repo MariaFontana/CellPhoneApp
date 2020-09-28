@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 import com.example.acer.mynewponeapp.Activity.ProductAdapter;
 import com.example.acer.mynewponeapp.Bussines.Session;
@@ -37,6 +38,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     private String nombreUser;
     static JSONArray userJsonArray = null;
     UserModel  userModel ;
+    ProductModel product;
     String json = "";
     boolean IsParse=false;
 
@@ -134,15 +136,16 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 String productName = UserJson.getString("product");
                 String productPrecio = UserJson.getString("precio");
                 String productImage = UserJson.getString("image");
+                String productDescription=UserJson.getString("description");
 
-                ProductModel product=new ProductModel(productName,Double.parseDouble(productPrecio),null,0,productImage,null);
+                product=new ProductModel(productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
 
-                userModel=new UserModel(name,mail,password,product);
+                userModel= new UserModel(name,mail,password,product);
                 return IsParse=true;
 
             }
 
-            return IsParse=false;
+            return IsParse;
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -152,20 +155,23 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
 
     @Override
-    protected void onPostExecute(String result){
+    protected void onPostExecute(String result) {
 
-        if( IsParse) {
-            session=new Session(contextService,userModel.getMail(),userModel.getPassword(),userModel.getName(), userModel.getProduct().getName(),userModel.getProduct().getPrecio(),userModel.getProduct().photoId);
+        if (IsParse) {
+
+            session = new Session(contextService, userModel.getMail(), userModel.getPassword(), userModel.getName(), userModel.getProduct().getName(), userModel.getProduct().getPrecio(), userModel.getProduct().photoId);
             session.SaveSharedPreferencesLogin();
-            contextService.startActivity(new Intent(contextService, ListProductActivity.class));
-        }
+            session.saveProductModel(product);
+            session.saveUserModel(userModel);
+            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+        } else if (!IsParse) {
 
-            Toast.makeText(contextService,   "El usuario y la contraseña no son válidos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService, "El usuario y la contraseña no son válidos", Toast.LENGTH_SHORT).show();
             if (this.progressDialog.isShowing()) {
                 this.progressDialog.dismiss();
             }
         }
-
+    }
 
     }
 

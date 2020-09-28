@@ -21,7 +21,8 @@
         <item name="subtitleTextColor">@color/ColorAccent</item>
         <item name="colorPrimaryDark">@color/ColorPrimary</item>
         <item name="statusBarBackground">@color/ColorPrimary</item>
-    </style>
+        <item name="android:textSize">7sp</item>
+</style>
 
     <style name="TextEditRegitre" parent="TextAppearance.AppCompat">
         <item name=  "android:layout_alignParentRight">true</item>

@@ -6,6 +6,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
+import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONStringer;
 
 public class Session {
 
@@ -17,6 +23,9 @@ public class Session {
     private String product;
     private String image;
     double precio;
+    private Gson gson;
+    private UserModel userModel;
+    private ProductModel productModel;
 
     public Session(Context context,String mailUser,String passwordUser,String nombreUser,String product, double precio, String image) {
         // TODO Auto-generated constructor stub
@@ -28,6 +37,7 @@ public class Session {
         this.product=product;
         this.precio=precio;
         this.image=image;
+
     }
 
     public Session(Context context,String mailUser,String passwordUser,String nombreUser) {
@@ -40,6 +50,9 @@ public class Session {
         this.image=image;
 
     }
+
+
+
     public Session(Context context) {
         // TODO Auto-generated constructor stub
 
@@ -48,6 +61,40 @@ public class Session {
         this.context=context;
 
     }
+
+
+    public void saveUserModel(UserModel userModel)
+    {
+        gson= new Gson();
+        String userModelString  =   gson.toJson(userModel);
+        prefs.edit().putString("userModel", userModelString).apply();
+        //Save that String in SharedPreferences
+
+    }
+
+    public void saveProductModel(ProductModel productModel)
+    {
+        gson= new Gson();
+        String productModelString  =   gson.toJson(productModel);
+        prefs.edit().putString("productModel", productModelString).apply();
+        //Save that String in SharedPreferences
+
+    }
+
+    public UserModel GetUserModel()
+    {
+         gson = new Gson();
+        String json = prefs.getString("userModel", "");
+        return userModel  = gson.fromJson(json, UserModel.class);
+    }
+
+    public ProductModel GetProductModel()
+    {
+        gson = new Gson();
+        String json = prefs.getString("productModel", "");
+        return productModel  = gson.fromJson(json, ProductModel.class);
+    }
+
 
     public void setUserName(String userName) {
         prefs.edit().putString("usenameSession", userName).apply();

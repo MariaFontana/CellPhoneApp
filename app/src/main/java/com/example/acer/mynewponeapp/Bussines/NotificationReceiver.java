@@ -36,11 +36,13 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent pendingShareIntent = PendingIntent.getActivity(context, 0, Intent.createChooser(sendIntent, "Comunicate con nosotros!!!"),
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, Channel.CHANNNEL_ID)
                 .setSmallIcon(android.R.drawable.btn_star_big_on)
-                .setContentTitle("Hola, el alimento de tu mascota esta por terminarse, mandanos tu pedido.Gracias!!!!!")
+                .setContentTitle("Hola, el alimento de tu mascota esta por terminarse, Hacenos tu pedido yaa!!!!!")
                 .setAutoCancel(true)
-                .addAction(android.R.drawable.ic_menu_share, "share...", pendingShareIntent);
+                .addAction(android.R.drawable.btn_star, "Open WhatssApp...", pendingShareIntent);
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(Channel.NOTIFICATION_ID, mBuilder.build());

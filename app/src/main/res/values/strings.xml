@@ -23,5 +23,7 @@
     <string name="passwordEqual"> Las password no cinciden</string>
     <string name="messageWhatsApp">Hola necesito comprar el alimento de mi mascota.Muchas Gracias!!!</string>
     <string name="phoneNumber">542615568504</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
 
 </resources>

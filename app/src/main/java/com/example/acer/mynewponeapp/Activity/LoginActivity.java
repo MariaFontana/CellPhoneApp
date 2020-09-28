@@ -31,23 +31,18 @@ public class LoginActivity extends AppCompatActivity {
     private String passwordUser = "";
     private Session session;
 
-    TextView resul;
-    int counter = 3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         session = new Session(this);
         if (session.ValidateUserSession()) {
 
-            this.startActivity(new Intent(this, ListProductActivity.class));
+            this.startActivity(new Intent(this, ActivityHome.class));
         } else {
-
             setContentView(R.layout.activity_login);
             mail = (EditText) findViewById(R.id.mailLogin);
             password = (EditText) findViewById(R.id.passwordLogin);
             loginButton = (Button) findViewById(R.id.buttonLogin);
-
         }
 
     }

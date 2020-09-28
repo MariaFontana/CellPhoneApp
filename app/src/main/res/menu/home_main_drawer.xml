@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item android:id="@+id/updateDateBuy"
+            android:icon="@drawable/update"
+            android:title="Modificar fechaCompra" />
+    </group>
+
+    <group android:id="@+id/group_menu">
+        <item android:id="@+id/nav_item_four"
+            android:title="Item 4" />
+        <item android:id="@+id/nav_item_five"
+            android:title="Item 5" />
+    </group>
+
+</menu>
