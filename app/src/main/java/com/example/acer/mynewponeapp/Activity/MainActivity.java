@@ -28,6 +28,7 @@ import com.example.acer.mynewponeapp.Bussines.Channel;
 import com.example.acer.mynewponeapp.Bussines.CheckUserName;
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.DataBase.GetBrand;
 import com.example.acer.mynewponeapp.DataBase.GetProductByIdBrand;
 import com.example.acer.mynewponeapp.Model.BrandModel;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     AppCompatSpinner spinnerBrand;
     AppCompatSpinner spinnerProduct;
     AppCompatSpinner breedSpinner;
-    private user usuario;
 
     private CheckUserName checkUserName;
     private Session sessionUser;
@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     BreedModel breedItem;
     BrandModel brandItem;
     private UserModel user;
+    public boolean saveUser=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,11 +177,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void cerrarSession()
     {
-        sessionUser.setUserName("");
-        sessionUser.setPassword("");
-        sessionUser.setUserImage("");
-        sessionUser.setuserProduct("");
-        sessionUser.setuserProductPrecio(0);
+        sessionUser.LogOut();
         Intent LoginActivity = new Intent(this, LoginActivity.class);
         startActivity(LoginActivity);
     }
@@ -192,18 +190,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            String direccion = direccionTxt.getText().toString();
            String mascota = mascotaTxt.getText().toString();
            String mail = mailTxt.getText().toString();
-            String dia = diaTxt.getText().toString();
-            String password = passwordtxt.getText().toString();
-            String repetPassword= repitPasswordtxt.getText().toString();
+           String dia = diaTxt.getText().toString();
+           String password = passwordtxt.getText().toString();
+           String repetPassword= repitPasswordtxt.getText().toString();
 
 
-            Intent intent = new Intent(MainActivity.this, NotificationReceiver.class);
-            PendingIntent pending=  PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
-            AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
+        //    AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
             //set timer you want alarm to work (here I have set it to 7.20pm)
-            Calendar dayOfNotification = Calendar.getInstance();
-            long time= System.currentTimeMillis();
-            long timeseconf=1000*10;
+          //  Calendar dayOfNotification = Calendar.getInstance();
+            //long time= System.currentTimeMillis();
+            //long timeseconf=1000*10;
              //dayOfNotification.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dia));
              //long time2=dayOfNotification.getTimeInMillis();
             //Date after adding the days to the given date
@@ -212,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
            // alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
-            alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
+            //alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
 
 
            if (!Validation.IsEmptyRegister(nombre, direccion, phone, dia, mail,password)) {
@@ -240,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             insertUserDataBase(nombre, phone, direccion, mascota, mail,dia,password);
 
 
-
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -262,12 +257,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String mail ,String dia,String password)
         {
             try {
-                backGround bc = new backGround(this,mail,password,nombre);
+
 
                UserModel user = new UserModel(0,nombre,mail, parseInt(dia),productItem, password, mascota,telefono,direccion,brandItem,breedItem);
 
-                bc.execute(user.getName().toString(), user.getTelephone().toString(), user.getAdress().toString() , user.getProduct().getIdProduct().toString(), user.getMail().toString(),user.getPassword().toString(),
-                        String.valueOf(user.getDiasCount()),user.getPet(),String.valueOf( brandItem.idBrand),String.valueOf(breedItem.breedId) );
+               backGround bc = new backGround(this,user);
+               // bc.execute(user.getName().toString(), user.getTelephone().toString(), user.getAdress().toString() , user.getProduct().getIdProduct().toString(), user.getMail().toString(),user.getPassword().toString(),
+                    //    String.valueOf(user.getDiasCount()),user.getPet(),String.valueOf( brandItem.idBrand),String.valueOf(breedItem.breedId) );
+                bc.execute();
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -329,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

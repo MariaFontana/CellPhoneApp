@@ -22,6 +22,7 @@ public class BrandModel  {
     public void setIdBrand(int idBrand) {
         this.idBrand = idBrand;
     }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/home"
+        <item android:id="@+id/perfil"
             android:icon="@drawable/home"
-            android:title="Home" />
+            android:title="Perfil" />
         <item android:id="@+id/updateDateBuy"
             android:icon="@drawable/update"
-            android:title="Modificar fechaCompra" />
+            android:title="Modificar fecha Notificación Compra" />
     </group>
 
-    <group android:id="@+id/group_menu">
+    <group android:id="@+id/group_menuPromos">
         <item android:id="@+id/nav_item_four"
-            android:title="Item 4" />
-        <item android:id="@+id/nav_item_five"
-            android:title="Item 5" />
+            android:title="Promos" />
+        <item android:id="@+id/nav_item_Accesorio"
+            android:title="Accesorios" />
+        <item android:id="@+id/nav_item_tips"
+            android:title="Tips" />
     </group>
-
+    <group android:id="@+id/out">
+        <item android:id="@+id/nav_item_out"
+            android:title="@string/Salir" />
+    </group>
 </menu>

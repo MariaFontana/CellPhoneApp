@@ -134,7 +134,7 @@ public class UpdateNotificationBuyFeed extends AsyncTask<String,Void,String>  {
                 Date fecha =new Date(dateUpdate);
 
 
-                UpdateNotificationModel updateNotificatinModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , fecha, Integer.parseInt(countDay));
+              //  UpdateNotificationModel updateNotificatinModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , fecha, Integer.parseInt(countDay));
 
 
                 return IsParse=true;

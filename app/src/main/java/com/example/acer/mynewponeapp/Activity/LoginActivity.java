@@ -1,5 +1,7 @@
 package com.example.acer.mynewponeapp.Activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +14,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Validation;
 import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
 import com.example.acer.mynewponeapp.DataBase.backGround;
 import com.example.acer.mynewponeapp.R;
 
+
+import java.util.Calendar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
             this.startActivity(new Intent(this, ActivityHome.class));
         } else {
+
             setContentView(R.layout.activity_login);
             mail = (EditText) findViewById(R.id.mailLogin);
             password = (EditText) findViewById(R.id.passwordLogin);
@@ -70,6 +77,29 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         LoginUserDatabase();
+
+        UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(this);
+        updateNotificaionBussines.CalculateAlarmNotification();
+
+       // Intent intent = new Intent(LoginActivity.this, NotificationReceiver.class);
+        //intent.putExtra("openWhatsApp", "1");
+        //PendingIntent pending=  PendingIntent.getBroadcast(LoginActivity.this,0,intent,0);
+
+
+        //AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
+        //set timer you want alarm to work (here I have set it to 7.20pm)
+        //Calendar dayOfNotification = Calendar.getInstance();
+        //long time= System.currentTimeMillis();
+       // long timeseconf=1000*10;
+        //dayOfNotification.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dia));
+        //long time2=dayOfNotification.getTimeInMillis();
+        //Date after adding the days to the given date
+
+        //Displaying the new Date after addition of Days
+
+
+        // alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
+        //alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
 
     }
 

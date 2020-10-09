@@ -27,7 +27,11 @@ public class UserModel {
 
     private ProductModel product;
 
+
+
     private BreedModel breedItem;
+
+
 
     private BrandModel brandItem;
 
@@ -45,6 +49,7 @@ public class UserModel {
         this.mail=mail;
         this.password=password;
         this.brandItem=brandItem;
+        this.breedItem=breedItem;
 
     }
 
@@ -65,16 +70,27 @@ public class UserModel {
         return name;
     }
 
+    public Date GetDateStart() {
+        return dateStart;
+    }
+
     public int getDiasCount() {
         return this.diasCount;
     }
 
+    public Date SetDateStart(Date date) {
+        return this.dateStart = date;
+    }
     public String getPassword() {
         return password;
     }
 
     public String getMail() {
         return mail;
+    }
+
+    public int getIdUser() {
+        return idUser;
     }
 
     public String getPet() {
@@ -96,7 +112,9 @@ public class UserModel {
     public void setName(String name) {
         this.name = name;
     }
-
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
     public void setProduct(ProductModel product)
     {
             this.product = product;
@@ -105,6 +123,21 @@ public class UserModel {
     public void setDiasCount(int diasCount)
     {
         this.diasCount = diasCount;
+    }
+    public BreedModel getBreedItem() {
+        return breedItem;
+    }
+
+    public BrandModel getBrandItem() {
+        return brandItem;
+    }
+
+    public void setBreedItem(BreedModel breedItem) {
+        this.breedItem = breedItem;
+    }
+
+    public void setBrandItem(BrandModel brandItem) {
+        this.brandItem = brandItem;
     }
 
 }

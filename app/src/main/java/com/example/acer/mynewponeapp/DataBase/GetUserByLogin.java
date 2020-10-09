@@ -159,8 +159,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
         if (IsParse) {
 
-            session = new Session(contextService, userModel.getMail(), userModel.getPassword(), userModel.getName(), userModel.getProduct().getName(), userModel.getProduct().getPrecio(), userModel.getProduct().photoId);
-            session.SaveSharedPreferencesLogin();
+            session = new Session(contextService);
+
             session.saveProductModel(product);
             session.saveUserModel(userModel);
             contextService.startActivity(new Intent(contextService, ActivityHome.class));

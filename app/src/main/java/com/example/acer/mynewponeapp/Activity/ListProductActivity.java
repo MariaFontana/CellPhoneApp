@@ -159,11 +159,7 @@ public class ListProductActivity extends AppCompatActivity implements FloatingAc
 
     private void cerrarSession()
     {
-        sessionUser.setUserName("");
-        sessionUser.setPassword("");
-        sessionUser.SaveSharedPreferencesLogin();
-        Intent LoginActivity = new Intent(this, LoginActivity.class);
-        startActivity(LoginActivity);
+        sessionUser.LogOut();
     }
 
     @Override

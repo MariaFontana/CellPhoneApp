@@ -9,8 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,103 +24,102 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class backGround extends AsyncTask<String,Void,String> {
+import static java.lang.Integer.parseInt;
+
+public class backGround extends AsyncTask<Void,Void,String> {
     boolean running;
     ProgressDialog progressDialog;
     Context contextService;
     private Session session;
-    private String mailUser;
-    private String passwordUser;
-    private String nombreUser;
+    private UserModel userModel;
+    StringBuilder  sb;
+    private UpdateNotificationAsync updateNotificationAsync;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public backGround(Context context,String mailUser,String passwordUser,String nombreUser ) {
+    public backGround(Context context,UserModel userModel ) {
         contextService = context;
         progressDialog= new ProgressDialog(contextService);
-        this.passwordUser=passwordUser;
-        this.mailUser=mailUser;
-        this.nombreUser=nombreUser;
-
+        this.userModel=userModel;
     }
+
+
 
     protected void onPreExecute() {
         this.progressDialog.setMessage("Loading...");
         this.progressDialog.setCancelable(false);
         this.progressDialog.show();
     }
+
     @Override
-
-
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(Void... param) {
 
             try {
 
-                String name = strings[0];
-                String telephone = strings[1];
-                String address = strings[2];
-                String idProduct = strings[3];
-                String mail = strings[4];
-                String password = strings[5];
-                String dateCount = strings[6];
-                String pet = strings[7];
-                String idBrand=strings[8];
-                String idBreed=strings[9];
+                if (userModel!=null) {
+
+                    String name = userModel.getName().toString();
+                    String telephone = userModel.getTelephone().toString();
+                    String address = userModel.getAdress().toString();
+                    String idProduct = userModel.getProduct().getIdProduct().toString();
+                    String mail = userModel.getMail().toString();
+                    String password = userModel.getPassword().toString();
+                    String dateCount =  String.valueOf(userModel.getDiasCount());
+                    String pet = userModel.getPet().toString();
+                    String idBrand = String.valueOf(userModel.getBrandItem().getIdBrand());
+                    String idBreed = String.valueOf(userModel.getBreedItem().getBreedId());
 
 
+                    String link = "http://192.168.0.114:8080/insertUser2.php";
 
+                    String data = URLEncoder.encode("name", "UTF-8") + "=" +
+                            URLEncoder.encode(name, "UTF-8");
+                    data += "&" + URLEncoder.encode("telephone", "UTF-8") + "=" +
+                            URLEncoder.encode(telephone, "UTF-8");
+                    data += "&" + URLEncoder.encode("address", "UTF-8") + "=" +
+                            URLEncoder.encode(address, "UTF-8");
+                    data += "&" + URLEncoder.encode("pet", "UTF-8") + "=" +
+                            URLEncoder.encode(pet, "UTF-8");
+                    data += "&" + URLEncoder.encode("dateCount", "UTF-8") + "=" +
+                            URLEncoder.encode(dateCount, "UTF-8");
+                    data += "&" + URLEncoder.encode("mail", "UTF-8") + "=" +
+                            URLEncoder.encode(mail, "UTF-8");
+                    data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
+                            URLEncoder.encode(password, "UTF-8");
+                    data += "&" + URLEncoder.encode("idBrand", "UTF-8") + "=" +
+                            URLEncoder.encode(idBrand, "UTF-8");
+                    data += "&" + URLEncoder.encode("idBreed", "UTF-8") + "=" +
+                            URLEncoder.encode(idBreed, "UTF-8");
+                    data += "&" + URLEncoder.encode("idProduct", "UTF-8") + "=" +
+                            URLEncoder.encode(idProduct, "UTF-8");
 
-                String link = "http://192.168.0.114:8080/insertUser2.php";
+                    URL url = new URL(link);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                    wr.write(data);
+                    wr.flush();
 
-                String data = URLEncoder.encode("name", "UTF-8") + "=" +
-                        URLEncoder.encode(name, "UTF-8");
-                data += "&" + URLEncoder.encode("telephone", "UTF-8") + "=" +
-                        URLEncoder.encode(telephone, "UTF-8");
-                data += "&" + URLEncoder.encode("address", "UTF-8") + "=" +
-                        URLEncoder.encode(address, "UTF-8");
-                data += "&" + URLEncoder.encode("pet", "UTF-8") + "=" +
-                        URLEncoder.encode(pet, "UTF-8");
-                data += "&" + URLEncoder.encode("dateCount", "UTF-8") + "=" +
-                        URLEncoder.encode(dateCount, "UTF-8");
-                data += "&" + URLEncoder.encode("mail", "UTF-8") + "=" +
-                        URLEncoder.encode(mail, "UTF-8");
-                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
-                        URLEncoder.encode(password, "UTF-8");
-                data += "&" + URLEncoder.encode("idBrand", "UTF-8") + "=" +
-                        URLEncoder.encode(idBrand, "UTF-8");
-                data += "&" + URLEncoder.encode("idBreed", "UTF-8") + "=" +
-                        URLEncoder.encode(idBreed, "UTF-8");
-                data += "&" + URLEncoder.encode("idProduct", "UTF-8") + "=" +
-                        URLEncoder.encode(idProduct, "UTF-8");
+                    BufferedReader reader = new BufferedReader(new
+                            InputStreamReader(conn.getInputStream()));
 
-                URL url = new URL(link);
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write(data);
-                wr.flush();
+                    sb = new StringBuilder();
+                    String line = null;
 
-                BufferedReader reader = new BufferedReader(new
-                        InputStreamReader(conn.getInputStream()));
-
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-
-                // Read Server Response
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                    break;
+                    // Read Server Response
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                        break;
+                    }
                 }
-                return sb.toString();
 
-            } catch (Exception e) {
+                return sb.toString();
+            }
+
+            catch (Exception e) {
 
                 return new String("");
             }
         }
-
-
-
-
 
     @Override
     protected void onPostExecute(String result){
@@ -125,12 +128,17 @@ public class backGround extends AsyncTask<String,Void,String> {
         {
             Toast.makeText(contextService, result, Toast.LENGTH_SHORT).show();
         }
-        else {
+        else if(userModel!=null)  {
 
-            session=new Session(contextService,mailUser,passwordUser,nombreUser);
-            session.SaveSharedPreferencesLogin();
+            int idUser=   Integer.parseInt(result) ;
+            userModel.setIdUser(idUser);
+            session=new Session(contextService);
+            session.saveUserModel(userModel);
             Toast.makeText(contextService, result, Toast.LENGTH_SHORT).show();
-            contextService.startActivity(new Intent(contextService, ListProductActivity.class));
+            UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,userModel.getDiasCount(),userModel);
+            updateNotificationAsync= new UpdateNotificationAsync(contextService,updateNotificationModelNew);
+            updateNotificationAsync.execute();
+
         }
         if (this.progressDialog.isShowing()) {
             this.progressDialog.dismiss();

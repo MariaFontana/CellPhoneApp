@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
+import com.example.acer.mynewponeapp.Activity.LoginActivity;
 import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,50 +28,27 @@ public class Session {
     private Gson gson;
     private UserModel userModel;
     private ProductModel productModel;
-
-    public Session(Context context,String mailUser,String passwordUser,String nombreUser,String product, double precio, String image) {
-        // TODO Auto-generated constructor stub
-        prefs =context.getSharedPreferences("loginPreferences",Context.MODE_PRIVATE);
-        this.context=context;
-        this.mailUser=mailUser;
-        this.passwordUser=passwordUser;
-        this.nonbreUser=nombreUser;
-        this.product=product;
-        this.precio=precio;
-        this.image=image;
-
-    }
-
-    public Session(Context context,String mailUser,String passwordUser,String nombreUser) {
-        // TODO Auto-generated constructor stub
-        prefs =context.getSharedPreferences("loginPreferences",Context.MODE_PRIVATE);
-        this.context=context;
-        this.mailUser=mailUser;
-        this.passwordUser=passwordUser;
-        this.nonbreUser=nombreUser;
-        this.image=image;
-
-    }
-
-
+    private UpdateNotificationModel updateNotificationModel;
 
     public Session(Context context) {
         // TODO Auto-generated constructor stub
-
-       // prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs =context.getSharedPreferences("loginPreferences",Context.MODE_PRIVATE);
-        this.context=context;
-
+        prefs = context.getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
+        this.context = context;
     }
 
-
+    public void saveUpdateNotidicationModel(UpdateNotificationModel updateNotificationModel)
+    {
+        gson= new Gson();
+        String updateNotificationModelString  =   gson.toJson(updateNotificationModel);
+        prefs.edit().putString("updateNotificationModel", updateNotificationModelString).apply();
+        //Save that String in SharedPreferences
+    }
     public void saveUserModel(UserModel userModel)
     {
         gson= new Gson();
         String userModelString  =   gson.toJson(userModel);
         prefs.edit().putString("userModel", userModelString).apply();
         //Save that String in SharedPreferences
-
     }
 
     public void saveProductModel(ProductModel productModel)
@@ -95,7 +74,12 @@ public class Session {
         return productModel  = gson.fromJson(json, ProductModel.class);
     }
 
-
+    public UpdateNotificationModel GetNotificationModel()
+    {
+        gson = new Gson();
+        String json = prefs.getString("updateNotificationModel", "");
+        return updateNotificationModel  = gson.fromJson(json, UpdateNotificationModel.class);
+    }
     public void setUserName(String userName) {
         prefs.edit().putString("usenameSession", userName).apply();
 
@@ -148,34 +132,40 @@ public class Session {
         return nombreUser;
     }
 
-    public void SaveSharedPreferencesLogin()
+    public void SaveSharedPreferencesLogin(UserModel userModel,ProductModel productModel)
     {
-        long precioProduct = (new Double(precio)).longValue();
+        saveProductModel(productModel);
+        saveUserModel(userModel);
 
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("userNameSession", mailUser);
-        editor.putString("passwordSession", passwordUser);
-        editor.putString("nombreUser",nonbreUser);
-        editor.putString("userProduct",product);
-        editor.putLong("userProductPrecio",precioProduct);
-        editor.putString("userImage",image);
-        editor.commit();
     }
 
     public boolean ValidateUserSession()
     {
         boolean isLoged=false;
-        String user= getUserName();
-        if(user.isEmpty())
-        {
-            SaveSharedPreferencesLogin();
-            isLoged=false;
-        }
-        else
-        {
-            isLoged=true;
+
+        UserModel userModel = GetUserModel();
+
+        if(userModel != null) {
+
+            String user = userModel.getName();
+
+            if (user.isEmpty()) {
+                //SaveSharedPreferencesLogin();
+                isLoged = false;
+            } else {
+                isLoged = true;
+            }
         }
         return isLoged;
+    }
+
+    public void LogOut()
+    {
+        prefs.edit().putString("productModel", null).apply();
+        prefs.edit().putString("userModel", null).apply();
+        prefs.edit().commit();
+        Intent LoginActivity = new Intent(this.context, com.example.acer.mynewponeapp.Activity.LoginActivity.class);
+        context.startActivity(LoginActivity);
     }
 
 }

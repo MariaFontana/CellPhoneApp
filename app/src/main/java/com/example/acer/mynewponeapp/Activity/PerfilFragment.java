@@ -11,18 +11,15 @@ import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
+import com.squareup.picasso.Picasso;
 
 import androidx.fragment.app.Fragment;
 
 
 public class PerfilFragment extends Fragment {
 
-
-    private ProductModel productModel;
     private UserModel userModel;
     private Session session;
-
-
 
     public PerfilFragment(){
 
@@ -34,8 +31,6 @@ public class PerfilFragment extends Fragment {
         session = new Session(getContext());
         // Inflate the layout for this fragment
 
-        GetProductModel();
-
         GetUserModel();
 
         final View view = inflater.inflate(R.layout.perfil_fragment, container, false);
@@ -46,17 +41,15 @@ public class PerfilFragment extends Fragment {
 
         ImageView photo = (ImageView)view.findViewById(R.id.imageProduct);
 
+        precio.setText(userModel.getProduct().getPrecio().toString());
+        String urlImage =userModel.getProduct().getPhotoId().toString();
+        Picasso.with(getContext()).load(urlImage).into(photo);
+        description.setText(userModel.getProduct().description.toString());
 
         return view;
     }
 
-
-    public void GetProductModel() {
-        this.productModel =   session.GetProductModel();
-
-    }
-
     public void GetUserModel() {
-        this.userModel = session.GetUserModel();
+         this.userModel = session.GetUserModel();
     }
 }

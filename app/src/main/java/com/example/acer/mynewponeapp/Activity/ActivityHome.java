@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Session;
@@ -42,7 +44,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
             this.startActivity(new Intent(this, LoginActivity.class));
         }
         else {
-            
+
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
 
@@ -55,7 +57,14 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 drawer.addDrawerListener(toggle);
                 toggle.syncState();
 
+
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                navigationView.setNavigationItemSelectedListener(this);
+                View headerView  =navigationView.getHeaderView(0);
+                TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_textView);
+
+               String titleBar = getString(R.string.Hola);
+                navUsername.setText(titleBar + " " + sessionUser.GetUserModel().getName().toString());
 
 
             //First start (Inbox Fragment)
@@ -76,12 +85,19 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.home:
+            case R.id.perfil:
                 menuItem.setChecked(true);
                 setFragment(0);
                 drawer.closeDrawer(GravityCompat.START);
             case R.id.updateDateBuy:
               //  menuItem.setChecked(true);
+                //setFragment(1);
+                //drawer.closeDrawer(GravityCompat.START);
+                return true;
+
+            case R.id.nav_item_out:
+                sessionUser.LogOut();
+                //  menuItem.setChecked(true);
                 //setFragment(1);
                 //drawer.closeDrawer(GravityCompat.START);
                 return true;
