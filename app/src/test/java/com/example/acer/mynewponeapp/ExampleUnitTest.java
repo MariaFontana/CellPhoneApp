@@ -1,6 +1,6 @@
 package com.example.acer.mynewponeapp;
 
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Usuario;
+
 
 import org.junit.Test;
 

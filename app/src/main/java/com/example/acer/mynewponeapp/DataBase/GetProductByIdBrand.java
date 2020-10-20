@@ -11,6 +11,7 @@ import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +67,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
     protected String doInBackground(String... strings) {
         try {
             String idBrand = strings[0];
-            String link = "http://192.168.0.114:8080/getproductbybrand.php";
+            String link = constant.url+"/getproductbybrand.php";
 
             String data = URLEncoder.encode("idBrand", "UTF-8") + "=" +
                     URLEncoder.encode(idBrand, "UTF-8");

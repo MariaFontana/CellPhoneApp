@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import static java.lang.Integer.parseInt;
 
@@ -69,7 +70,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
                     String idBreed = String.valueOf(userModel.getBreedItem().getBreedId());
 
 
-                    String link = "http://192.168.0.114:8080/insertUser2.php";
+                   final String link = constant.url +"/insertUser2.php";
 
                     String data = URLEncoder.encode("name", "UTF-8") + "=" +
                             URLEncoder.encode(name, "UTF-8");

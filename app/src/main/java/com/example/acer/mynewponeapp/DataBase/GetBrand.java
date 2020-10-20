@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.acer.mynewponeapp.Activity.ProductAdapter;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +55,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     protected String doInBackground(String... strings) {
         try
         {
-            String link = "http://192.168.0.114:8080/getBrand.php";
+            String link = constant.url +"/getBrand.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();

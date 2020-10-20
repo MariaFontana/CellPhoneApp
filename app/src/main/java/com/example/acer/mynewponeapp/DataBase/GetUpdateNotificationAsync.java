@@ -61,7 +61,7 @@ public GetUpdateNotificationAsync(Context context) {
 
         String idUser = String.valueOf(userModel.getIdUser());
 
-        String link = "http://192.168.0.114:8080/getLastNotification.php";
+        String link = "http://192.168.0.105:8080/getLastNotification.php";
 
         String data = URLEncoder.encode("idUser", "UTF-8") + "=" +
         URLEncoder.encode(idUser, "UTF-8");
