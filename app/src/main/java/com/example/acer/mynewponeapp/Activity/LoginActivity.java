@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mailUser = mail.getText().toString();
         passwordUser = password.getText().toString();
+        mailUser=mailUser.trim();
 
        if(!Validation.passwordValidateStringEmpty(passwordUser))
        {
@@ -77,8 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginUserDatabase();
 
-        UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(this);
-        updateNotificaionBussines.CalculateAlarmNotification();
 
     }
 

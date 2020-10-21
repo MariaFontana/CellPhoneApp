@@ -26,6 +26,8 @@ import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
+import com.example.acer.mynewponeapp.Util.constant;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +63,7 @@ public GetUpdateNotificationAsync(Context context) {
 
         String idUser = String.valueOf(userModel.getIdUser());
 
-        String link = "http://192.168.0.105:8080/getLastNotification.php";
+        String link = constant.url +"/getLastNotification.php";
 
         String data = URLEncoder.encode("idUser", "UTF-8") + "=" +
         URLEncoder.encode(idUser, "UTF-8");

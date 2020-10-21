@@ -53,12 +53,13 @@ public class UserModel {
 
     }
 
-    public UserModel( String name, String mail,String password, ProductModel product)
+    public UserModel( int idUser,String name, String mail,String password, ProductModel product)
     {
         this.mail=mail;
         this.name=name ;
         this.password=password;
         this.product=product;
+        this.idUser=idUser;
     }
 
     public UserModel()

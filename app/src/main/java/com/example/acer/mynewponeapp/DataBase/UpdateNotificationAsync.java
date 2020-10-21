@@ -12,6 +12,7 @@ import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
 
                 String idUser = String.valueOf(updateNotificationModel.getUserModel().getIdUser());
 
-                String link = "http://192.168.0.105:8080/updateNotification.php";
+                String link = constant.url +"/updateNotification.php";
 
                 String data = URLEncoder.encode("countDay", "UTF-8") + "=" +
                         URLEncoder.encode(countDay, "UTF-8");
@@ -144,7 +145,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
             GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(contextService);
             updateAsync.execute();
 
-            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+           contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
         }
 

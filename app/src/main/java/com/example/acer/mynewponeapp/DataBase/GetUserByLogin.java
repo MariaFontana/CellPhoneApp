@@ -11,8 +11,10 @@ import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 import com.example.acer.mynewponeapp.Activity.ProductAdapter;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +65,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             String password = strings[1];
 
 
-            String link = "http://192.168.0.114:8080/getUserLogin.php";
+            String link = constant.url +"/getUserLogin.php";
 
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
@@ -137,10 +139,13 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 String productPrecio = UserJson.getString("precio");
                 String productImage = UserJson.getString("image");
                 String productDescription=UserJson.getString("description");
+                String idUser=UserJson.getString("idUser");
+
+
 
                 product=new ProductModel(productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
 
-                userModel= new UserModel(name,mail,password,product);
+                userModel= new UserModel(Integer.parseInt(idUser) ,name,mail,password,product);
                 return IsParse=true;
 
             }
@@ -157,21 +162,33 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     @Override
     protected void onPostExecute(String result) {
 
-        if (IsParse) {
+        try {
+            if (IsParse) {
 
-            session = new Session(contextService);
+                session = new Session(contextService);
+                //Save product
+                session.saveProductModel(product);
+                //Save User
+                session.saveUserModel(userModel);
+                //Get Update Notification
+              UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
+                //updateNotificaionBussines.CalculateAlarmNotification();
+                contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
-            session.saveProductModel(product);
-            session.saveUserModel(userModel);
-            contextService.startActivity(new Intent(contextService, ActivityHome.class));
-        } else if (!IsParse) {
+            } else if (!IsParse) {
 
-            Toast.makeText(contextService, "El usuario y la contraseña no son válidos", Toast.LENGTH_SHORT).show();
-            if (this.progressDialog.isShowing()) {
-                this.progressDialog.dismiss();
+                Toast.makeText(contextService, "El usuario y la contraseña no son válidos", Toast.LENGTH_SHORT).show();
+                if (this.progressDialog.isShowing()) {
+                    this.progressDialog.dismiss();
+                }
             }
         }
+        catch (Exception e){
+             new String("Exception: " + e.getMessage());
+
+        }
     }
+
 
     }
 
