@@ -39,7 +39,7 @@ public class PerfilFragment extends Fragment {
         GetUpdateNotification();
         GetProductBussiness();
 
-       int days= productBussnes.CalculationDurationFeed();
+       long days= productBussnes.CalculationDurationFeed();
 
 
         final View view = inflater.inflate(R.layout.perfil_fragment, container, false);
@@ -56,7 +56,7 @@ public class PerfilFragment extends Fragment {
         String urlImage =userModel.getProduct().getPhotoId().toString();
         Picasso.with(getContext()).load(urlImage).into(photo);
         description.setText(userModel.getProduct().description.toString());
-        daysRemaining.setText("Te quedan" + days + "días de alimento");
+        daysRemaining.setText("Te quedan " + days + " días de alimento");
 
         return view;
     }

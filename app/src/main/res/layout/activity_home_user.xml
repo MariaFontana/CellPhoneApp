@@ -33,8 +33,6 @@
          app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24"
          android:layout_margin="45dp"
          app:backgroundTint="#FFFFFF"
-
-
          app:fabSize="normal"
          tools:ignore="VectorDrawableCompat" />
 

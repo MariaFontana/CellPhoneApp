@@ -24,19 +24,42 @@ public class ProductBussnes {
     }
 
 
-    public int CalculationDurationFeed()
+    public long CalculationDurationFeed()
     {
+
         if(updateNotificationModel != null) {
-            Date fecha = updateNotificationModel.getDateUpdate();
+
+            Date dateStart = updateNotificationModel.getDateUpdate();
+
             int days = updateNotificationModel.getCountDays();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(fecha);
-            calendar.add(Calendar.DAY_OF_MONTH, days);
-            return calendar.DAY_OF_MONTH;
+            Date dateNow =Calendar.getInstance().getTime();
+
+
+            Calendar calendarNow = Calendar.getInstance();
+
+            calendarNow.setTime(dateStart);
+            calendarNow.add(Calendar.DAY_OF_YEAR, days);
+
+            Date dateFinish =calendarNow.getTime();
+
+            if(dateFinish.getTime() < dateNow.getTime())
+            {
+                return 0 ;
+            }
+            else {
+                long difference_In_Time = dateFinish.getTime() - dateStart.getTime();
+
+                long difference_In_Days = (difference_In_Time
+                        / (1000 * 60 * 60 * 24))
+                        % 365;
+
+                return difference_In_Days;
+            }
         }
         return 0;
 
     }
+
 
 
 }
