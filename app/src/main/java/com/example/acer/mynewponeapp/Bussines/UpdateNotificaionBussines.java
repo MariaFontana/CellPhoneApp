@@ -68,8 +68,9 @@ public class UpdateNotificaionBussines {
                 Date date = updateNotificationModel.getDateUpdate();
                 dayOfNotification.setTime(date);
                 dayOfNotification.add(Calendar.DAY_OF_MONTH, updateNotificationModel.getCountDays());
+                int days=dayOfNotification.DAY_OF_MONTH;
                 long time2=dayOfNotification.getTimeInMillis();
-                 alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
+                alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
 
                 //UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,newDayUpdate,userModel.getDiasCount(),userModel);
                 // updateNotificationAsync= new UpdateNotificationAsync(context,updateNotificationModel);

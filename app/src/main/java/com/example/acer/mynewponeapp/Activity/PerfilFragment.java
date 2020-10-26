@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.acer.mynewponeapp.Bussines.ProductBussnes;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 import com.squareup.picasso.Picasso;
@@ -20,6 +22,8 @@ public class PerfilFragment extends Fragment {
 
     private UserModel userModel;
     private Session session;
+    private UpdateNotificationModel updateNotificationModel;
+    ProductBussnes productBussnes;
 
     public PerfilFragment(){
 
@@ -32,6 +36,11 @@ public class PerfilFragment extends Fragment {
         // Inflate the layout for this fragment
 
         GetUserModel();
+        GetUpdateNotification();
+        GetProductBussiness();
+
+       int days= productBussnes.CalculationDurationFeed();
+
 
         final View view = inflater.inflate(R.layout.perfil_fragment, container, false);
 
@@ -41,15 +50,26 @@ public class PerfilFragment extends Fragment {
 
         ImageView photo = (ImageView)view.findViewById(R.id.imageProduct);
 
+        final TextView daysRemaining =(TextView)view.findViewById(R.id.textDaysRemaining);
+
         precio.setText(userModel.getProduct().getPrecio().toString());
         String urlImage =userModel.getProduct().getPhotoId().toString();
         Picasso.with(getContext()).load(urlImage).into(photo);
         description.setText(userModel.getProduct().description.toString());
+        daysRemaining.setText("Te quedan" + days + "días de alimento");
 
         return view;
     }
 
     public void GetUserModel() {
          this.userModel = session.GetUserModel();
+    }
+    public void GetUpdateNotification()
+    {
+        this.updateNotificationModel=session.GetNotificationModel();
+    }
+    public void GetProductBussiness()
+    {
+        productBussnes= new ProductBussnes(userModel.getProduct(),updateNotificationModel);
     }
 }

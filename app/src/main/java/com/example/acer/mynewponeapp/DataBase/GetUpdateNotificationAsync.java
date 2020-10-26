@@ -158,6 +158,7 @@ public GetUpdateNotificationAsync(Context context) {
 
             UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService,updateNotificatinModel);
             updateNotificaionBussines.CalculateAlarmNotification();
+            contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
         }
 

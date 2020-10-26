@@ -173,7 +173,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 //Get Update Notification
               UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
                 //updateNotificaionBussines.CalculateAlarmNotification();
-                contextService.startActivity(new Intent(contextService, ActivityHome.class));
+
 
             } else if (!IsParse) {
 

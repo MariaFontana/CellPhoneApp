@@ -2,6 +2,7 @@ package com.example.acer.mynewponeapp.Activity;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     private Bundle arguments;
     private ProductModel productModel;
     private UserModel userModel;
+    private FloatingActionButton buttonHomeBuy;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -64,8 +67,15 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 TextView navUsername = (TextView) headerView.findViewById(R.id.nav_header_textView);
 
                String titleBar = getString(R.string.Hola);
-                navUsername.setText(titleBar + " " + sessionUser.GetUserModel().getName().toString());
+               navUsername.setText(titleBar + " " + sessionUser.GetUserModel().getName().toString());
 
+                buttonHomeBuy= (FloatingActionButton)findViewById(R.id.homeBuy) ;
+                buttonHomeBuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        buyWhatssUp();
+                    }
+                });
 
             //First start (Inbox Fragment)
             setFragment(0);
@@ -133,6 +143,26 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 //fragmentTransaction.replace(R.id.fragment, starredFragment);
                 //fragmentTransaction.commit();
                 break;
+        }
+    }
+
+
+    private void buyWhatssUp()
+    {
+        try {
+
+            String message = String.valueOf(R.string.messageWhatsApp);// Replace with your message.
+
+            String toNumber = "542615568504";
+
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            // Uri uri = Uri.parse("smsto:" + "");
+            sendIntent.setData(Uri.parse("http://api.whatsapp.com/send?phone=" + toNumber + "&text=" + "Me gustaría cominicarme con ustedes!"));
+
+            startActivity(sendIntent);
+
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -384,7 +384,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/keyboard_arrow_down/baseline_keyboard_arrow_down_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/add_shopping_cart/baseline_add_shopping_cart_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -394,7 +394,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_keyboard_arrow_down_24" />
+                            <entry key="color" value="ff2021" />
+                            <entry key="outputName" value="ic_baseline_add_shopping_cart_24" />
                             <entry key="sourceFile" value="C:\Users\Acer" />
                           </map>
                         </option>

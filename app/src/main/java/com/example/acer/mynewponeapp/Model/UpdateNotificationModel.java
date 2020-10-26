@@ -23,7 +23,7 @@ public class UpdateNotificationModel {
     public UpdateNotificationModel(BigInteger idUpdatenotification, String dateUpdate, Integer countDays)  {
 
         this.idUpdatenotification = idUpdatenotification;
-       this.dateUpdate=  GetDate(dateUpdate);
+        this.dateUpdate=  GetDate(dateUpdate);
         this.countDays = countDays;
 
     }
