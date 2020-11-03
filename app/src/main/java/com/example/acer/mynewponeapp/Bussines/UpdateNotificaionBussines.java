@@ -67,8 +67,8 @@ public class UpdateNotificaionBussines {
                 dayOfNotification = Calendar.getInstance();
                 Date date = updateNotificationModel.getDateUpdate();
                 dayOfNotification.setTime(date);
-                dayOfNotification.add(Calendar.DAY_OF_MONTH, updateNotificationModel.getCountDays());
-                int days=dayOfNotification.DAY_OF_MONTH;
+                dayOfNotification.add(Calendar.DAY_OF_YEAR, updateNotificationModel.getCountDays());
+
                 long time2=dayOfNotification.getTimeInMillis();
                 alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
 
@@ -102,7 +102,7 @@ public class UpdateNotificaionBussines {
 
     private void GetLastNotification()
     {
-        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context);
+        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
         updateAsync.execute();
         //updateNotificationModel= session.GetNotificationModel();
 

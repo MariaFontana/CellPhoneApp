@@ -53,8 +53,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(Channel.NOTIFICATION_ID, mBuilder.build());
 
+        boolean IsAlarmSet=true;
 
-        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context);
+
+        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,IsAlarmSet);
         updateAsync.execute();
 
         //getting the remote input bundle from intent

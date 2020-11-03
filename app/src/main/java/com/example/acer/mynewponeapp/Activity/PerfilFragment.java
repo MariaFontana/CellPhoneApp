@@ -15,6 +15,9 @@ import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.fragment.app.Fragment;
 
 
@@ -41,11 +44,10 @@ public class PerfilFragment extends Fragment {
 
        long days= productBussnes.CalculationDurationFeed();
 
-
         final View view = inflater.inflate(R.layout.perfil_fragment, container, false);
-
         final TextView precio = (TextView) view.findViewById(R.id.textPrecio);
-
+        final TextView duration = (TextView) view.findViewById(R.id.duration);
+        final TextView dateBuy = (TextView) view.findViewById(R.id.dateBuy);
         final TextView description = (TextView) view.findViewById(R.id.txtDescription);
 
         ImageView photo = (ImageView)view.findViewById(R.id.imageProduct);
@@ -57,6 +59,10 @@ public class PerfilFragment extends Fragment {
         Picasso.with(getContext()).load(urlImage).into(photo);
         description.setText(userModel.getProduct().description.toString());
         daysRemaining.setText("Te quedan " + days + " días de alimento");
+         Date dateNew= updateNotificationModel.getDateUpdate();
+        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dateNew);
+        dateBuy.setText("última compra " + formattedDate);
+        duration.setText("Duración alimento" + updateNotificationModel.getCountDays() + " días" );
 
         return view;
     }
@@ -64,6 +70,7 @@ public class PerfilFragment extends Fragment {
     public void GetUserModel() {
          this.userModel = session.GetUserModel();
     }
+
     public void GetUpdateNotification()
     {
         this.updateNotificationModel=session.GetNotificationModel();

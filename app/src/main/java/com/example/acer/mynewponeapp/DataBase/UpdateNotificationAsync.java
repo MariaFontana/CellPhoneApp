@@ -142,10 +142,11 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
         }
         else {
 
-            GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(contextService);
+            GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(contextService,false);
             updateAsync.execute();
 
-           contextService.startActivity(new Intent(contextService, ActivityHome.class));
+
+        //   contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
         }
 

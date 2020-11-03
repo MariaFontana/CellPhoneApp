@@ -37,7 +37,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     static JSONArray brandJsonArray = null;
     String json = "";
     AppCompatSpinner spinnerBrand;
-    BussinessMysql bussinesSql;
+
     boolean IsParse=false;
     List<BrandModel>brandList =new ArrayList<>();
     ProgressDialog progressDialog;
@@ -47,7 +47,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     {
         contextService = context;
         this.spinnerBrand=spinnerBrand;
-        this.bussinesSql=new BussinessMysql("id","name");
+
         progressDialog= new ProgressDialog(contextService);
     }
 
@@ -55,7 +55,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     protected String doInBackground(String... strings) {
         try
         {
-            String link = constant.url +"/getBrand.php";
+            String link = constant.url+"/getBrand.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();

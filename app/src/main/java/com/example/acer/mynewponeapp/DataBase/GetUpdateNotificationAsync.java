@@ -45,10 +45,12 @@ private boolean IsParse=false;
 static JSONArray userJsonArray = null;
 private UpdateNotificationModel updateNotificatinModel;
 private Session session;
+private boolean IsAlarmSet=false;
 //flag 0 means get and 1 means post.(By default it is get.)
-public GetUpdateNotificationAsync(Context context) {
+public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
             contextService = context;
             session= new Session(context);
+            IsAlarmSet=isAlarmSet;
             if(session!=null) {
                 this.userModel = session.GetUserModel();
             }
@@ -154,11 +156,21 @@ public GetUpdateNotificationAsync(Context context) {
         @Override
         protected void onPostExecute(String result) {
 
-            session.saveUpdateNotidicationModel(updateNotificatinModel);
 
-            UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService,updateNotificatinModel);
-            updateNotificaionBussines.CalculateAlarmNotification();
-            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+
+            if(IsAlarmSet)
+            {
+                updateNotificatinModel.setDateUpdate(new Date());
+                UpdateNotificationAsync update=new UpdateNotificationAsync(contextService,updateNotificatinModel);
+                update.execute();
+                session.saveUpdateNotidicationModel(updateNotificatinModel);
+            }
+            else {
+                session.saveUpdateNotidicationModel(updateNotificatinModel);
+                UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService, updateNotificatinModel);
+                updateNotificaionBussines.CalculateAlarmNotification();
+                contextService.startActivity(new Intent(contextService, ActivityHome.class));
+            }
 
         }
 
