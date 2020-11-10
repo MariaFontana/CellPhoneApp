@@ -68,7 +68,7 @@ public class UpdateNotificaionBussines {
                 Date date = updateNotificationModel.getDateUpdate();
                 dayOfNotification.setTime(date);
                 dayOfNotification.add(Calendar.DAY_OF_YEAR, updateNotificationModel.getCountDays());
-
+                dayOfNotification.set(Calendar.HOUR_OF_DAY, 10);
                 long time2=dayOfNotification.getTimeInMillis();
                 alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
 

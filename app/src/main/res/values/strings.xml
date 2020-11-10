@@ -26,5 +26,8 @@
     <string name="navigation_drawer_open">Drawer Open</string>
     <string name="navigation_drawer_close">Drawer Closed</string>
     <string name="Hola">Hola</string>
+    <string name="userExist">El Nombre de usuario ya existe</string>
+    <string name="userSave">El usuario se guardo exitosamente!!!!Felicitaciones!!</string>
+    <string name="errorConexion">Hay un error en la conexión, vuelva a intentarlo!</string>
 
 </resources>

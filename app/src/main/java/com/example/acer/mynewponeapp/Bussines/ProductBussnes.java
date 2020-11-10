@@ -38,6 +38,7 @@ public class ProductBussnes {
             Calendar calendarNow = Calendar.getInstance();
 
             calendarNow.setTime(dateStart);
+
             calendarNow.add(Calendar.DAY_OF_YEAR, days);
 
             Date dateFinish =calendarNow.getTime();

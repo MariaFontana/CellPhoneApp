@@ -23,6 +23,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Objects;
+
+import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import static java.lang.Integer.parseInt;
@@ -125,9 +128,13 @@ public class backGround extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String result){
 
-        if (result.isEmpty())
+        if(result.isEmpty())
         {
-            Toast.makeText(contextService, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService, R.string.errorConexion, Toast.LENGTH_LONG).show();
+        }
+        if (result.equals(new String("0")))
+        {
+            Toast.makeText(contextService, R.string.userExist, Toast.LENGTH_LONG).show();
         }
         else if(userModel!=null)  {
 
@@ -135,7 +142,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
             userModel.setIdUser(idUser);
             session=new Session(contextService);
             session.saveUserModel(userModel);
-            Toast.makeText(contextService, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService, R.string.userSave, Toast.LENGTH_LONG).show();
             UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,userModel.getDiasCount(),userModel);
             updateNotificationAsync= new UpdateNotificationAsync(contextService,updateNotificationModelNew);
             updateNotificationAsync.execute();

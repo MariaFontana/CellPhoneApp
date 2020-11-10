@@ -162,8 +162,10 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
             {
                 updateNotificatinModel.setDateUpdate(new Date());
                 UpdateNotificationAsync update=new UpdateNotificationAsync(contextService,updateNotificatinModel);
+                updateNotificatinModel.setUserModel(userModel);
                 update.execute();
                 session.saveUpdateNotidicationModel(updateNotificatinModel);
+                IsAlarmSet=false;
             }
             else {
                 session.saveUpdateNotidicationModel(updateNotificatinModel);
