@@ -99,7 +99,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 menuItem.setChecked(true);
                 setFragment(0);
                 drawer.closeDrawer(GravityCompat.START);
-            case R.id.updateDateBuy:
+            case R.id.notification:
               //  menuItem.setChecked(true);
                 //setFragment(1);
                 //drawer.closeDrawer(GravityCompat.START);

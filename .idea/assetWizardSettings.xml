@@ -243,7 +243,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\xampp\htdocs\marcas\animaliaLogo.jpg" />
+                                                <entry key="imagePath" value="C:\xampp\htdocs\marcas\logo.png" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -276,8 +276,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\xampp\htdocs\marcas\animaliaLogo.jpg" />
-                                      <entry key="outputName" value="backgroundLogin" />
+                                      <entry key="imageAsset" value="C:\xampp\htdocs\marcas\logo.png" />
+                                      <entry key="outputName" value="logoNewNoti" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -361,6 +361,11 @@
                             </entry>
                           </map>
                         </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="NOTIFICATION" />
+                          </map>
+                        </option>
                       </PersistentState>
                     </value>
                   </entry>
@@ -384,7 +389,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/add_shopping_cart/baseline_add_shopping_cart_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/notifications/baseline_notifications_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -394,8 +399,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff2021" />
-                            <entry key="outputName" value="ic_baseline_add_shopping_cart_24" />
+                            <entry key="color" value="1a47ff" />
+                            <entry key="outputName" value="ic_baseline_notifications_24" />
                             <entry key="sourceFile" value="C:\Users\Acer" />
                           </map>
                         </option>

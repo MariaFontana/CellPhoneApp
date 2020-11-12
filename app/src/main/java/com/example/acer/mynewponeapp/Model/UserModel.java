@@ -1,13 +1,13 @@
 package com.example.acer.mynewponeapp.Model;
 
 import java.util.Date;
+import java.util.List;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 public class UserModel {
-
 
     private int idUser;
 
@@ -37,7 +37,10 @@ public class UserModel {
 
     private int diasCount;
 
-    public UserModel(int idUser, String name, String mail, int diasCount,ProductModel product, String password,  String pet, String telephone, String address,BrandModel brandItem,BreedModel breedItem)
+    private List<UpdateNotificationModel> listNotificationModel;
+
+
+    public UserModel(int idUser, String name, String mail, int diasCount,ProductModel product, String password,  String pet, String telephone, String address,BrandModel brandItem,BreedModel breedItem,List<UpdateNotificationModel> listNotificationModel)
     {
         this.idUser=idUser;
         this.adress=address;
@@ -50,6 +53,7 @@ public class UserModel {
         this.password=password;
         this.brandItem=brandItem;
         this.breedItem=breedItem;
+        this.listNotificationModel=listNotificationModel;
 
     }
 
@@ -139,6 +143,12 @@ public class UserModel {
 
     public void setBrandItem(BrandModel brandItem) {
         this.brandItem = brandItem;
+    }
+    public void setListNotificationModel(List<UpdateNotificationModel> listNotificationModel) {
+        this.listNotificationModel = listNotificationModel;
+    }
+    public List<UpdateNotificationModel> getNotificationModelList() {
+        return listNotificationModel;
     }
 
 }

@@ -4,9 +4,9 @@
         <item android:id="@+id/perfil"
             android:icon="@drawable/home"
             android:title="Perfil" />
-        <item android:id="@+id/updateDateBuy"
-            android:icon="@drawable/update"
-            android:title="Modificar fecha Notificación Compra" />
+        <item android:id="@+id/notification"
+            android:icon="@drawable/ic_baseline_notifications_24"
+            android:title="Notificaciones" />
     </group>
 
     <group android:id="@+id/group_menuPromos">

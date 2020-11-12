@@ -48,9 +48,11 @@ private Session session;
 private boolean IsAlarmSet=false;
 //flag 0 means get and 1 means post.(By default it is get.)
 public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
+
             contextService = context;
             session= new Session(context);
             IsAlarmSet=isAlarmSet;
+
             if(session!=null) {
                 this.userModel = session.GetUserModel();
             }

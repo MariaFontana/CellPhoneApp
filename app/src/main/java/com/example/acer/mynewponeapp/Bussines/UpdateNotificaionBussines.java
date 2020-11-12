@@ -105,6 +105,5 @@ public class UpdateNotificaionBussines {
         GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
         updateAsync.execute();
         //updateNotificationModel= session.GetNotificationModel();
-
     }
 }

@@ -65,7 +65,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             String password = strings[1];
 
 
-            String link = constant.url +"/getUserLogin.php";
+            String link = constant.url+"/getUserLogin.php";
 
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +

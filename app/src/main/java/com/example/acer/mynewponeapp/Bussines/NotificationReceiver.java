@@ -44,7 +44,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, Channel.CHANNNEL_ID)
-                .setSmallIcon(android.R.drawable.btn_star_big_on)
+                .setSmallIcon(android.R.drawable.btn_star)
                 .setContentTitle("Hola, el alimento de tu mascota esta por terminarse, Hacenos tu pedido yaa!!!!!")
                 .setAutoCancel(true)
                 .addAction(android.R.drawable.btn_star, "Open WhatssApp...", pendingShareIntent);

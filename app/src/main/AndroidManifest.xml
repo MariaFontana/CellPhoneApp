@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.ListProductActivity"></activity>
         <activity android:name=".Activity.ActivityHome"></activity>
+        <activity android:name=".Activity.LoginActivity"></activity>
 
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
@@ -20,16 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
         <activity
             android:name=".RoomPersistence.Dao.Adapter.notificationView"
             android:label="Details of notification"
