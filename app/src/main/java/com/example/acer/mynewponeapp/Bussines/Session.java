@@ -57,7 +57,6 @@ public class Session {
         String productModelString  =   gson.toJson(productModel);
         prefs.edit().putString("productModel", productModelString).apply();
         //Save that String in SharedPreferences
-
     }
 
     public UserModel GetUserModel()

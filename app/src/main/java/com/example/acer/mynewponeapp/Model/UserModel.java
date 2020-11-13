@@ -40,7 +40,7 @@ public class UserModel {
     private List<UpdateNotificationModel> listNotificationModel;
 
 
-    public UserModel(int idUser, String name, String mail, int diasCount,ProductModel product, String password,  String pet, String telephone, String address,BrandModel brandItem,BreedModel breedItem,List<UpdateNotificationModel> listNotificationModel)
+    public UserModel(int idUser, String name, String mail, int diasCount,ProductModel product, String password,  String pet, String telephone, String address,BrandModel brandItem,BreedModel breedItem)
     {
         this.idUser=idUser;
         this.adress=address;
@@ -53,7 +53,7 @@ public class UserModel {
         this.password=password;
         this.brandItem=brandItem;
         this.breedItem=breedItem;
-        this.listNotificationModel=listNotificationModel;
+
 
     }
 

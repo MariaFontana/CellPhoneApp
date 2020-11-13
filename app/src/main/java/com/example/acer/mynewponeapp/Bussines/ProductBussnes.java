@@ -22,6 +22,11 @@ public class ProductBussnes {
         this.productModel = productModel;
         this.updateNotificationModel=updateNotificationModel;
     }
+    public ProductBussnes( UpdateNotificationModel updateNotificationModel)
+    {
+
+        this.updateNotificationModel=updateNotificationModel;
+    }
 
 
     public long CalculationDurationFeed()

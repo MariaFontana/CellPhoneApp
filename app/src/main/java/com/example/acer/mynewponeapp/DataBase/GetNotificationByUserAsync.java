@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
+import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
@@ -39,7 +41,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
     boolean IsParse=false;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public GetNotificationByUserAsync(Context context,boolean isAlarmSet) {
+    public GetNotificationByUserAsync(Context context) {
 
         contextService = context;
         session= new Session(context);
@@ -55,6 +57,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
         try {
 
             if (userModel != null) {
+
 
                 String idUser = String.valueOf(userModel.getIdUser());
 
@@ -85,6 +88,10 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
                     userJsonArray = CreateJson();
                     parse();
                 }
+            }
+            else
+            {
+                Toast.makeText(contextService, "El usuario es nulo", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -133,11 +140,14 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
                 updateNotificatinModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , dateUpdate, Integer.parseInt(countDay));
                 updateNotificatinModelList.add(updateNotificatinModel);
 
+
                 return IsParse=true;
 
             }
 
-            userModel.
+            userModel.setListNotificationModel(updateNotificatinModelList);
+
+            session.saveUserModel(userModel);
             return IsParse=false;
 
         } catch (JSONException e) {
@@ -151,7 +161,13 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
+        try
+        {
 
+        }
+        catch(Exception e) {
+             e.getMessage();
+        }
 
     }
 

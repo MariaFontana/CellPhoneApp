@@ -166,6 +166,9 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             if (IsParse) {
 
                 session = new Session(contextService);
+
+                GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
+                getNotification.execute();
                 //Save product
                 session.saveProductModel(product);
                 //Save User
