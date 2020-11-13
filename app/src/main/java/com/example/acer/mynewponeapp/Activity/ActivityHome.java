@@ -137,11 +137,11 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 break;
             case 1:
-                //fragmentManager = getSupportFragmentManager();
-               // fragmentTransaction = fragmentManager.beginTransaction();
-                //StarredFragment starredFragment = new StarredFragment();
-                //fragmentTransaction.replace(R.id.fragment, starredFragment);
-                //fragmentTransaction.commit();
+                fragmentManager = getSupportFragmentManager();
+               fragmentTransaction = fragmentManager.beginTransaction();
+               NotificationListFragment notificationListFragment = new NotificationListFragment();
+               fragmentTransaction.replace(R.id.fragment, notificationListFragment);
+               fragmentTransaction.commit();
                 break;
         }
     }
