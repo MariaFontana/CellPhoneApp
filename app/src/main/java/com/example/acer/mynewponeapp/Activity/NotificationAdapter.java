@@ -63,7 +63,8 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
 
         holder.dateNotification.setText(date);
         holder.nextNotification.setText(formattedNextDate);
-        holder.daysRemainig.setText(daysRemaining);
+
+        holder.daysRemainig.setText(String.valueOf(daysRemaining) );
 
     }
 

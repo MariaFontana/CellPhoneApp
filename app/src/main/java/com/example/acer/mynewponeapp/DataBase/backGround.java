@@ -143,7 +143,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
             session=new Session(contextService);
             session.saveUserModel(userModel);
             Toast.makeText(contextService, R.string.userSave, Toast.LENGTH_LONG).show();
-            UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,userModel.getDiasCount(),userModel);
+            UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,null,userModel.getDiasCount(),userModel);
             updateNotificationAsync= new UpdateNotificationAsync(contextService,updateNotificationModelNew);
             updateNotificationAsync.execute();
 

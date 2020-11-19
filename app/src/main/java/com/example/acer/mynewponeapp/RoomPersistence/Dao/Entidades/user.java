@@ -43,7 +43,7 @@ public class user implements Parcelable {
     @TypeConverters(Converter.class)
     private Date dateStart;
 
-    public user(  String name, String address, String telephone, String pet, String mail, int dateCount, String password, Date  dateStart) {
+    public user( String name, String address, String telephone, String pet, String mail, int dateCount, String password, Date  dateStart) {
 
         this.name = name;
         this.address = address;

@@ -11,18 +11,23 @@ import java.util.List;
 import androidx.lifecycle.LiveData;
 
 public class BrandRepository {
+
     private BrandDao brandDao;
+
     private LiveData<List<Brand>> brands;
+
     private LiveData<Brand> BrandLiveData;
+
     private  List<Brand> brandList;
+
     AnimaliaDataBase db;
 
 
     public BrandRepository(Application application) {
+
         db = AnimaliaDataBase.getDatabase(application);
         brandDao = db.BrandDao();
         brands = brandDao.getBrandAll();
-
 
     }
 
@@ -34,5 +39,11 @@ public class BrandRepository {
 
     public List<Brand> getAllBrandList() {
         return  brandDao.getBrandAllList();
+    }
+
+    public void insert(Brand brand) {
+        AnimaliaDataBase.databaseWriteExecutor.execute(() -> {
+            brandDao.insert(brand);
+        });
     }
 }

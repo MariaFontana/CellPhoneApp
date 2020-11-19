@@ -34,4 +34,12 @@ public class BrandViewModel extends AndroidViewModel
             return brandList;
         }
 
+       public  void insert(Brand brand) {
+            brandRepository.insert(brand);
+        }
+
+
+
+
+
     }

@@ -25,6 +25,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -126,7 +127,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
         {
 
             JSONObject updateNotificationJson;
-
+            updateNotificatinModelList= new ArrayList<>();
             for (int i=0;i< userJsonArray.length();i++)
             {
                 updateNotificationJson=userJsonArray.getJSONObject(i);
@@ -136,18 +137,16 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
                 String countDay = updateNotificationJson.getString("countDay");
                 String idUser = updateNotificationJson.getString("idUser");
 
-
                 updateNotificatinModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , dateUpdate, Integer.parseInt(countDay));
                 updateNotificatinModelList.add(updateNotificatinModel);
 
-
-                return IsParse=true;
-
             }
+
 
             userModel.setListNotificationModel(updateNotificatinModelList);
 
             session.saveUserModel(userModel);
+
             return IsParse=false;
 
         } catch (JSONException e) {
@@ -163,7 +162,16 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
         try
         {
+            session.saveUserModel(userModel);
 
+            if(updateNotificatinModelList != null) {
+                session.saveUpdateNotidicationModel(updateNotificatinModelList.get(0));
+            }
+
+            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+            //Get Update Notification
+            //UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
+            //updateNotificaionBussines.CalculateAlarmNotification();
         }
         catch(Exception e) {
              e.getMessage();

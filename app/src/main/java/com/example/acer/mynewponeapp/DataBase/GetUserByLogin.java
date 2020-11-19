@@ -13,8 +13,13 @@ import com.example.acer.mynewponeapp.Activity.ProductAdapter;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +28,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -41,6 +48,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     static JSONArray userJsonArray = null;
     UserModel  userModel ;
     ProductModel product;
+    UpdateNotificationModel updateNotificationModel;
     String json = "";
     boolean IsParse=false;
 
@@ -88,16 +96,20 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             StringBuilder sb = new StringBuilder();
             String line = null;
 
+
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
+
                 sb.append(line + "\n");
 
                 json = sb.toString();
 
-                userJsonArray = CreateJson();
+                userJsonArray = CreateJson(json);
                 parse();
-
             }
+
+
+
         }
         catch(Exception e){
             return new String("Exception: " + e.getMessage());
@@ -107,7 +119,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     }
 
 
-    protected JSONArray CreateJson() {
+
+    protected JSONArray CreateJson(String json) {
         try {
 
             userJsonArray = new JSONArray(json);
@@ -142,10 +155,10 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 String idUser=UserJson.getString("idUser");
 
 
-
                 product=new ProductModel(productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
 
                 userModel= new UserModel(Integer.parseInt(idUser) ,name,mail,password,product);
+
                 return IsParse=true;
 
             }
@@ -167,15 +180,14 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
                 session = new Session(contextService);
 
-                GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
-                getNotification.execute();
-                //Save product
                 session.saveProductModel(product);
                 //Save User
                 session.saveUserModel(userModel);
-                //Get Update Notification
-              UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
-                //updateNotificaionBussines.CalculateAlarmNotification();
+
+                GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
+                getNotification.execute();
+                //Save product
+
 
 
             } else if (!IsParse) {

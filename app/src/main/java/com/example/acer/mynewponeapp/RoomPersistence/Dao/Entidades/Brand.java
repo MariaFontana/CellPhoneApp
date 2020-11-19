@@ -10,53 +10,48 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "brand")
-public class Brand implements Parcelable {
+public class Brand  {
 
     @NonNull
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public int idBrand;
+
     @ColumnInfo(name = "name")
     public String name;
 
+    @ColumnInfo(name = "description")
+    public String description;
 
-    public Brand(int idBrand,String name)
+    public Brand(int idBrand,String name,String description)
     {
         this.idBrand=idBrand;
         this.name=name;
     }
-
     @Ignore
     public Brand()
     {
 
     }
 
-    protected Brand(Parcel in) {
-        idBrand = in.readInt();
-        name = in.readString();
-    }
-
-    public static final Creator<Brand> CREATOR = new Creator<Brand>() {
-        @Override
-        public Brand createFromParcel(Parcel in) {
-            return new Brand(in);
-        }
-
-        @Override
-        public Brand[] newArray(int size) {
-            return new Brand[size];
-        }
-    };
-
     public void setIdBrand(int idBrand) {
         this.idBrand = idBrand;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     public void setName(String name) {
         this.name = name;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public int getIdBrand() {
@@ -69,15 +64,6 @@ public class Brand implements Parcelable {
         return name;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idBrand);
-        dest.writeString(name);
-    }
 }
 

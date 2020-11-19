@@ -4,6 +4,7 @@ package com.example.acer.mynewponeapp.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 
 import android.app.AlarmManager;
@@ -25,7 +26,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
-import com.example.acer.mynewponeapp.Bussines.CheckUserName;
+
 import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
@@ -40,6 +41,7 @@ import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
 import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 
 
 import java.math.BigInteger;
@@ -60,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     AppCompatSpinner spinnerProduct;
     AppCompatSpinner breedSpinner;
 
-    private CheckUserName checkUserName;
     private Session sessionUser;
     private int position;
     private String selection;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     BrandModel brandItem;
     private UserModel user;
     public boolean saveUser=false;
+    private BrandViewModel brandViewModel;
 
 
     @Override
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //  RetrievedBrand();
 
             GetBrand();
+
+          //  GetBrandRoom();
 
             //     RetrievedBrand();
 
@@ -251,6 +255,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         catch (Exception e) {
           Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void GetBrandRoom()
+    {
+        try {
+
+            // Get a new or existing ViewModel from the ViewModelProvider.
+            brandViewModel = new ViewModelProvider(this).get(BrandViewModel.class);
+        }
+        catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

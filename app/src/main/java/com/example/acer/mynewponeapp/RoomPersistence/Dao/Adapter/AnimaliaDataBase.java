@@ -12,9 +12,11 @@ import com.example.acer.mynewponeapp.RoomPersistence.Dao.UserDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {user.class, Brand.class}, version = 1, exportSchema = false)
 
@@ -42,6 +44,24 @@ import androidx.room.RoomDatabase;
             }
             return INSTANCE;
         }
+    //private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+      //  @Override
+        //public void onCreate(@NonNull SupportSQLiteDatabase db) {
+         //   super.onCreate(db);
+
+           // databaseWriteExecutor.execute(() -> {
+                // Populate the database in the background.
+                // If you want to start with more words, just add them.
+             //   BrandDao brandDao = INSTANCE.BrandDao();
+               // brandDao.deleteAll();
+
+                //Brand word = new Word("Hello");
+                //dao.insert(word);
+                //word = new Word("World");
+               // dao.insert(word);
+            //});
+        //}
+    //};
 
    // private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
       //  @Override

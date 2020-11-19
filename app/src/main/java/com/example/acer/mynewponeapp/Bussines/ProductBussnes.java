@@ -1,5 +1,6 @@
 package com.example.acer.mynewponeapp.Bussines;
 
+import com.example.acer.mynewponeapp.Bussines.Interfaces.IproductBussnes;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 
@@ -7,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ProductBussnes {
+public class ProductBussnes implements IproductBussnes {
 
     private ProductModel productModel;
     private List<ProductModel> listProductModel;

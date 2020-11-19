@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 import com.example.acer.mynewponeapp.Activity.LoginActivity;
+import com.example.acer.mynewponeapp.Bussines.Interfaces.ISession;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
@@ -15,7 +16,7 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONStringer;
 
-public class Session {
+public class Session implements ISession {
 
     private SharedPreferences prefs;
     private Context context;
@@ -30,10 +31,12 @@ public class Session {
     private ProductModel productModel;
     private UpdateNotificationModel updateNotificationModel;
 
+
     public Session(Context context) {
         // TODO Auto-generated constructor stub
         prefs = context.getSharedPreferences("loginPreferences", Context.MODE_PRIVATE);
         this.context = context;
+
     }
 
     public void saveUpdateNotidicationModel(UpdateNotificationModel updateNotificationModel)
@@ -90,11 +93,11 @@ public class Session {
     public void setNombreUsuario(String nombreUser) {
         prefs.edit().putString("nombreUser", nombreUser).apply();
     }
-    public void setuserProduct(String nombreUser) {
+    public void setUserProduct(String nombreUser) {
         prefs.edit().putString("userProduct", product).apply();
     }
 
-    public void setuserProductPrecio(long userProductPrecio) {
+    public void setUserProductPrecio(long userProductPrecio) {
         prefs.edit().putLong("userProductPrecio", userProductPrecio).apply();
     }
 

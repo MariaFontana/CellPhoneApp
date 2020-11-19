@@ -7,6 +7,8 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 @Dao
@@ -18,5 +20,10 @@ public interface BrandDao {
     @Query("SELECT * from brand")
     List<Brand> getBrandAllList();
 
+    @Query("DELETE FROM brand")
+    void deleteAll();
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(Brand brand);
 
 }

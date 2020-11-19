@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.acer.mynewponeapp.Bussines.PerfilFragmentBusiness;
 import com.example.acer.mynewponeapp.Bussines.ProductBussnes;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.ProductModel;
@@ -36,11 +37,14 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         session = new Session(getContext());
+
+        this.userModel  =session.GetUserModel();
+        GetUpdateNotification();
         // Inflate the layout for this fragment
 
-        GetUserModel();
-        GetUpdateNotification();
-        GetProductBussiness();
+    //    GetUserModel();
+        //GetUpdateNotification();
+       GetProductBussiness();
 
        long days= productBussnes.CalculationDurationFeed();
 
@@ -67,8 +71,11 @@ public class PerfilFragment extends Fragment {
         return view;
     }
 
-    public void GetUserModel() {
-         this.userModel = session.GetUserModel();
+    public void GetUserModel()
+    {
+        PerfilFragmentBusiness perfilFragmentBusiness =new PerfilFragmentBusiness(getContext(),session);
+        //perfilFragmentBusiness.GetUserModel();
+       // this.userModel=session.GetUserModel();
     }
 
     public void GetUpdateNotification()

@@ -29,34 +29,40 @@ public class NotificationListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notification_fragment, container, false);
-        reciclerNotificationFragment= (RecyclerView) view.findViewById(R.id.recyclerViewNotification);
 
-        LinearLayoutManager linear = new LinearLayoutManager(getActivity());
-        linear.setOrientation(LinearLayoutManager.VERTICAL);
-        reciclerNotificationFragment.setLayoutManager(linear);
 
-        reciclerNotificationFragment.setHasFixedSize(true);
+            View view = inflater.inflate(R.layout.notification_fragment, container, false);
+            reciclerNotificationFragment = (RecyclerView) view.findViewById(R.id.recyclerViewNotification);
+        try
+        {
+            LinearLayoutManager linear = new LinearLayoutManager(getActivity());
+            linear.setOrientation(LinearLayoutManager.VERTICAL);
+            reciclerNotificationFragment.setLayoutManager(linear);
 
-        verticalSpacignDecorator spacingRecicler= new verticalSpacignDecorator(1);
-        reciclerNotificationFragment.addItemDecoration(spacingRecicler);
+            reciclerNotificationFragment.setHasFixedSize(true);
 
-        sessionUser = new Session(getContext());
+            verticalSpacignDecorator spacingRecicler = new verticalSpacignDecorator(1);
+            reciclerNotificationFragment.addItemDecoration(spacingRecicler);
 
-        updateNotificationModelList =sessionUser.GetUserModel().getNotificationModelList();
+            sessionUser = new Session(getContext());
 
-        GetData();
+            if (sessionUser.GetUserModel().getListNotificationModelList() != null) {
 
+                updateNotificationModelList = sessionUser.GetUserModel().getListNotificationModelList();
+
+                NotificationAdapter notification = new NotificationAdapter(updateNotificationModelList, getContext());
+                reciclerNotificationFragment.setAdapter(notification);
+
+            }
+
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
         return view;
     }
 
 
-    private void GetData()
-    {
-
-        NotificationAdapter notificator=new NotificationAdapter(updateNotificationModelList,getContext());
-        reciclerNotificationFragment.setAdapter(notificator);
-    }
 
 
 }

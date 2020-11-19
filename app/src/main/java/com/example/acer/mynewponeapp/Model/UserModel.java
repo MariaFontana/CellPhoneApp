@@ -39,6 +39,8 @@ public class UserModel {
 
     private List<UpdateNotificationModel> listNotificationModel;
 
+    private List<ProductModel> listProductModel;
+
 
     public UserModel(int idUser, String name, String mail, int diasCount,ProductModel product, String password,  String pet, String telephone, String address,BrandModel brandItem,BreedModel breedItem)
     {
@@ -147,8 +149,15 @@ public class UserModel {
     public void setListNotificationModel(List<UpdateNotificationModel> listNotificationModel) {
         this.listNotificationModel = listNotificationModel;
     }
-    public List<UpdateNotificationModel> getNotificationModelList() {
+    public List<UpdateNotificationModel> getListNotificationModelList() {
         return listNotificationModel;
+    }
+
+    public List<ProductModel> getListProductModelModelList() {
+        return listProductModel;
+    }
+    public void setListProductModel(List<ProductModel> listProductModel) {
+        this.listProductModel = listProductModel;
     }
 
 }
