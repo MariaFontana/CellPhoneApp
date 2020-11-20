@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.mynewponeapp.Bussines.ActivityHomeBussine;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
@@ -48,6 +49,8 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         }
         else {
 
+                userModel= sessionUser.GetUserModel();
+
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 setSupportActionBar(toolbar);
 
@@ -77,6 +80,8 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
+            ActivityHomeBussine activityHomeBussine= new ActivityHomeBussine(this,userModel);
+            activityHomeBussine.GetLastNotification(userModel.getIdUser());
             //First start (Inbox Fragment)
             setFragment(0);
         }

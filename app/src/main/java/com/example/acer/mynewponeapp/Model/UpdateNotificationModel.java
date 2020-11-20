@@ -10,9 +10,9 @@ public class UpdateNotificationModel {
 
     private BigInteger idUpdatenotification;
 
-    public UpdateNotificationModel(BigInteger idUpdatenotification, String dateUpdate,Integer countDays, UserModel userModel) {
+    public UpdateNotificationModel(BigInteger idUpdatenotification, Date dateUpdate,Integer countDays, UserModel userModel) {
         this.idUpdatenotification = idUpdatenotification;
-        this.dateUpdate = GetDate(dateUpdate);
+        this.dateUpdate = dateUpdate;
         this.countDays = countDays;
         this.userModel = userModel;
     }

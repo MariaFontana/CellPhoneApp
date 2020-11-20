@@ -18,7 +18,9 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.Time;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
@@ -46,6 +48,7 @@ static JSONArray userJsonArray = null;
 private UpdateNotificationModel updateNotificatinModel;
 private Session session;
 private boolean IsAlarmSet=false;
+private List<UpdateNotificationModel> listUpdateNotificationModel;
 //flag 0 means get and 1 means post.(By default it is get.)
 public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
 
@@ -170,7 +173,12 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
                 IsAlarmSet=false;
             }
             else {
+                listUpdateNotificationModel=new ArrayList<UpdateNotificationModel>();
+
                 session.saveUpdateNotidicationModel(updateNotificatinModel);
+                listUpdateNotificationModel.add(updateNotificatinModel);
+                userModel.setListNotificationModel(listUpdateNotificationModel);
+                session.saveUserModel(userModel);
                 UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService, updateNotificatinModel);
                 updateNotificaionBussines.CalculateAlarmNotification();
                 contextService.startActivity(new Intent(contextService, ActivityHome.class));

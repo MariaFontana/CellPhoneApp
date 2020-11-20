@@ -23,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import com.example.acer.mynewponeapp.R;
@@ -143,7 +145,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
             session=new Session(contextService);
             session.saveUserModel(userModel);
             Toast.makeText(contextService, R.string.userSave, Toast.LENGTH_LONG).show();
-            UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null,null,userModel.getDiasCount(),userModel);
+            UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null, Calendar.getInstance().getTime(),userModel.getDiasCount(),userModel);
             updateNotificationAsync= new UpdateNotificationAsync(contextService,updateNotificationModelNew);
             updateNotificationAsync.execute();
 

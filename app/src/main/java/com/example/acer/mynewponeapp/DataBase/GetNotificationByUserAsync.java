@@ -168,7 +168,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
                 session.saveUpdateNotidicationModel(updateNotificatinModelList.get(0));
             }
 
-            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+            //contextService.startActivity(new Intent(contextService, ActivityHome.class));
             //Get Update Notification
             //UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
             //updateNotificaionBussines.CalculateAlarmNotification();

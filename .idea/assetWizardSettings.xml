@@ -399,8 +399,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="1a47ff" />
-                            <entry key="outputName" value="ic_baseline_notifications_24" />
+                            <entry key="color" value="34ff1a" />
+                            <entry key="outputName" value="notifications_green" />
                             <entry key="sourceFile" value="C:\Users\Acer" />
                           </map>
                         </option>

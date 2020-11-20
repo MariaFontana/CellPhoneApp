@@ -50,6 +50,8 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dateUpdate);
         String date = formattedDate;
 
+
+
         int  daysRemaining= updateNotificationModelsList.get(position).getCountDays();
 
         Calendar calendarNow = Calendar.getInstance();
@@ -59,12 +61,30 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
         calendarNow.add(Calendar.DAY_OF_YEAR, daysRemaining);
 
         Date dateFinish =calendarNow.getTime();
+
         String formattedNextDate = new SimpleDateFormat("dd/MM/yyyy").format(dateFinish);
+        int colorUpdate=dateUpdate.compareTo(calendarNow.getTime());
+
+        switch(colorUpdate) {
+            case 0:
+                holder.imageNotification.setImageResource(R.drawable.notifications_green);
+
+                break;
+            case -1:
+                holder.imageNotification.setImageResource(R.drawable.notifications_green);
+
+                break;
+            default:
+                holder.imageNotification.setImageResource(R.drawable.notifications_red);
+        }
 
         holder.dateNotification.setText(date);
+
         holder.nextNotification.setText(formattedNextDate);
 
         holder.daysRemainig.setText(String.valueOf(daysRemaining) );
+
+
 
     }
 
@@ -78,6 +98,7 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
         private TextView dateNotification;
         private TextView daysRemainig;
         private TextView nextNotification;
+        private ImageView imageNotification;
 
         public ViewHolder(View v) {
             super(v);
@@ -85,6 +106,7 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
             dateNotification = (TextView) v.findViewById(R.id.txtdateNotification);
             daysRemainig = (TextView) v.findViewById(R.id.daysRemaining);
             nextNotification = (TextView) v.findViewById(R.id.daysNextNotification);
+            imageNotification=(ImageView)v.findViewById(R.id.imageNotification);
 
 
         }

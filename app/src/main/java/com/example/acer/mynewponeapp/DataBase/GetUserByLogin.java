@@ -186,7 +186,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
                 GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
                 getNotification.execute();
-                //Save product
+
+                contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
 
 
