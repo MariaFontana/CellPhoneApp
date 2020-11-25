@@ -41,8 +41,13 @@ public class NotificationListFragment extends Fragment {
 
             reciclerNotificationFragment.setHasFixedSize(true);
 
+
+
             verticalSpacignDecorator spacingRecicler = new verticalSpacignDecorator(1);
             reciclerNotificationFragment.addItemDecoration(spacingRecicler);
+
+            // use a linear layout manager
+
 
             sessionUser = new Session(getContext());
 

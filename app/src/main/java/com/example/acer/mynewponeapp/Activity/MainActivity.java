@@ -7,8 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,35 +17,25 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
 
-import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
 import com.example.acer.mynewponeapp.DataBase.GetBrand;
+import com.example.acer.mynewponeapp.DataBase.GetBreedAsync;
 import com.example.acer.mynewponeapp.DataBase.GetProductByIdBrand;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter.UsuarioViewModel;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
 import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -97,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //  RetrievedBrand();
 
             GetBrand();
+            GetBreed();
 
           //  GetBrandRoom();
 
@@ -257,6 +246,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
           Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void GetBreed()
+    {
+        try {
+
+            GetBreedAsync breed = new GetBreedAsync(this,breedSpinner);
+            breed.execute();
+        }
+        catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
     private void GetBrandRoom()
     {
         try {
@@ -302,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         {
             try {
 
-                GetProductByIdBrand prod = new GetProductByIdBrand(this,spinnerProduct,breedSpinner);
+                GetProductByIdBrand prod = new GetProductByIdBrand(this,spinnerProduct);
                 prod.execute(idBrand.toString());
             }
             catch (Exception e) {

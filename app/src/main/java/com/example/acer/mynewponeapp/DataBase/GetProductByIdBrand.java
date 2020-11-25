@@ -47,12 +47,12 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
     boolean IsParse=false;
 
 
-    public GetProductByIdBrand(Context context, AppCompatSpinner spinnerProduct ,AppCompatSpinner breedSpinner )
+    public GetProductByIdBrand(Context context, AppCompatSpinner spinnerProduct )
     {
         contextService = context;
         this.spinnerProduct=spinnerProduct;
         progressDialog= new ProgressDialog(contextService);
-        this.breedSpinner=breedSpinner;
+
 
     }
 
@@ -174,17 +174,6 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
             comboAdapterSql = new ArrayAdapter<ProductModel>(contextService, android.R.layout.simple_spinner_item,productList );
             //Cargo el spinner con los datos
             spinnerProduct.setAdapter(comboAdapterSql);
-
-            List<BreedModel> breedList= new ArrayList<>();
-
-            breedList.add(new BreedModel(0,"Seleccione una Mordida"));
-            breedList.add(new BreedModel(1, "Mordida Grande") );
-            breedList.add(new BreedModel(2, "Mordida Mediana") );
-            breedList.add(new BreedModel(3, "Mordida Pequeña") );
-
-            comboAdapterSqlBreed = new ArrayAdapter<>(contextService, android.R.layout.simple_spinner_item, breedList);
-            //Cargo el spinner con los datos
-            breedSpinner.setAdapter(comboAdapterSqlBreed);
 
         }
         else
