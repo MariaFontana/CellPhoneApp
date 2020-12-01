@@ -8,18 +8,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
-import com.example.acer.mynewponeapp.Activity.ListProductActivity;
-import com.example.acer.mynewponeapp.Activity.ProductAdapter;
+
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,13 +24,11 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.math.BigInteger;
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class GetUserByLogin extends AsyncTask< String ,Void,String>
 {

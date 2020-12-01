@@ -100,17 +100,21 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.perfil:
+            case R.id.perfilMenu:
                 menuItem.setChecked(true);
                 setFragment(0);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
-            case R.id.notification:
+            case R.id.notificationMenu:
               menuItem.setChecked(true);
                 setFragment(1);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
-
+            case R.id.promoMenu:
+                menuItem.setChecked(true);
+                setFragment(2);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
             case R.id.nav_item_out:
                 sessionUser.LogOut();
                 //  menuItem.setChecked(true);
@@ -148,6 +152,14 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                NotificationListFragment notificationListFragment = new NotificationListFragment();
                fragmentTransaction.replace(R.id.fragment, notificationListFragment);
                fragmentTransaction.commit();
+                break;
+
+            case 2:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                PromoFragment promoFragment = new PromoFragment();
+                fragmentTransaction.replace(R.id.fragment, promoFragment);
+                fragmentTransaction.commit();
                 break;
         }
     }

@@ -29,10 +29,6 @@ public class PerfilFragment extends Fragment {
     private UpdateNotificationModel updateNotificationModel;
     ProductBussnes productBussnes;
 
-    public PerfilFragment(){
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -74,13 +70,14 @@ public class PerfilFragment extends Fragment {
     public void GetUserModel()
     {
         PerfilFragmentBusiness perfilFragmentBusiness =new PerfilFragmentBusiness(getContext(),session);
+
         //perfilFragmentBusiness.GetUserModel();
        // this.userModel=session.GetUserModel();
     }
 
     public void GetUpdateNotification()
     {
-        this.updateNotificationModel=session.GetNotificationModel();
+        this.updateNotificationModel=session.GetUserModel().getListNotificationModelList().get(0);
     }
     public void GetProductBussiness()
     {

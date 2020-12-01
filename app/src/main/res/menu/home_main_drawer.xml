@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/perfil"
+        <item android:id="@+id/perfilMenu"
             android:icon="@drawable/home"
             android:title="Perfil" />
-        <item android:id="@+id/notification"
+        <item android:id="@+id/notificationMenu"
             android:icon="@drawable/ic_baseline_notifications_24"
             android:title="Notificaciones" />
     </group>
 
     <group android:id="@+id/group_menuPromos">
-        <item android:id="@+id/nav_item_four"
+        <item android:id="@+id/promoMenu"
             android:title="Promos" />
         <item android:id="@+id/nav_item_Accesorio"
             android:title="Accesorios" />
