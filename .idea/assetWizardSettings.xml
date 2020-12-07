@@ -100,8 +100,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Acer\AppData\Local\Temp\baseline_expand_more_24.xml" />
+                                                <entry key="color" value="ff5c2b" />
+                                                <entry key="imagePath" value="C:\Users\Acer\AppData\Local\Temp\baseline_exit_to_app_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -112,7 +112,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/expand_more/baseline_expand_more_24.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/exit_to_app/baseline_exit_to_app_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -124,7 +124,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\xampp\htdocs\marcas\logo.png" />
+                                                <entry key="imagePath" value="D:\Documento Animalias\Diseños nuevos\Iconos IG\Mesa de trabajo 40 copia 5.png" />
                                                 <entry key="scalingPercent" value="64" />
                                               </map>
                                             </option>
@@ -158,8 +158,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="fafdfd" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="outputName" value="dropdown" />
+                                      <entry key="outputName" value="out" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -243,7 +244,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\xampp\htdocs\marcas\logo.png" />
+                                                <entry key="imagePath" value="D:\Documento Animalias\Diseños nuevos\Iconos IG\Mesa de trabajo 40 copia 8.png" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -276,7 +278,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\xampp\htdocs\marcas\logo.png" />
+                                      <entry key="imageAsset" value="D:\Documento Animalias\Diseños nuevos\Iconos IG\Mesa de trabajo 40 copia 8.png" />
                                       <entry key="outputName" value="logoNewNoti" />
                                     </map>
                                   </option>
@@ -361,11 +363,6 @@
                             </entry>
                           </map>
                         </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="NOTIFICATION" />
-                          </map>
-                        </option>
                       </PersistentState>
                     </value>
                   </entry>
@@ -389,7 +386,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/notifications/baseline_notifications_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio1/plugins/android/lib/android.jar!/images/material/icons/materialicons/storefront/baseline_storefront_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -399,8 +396,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="34ff1a" />
-                            <entry key="outputName" value="notifications_green" />
+                            <entry key="color" value="050313" />
+                            <entry key="outputName" value="tienda_24" />
                             <entry key="sourceFile" value="C:\Users\Acer" />
                           </map>
                         </option>

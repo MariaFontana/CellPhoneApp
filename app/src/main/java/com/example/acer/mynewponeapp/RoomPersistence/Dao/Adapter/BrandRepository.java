@@ -27,6 +27,7 @@ public class BrandRepository {
 
         db = AnimaliaDataBase.getDatabase(application);
         brandDao = db.BrandDao();
+
         brands = brandDao.getBrandAll();
 
     }

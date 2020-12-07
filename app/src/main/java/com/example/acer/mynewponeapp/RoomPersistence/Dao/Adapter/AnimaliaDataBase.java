@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.UserDao;
 
 import java.util.concurrent.ExecutorService;
@@ -18,11 +18,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {user.class, Brand.class}, version = 1, exportSchema = false)
+@Database(entities = {Brand.class}, version = 1, exportSchema = false)
 
     abstract public class AnimaliaDataBase extends RoomDatabase {
 
-        abstract UserDao UserDao();
+       // abstract UserDao UserDao();
         abstract BrandDao BrandDao();
 
         // marking the instance as volatile to ensure atomic access to the variable
@@ -37,31 +37,34 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                 AnimaliaDataBase.class, "Animaliaandroid")
-                                //.addCallback(sRoomDatabaseCallback)
+                                .addCallback(sRoomDatabaseCallback)
                                 .build();
                     }
                 }
             }
             return INSTANCE;
         }
-    //private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-      //  @Override
-        //public void onCreate(@NonNull SupportSQLiteDatabase db) {
-         //   super.onCreate(db);
 
-           // databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
-             //   BrandDao brandDao = INSTANCE.BrandDao();
-               // brandDao.deleteAll();
 
-                //Brand word = new Word("Hello");
-                //dao.insert(word);
-                //word = new Word("World");
-               // dao.insert(word);
-            //});
-        //}
-    //};
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+           databaseWriteExecutor.execute(() -> {
+              //  Populate the database in the background.
+    
+                //If you want to start with more words, just add them.
+              BrandDao brandDao = INSTANCE.BrandDao();
+                brandDao.deleteAll();
+
+                Brand brand = new Brand(2,"Test","test");
+                brandDao.insert(brand);
+
+
+            });
+        }
+    };
 
    // private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
       //  @Override

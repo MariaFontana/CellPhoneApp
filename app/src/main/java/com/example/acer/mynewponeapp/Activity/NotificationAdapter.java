@@ -67,15 +67,15 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
 
         switch(colorUpdate) {
             case 0:
-                holder.imageNotification.setImageResource(R.drawable.notifications_green);
+                holder.imageNotification.setImageResource(R.drawable.orange_add_shopping_cart_24);
 
                 break;
             case -1:
-                holder.imageNotification.setImageResource(R.drawable.notifications_green);
+                holder.imageNotification.setImageResource(R.drawable.orange_add_shopping_cart_24);
 
                 break;
             default:
-                holder.imageNotification.setImageResource(R.drawable.notifications_red);
+                holder.imageNotification.setImageResource(R.drawable.red_add_shopping_cart_24);
         }
 
         holder.dateNotification.setText(date);

@@ -27,11 +27,7 @@ public class Brand  {
         this.idBrand=idBrand;
         this.name=name;
     }
-    @Ignore
-    public Brand()
-    {
 
-    }
 
     public void setIdBrand(int idBrand) {
         this.idBrand = idBrand;

@@ -5,20 +5,21 @@
             android:icon="@drawable/home"
             android:title="Perfil" />
         <item android:id="@+id/notificationMenu"
-            android:icon="@drawable/ic_baseline_notifications_24"
+            android:icon="@drawable/orange_notifications_24"
             android:title="Notificaciones" />
     </group>
 
-    <group android:id="@+id/group_menuPromos">
+    <group android:checkableBehavior="single">
         <item android:id="@+id/promoMenu"
+            android:icon="@drawable/promo_24"
             android:title="Promos" />
         <item android:id="@+id/nav_item_Accesorio"
+            android:icon="@drawable/tienda_24"
             android:title="Accesorios" />
-        <item android:id="@+id/nav_item_tips"
-            android:title="Tips" />
     </group>
     <group android:id="@+id/out">
         <item android:id="@+id/nav_item_out"
+            android:icon="@drawable/exit_to_app_24"
             android:title="@string/Salir" />
     </group>
 </menu>

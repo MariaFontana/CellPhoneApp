@@ -23,7 +23,7 @@ public class UsuarioRepositorio {
     // https://github.com/googlesamples
     UsuarioRepositorio(Application application) {
         AnimaliaDataBase db = AnimaliaDataBase.getDatabase(application);
-        userDao = db.UserDao();
+       // userDao = db.UserDao();
 
     }
 

@@ -4,6 +4,7 @@ package com.example.acer.mynewponeapp.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,8 +36,11 @@ import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.DataBase.backGround;
 import  com.example.acer.mynewponeapp.Bussines.Validation;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 
+
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -80,14 +85,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             SetValuesIU();
 
-            //GetAllBrand();
-
-            //  RetrievedBrand();
-
             GetBrand();
-            GetBreed();
 
-          //  GetBrandRoom();
+          //  GetBreed();
+
+
+
+
+            GetBrandRoom();
 
             //     RetrievedBrand();
 
@@ -261,9 +266,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void GetBrandRoom()
     {
         try {
-
+            ArrayAdapter<Brand> comboAdapterSql;
             // Get a new or existing ViewModel from the ViewModelProvider.
             brandViewModel = new ViewModelProvider(this).get(BrandViewModel.class);
+            Brand word = new Brand(1,"test1","test2");
+            brandViewModel.insert(word);
+            brandViewModel.getAllBrand();
+            LiveData<List<Brand>> brand =brandViewModel.getAllBrand();
+            Toast.makeText(this, brand.getValue().size(), Toast.LENGTH_SHORT).show();
+          //  comboAdapterSql = new ArrayAdapter<Brand>(getApplicationContext(), android.R.layout.simple_spinner_item, (List<Brand>) brand);
+            //Cargo el spinner con los datos
+       //     spinnerBrand.setAdapter(comboAdapterSql);
+       //     spinnerBrand.getItemAtPosition(0);
         }
         catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

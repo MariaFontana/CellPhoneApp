@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import com.example.acer.mynewponeapp.Model.BrandModel;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 import com.example.acer.mynewponeapp.Util.constant;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
@@ -87,13 +92,6 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
         return null;
     }
 
-
-
-
-
-
-
-
     public JSONArray CreateJson(String json) {
         try {
 
@@ -116,6 +114,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
             JSONObject brandJson;
 
              brandList.add(new BrandModel(0,"Selecciona una Marca"));
+
 
             for (int i=0;i< brandJsonArray.length();i++)
             {
@@ -141,7 +140,10 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
 
     @Override
     protected void onPostExecute(String result){
+
         ArrayAdapter<BrandModel> comboAdapterSql;
+
+
 
         super.onPostExecute(result);
         if( IsParse) {

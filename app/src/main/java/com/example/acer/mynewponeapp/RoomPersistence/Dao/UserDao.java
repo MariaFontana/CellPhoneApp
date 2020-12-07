@@ -28,7 +28,7 @@ public interface UserDao {
     LiveData<user> GetUserById(int userIds);
 
     @Query("SELECT * FROM user WHERE mail like :mail and password like :password")
-    user GetUserLogin(String  mail, String password);
+    LiveData<user> GetUserLogin(String  mail, String password);
 
 
 
