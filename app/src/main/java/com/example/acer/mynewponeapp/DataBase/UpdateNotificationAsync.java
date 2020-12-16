@@ -8,8 +8,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
+import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
@@ -43,7 +44,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
         this.updateNotificationModel=updateNotificationModel;
     }
 
-
+    ///Insert table updateNotification
     @Override
     protected String doInBackground(Void... voids) {
         try {
@@ -65,8 +66,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
 
                 String data = URLEncoder.encode("countDay", "UTF-8") + "=" +
                         URLEncoder.encode(countDay, "UTF-8");
-           //     data += "&" + URLEncoder.encode("dateUpdate", "UTF-8") + "=" +
-             //           URLEncoder.encode(dateUpdate, "UTF-8");
+
                 data += "&" + URLEncoder.encode("idUser", "UTF-8") + "=" +
                         URLEncoder.encode(idUser, "UTF-8");
 
@@ -103,51 +103,19 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
 
 
 
-
-   // private Boolean parse()
-  //  {
-   //     try
-     //   {
-
-       //     JSONObject updateNotificationJson;
-
-        //    for (int i=0;i< userJsonArray.length();i++)
-        //    {
-        //        updateNotificationJson=userJsonArray.getJSONObject(i);
-
-          //      String idUpdateNotification =updateNotificationJson.getString("idUpdateNotification");
-          //      String dateUpdate =updateNotificationJson.getString("dateUpdate");
-          //      String countDay = updateNotificationJson.getString("countDay");
-          //      String idUser = updateNotificationJson.getString("idUser");
-          //      Date fecha =new Date(dateUpdate);
-
-            //    updateNotificationModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , fecha, Integer.parseInt(countDay));
-
-         //       return IsParse=true;
-
-        //    }
-
-      //      return IsParse=false;
-
-     //   } catch (JSONException e) {
-      //      e.printStackTrace();
-      //      return IsParse=false;
-      //  }
-   // }
     protected void onPostExecute(String result){
 
         if (result.isEmpty())
         {
             Toast.makeText(contextService, result, Toast.LENGTH_SHORT).show();
         }
-        else {
-
-            GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(contextService,false);
-            updateAsync.execute();
-
-        //   contextService.startActivity(new Intent(contextService, ActivityHome.class));
+        else
+        {
+            NotificaionBussines noti=new NotificaionBussines(contextService);
+            noti.getListNotificationByUser();
 
         }
+
 
     }
 

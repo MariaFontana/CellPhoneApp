@@ -73,12 +73,7 @@ public class NotificationReceiver extends BroadcastReceiver implements Inotifica
 
     }
 
-    @Override
-    public void UpdateNotificationAsync() {
 
-        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,IsAlarmSet);
-        updateAsync.execute();
-    }
 }
 
 

@@ -3,6 +3,7 @@ package com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter;
 
 import android.content.Context;
 
+import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
@@ -18,7 +19,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Brand.class}, version = 1, exportSchema = false)
+@Database(entities = {BrandModel.class}, version = 1, exportSchema = false)
 
     abstract public class AnimaliaDataBase extends RoomDatabase {
 
@@ -58,7 +59,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
               BrandDao brandDao = INSTANCE.BrandDao();
                 brandDao.deleteAll();
 
-                Brand brand = new Brand(2,"Test","test");
+                BrandModel brand = new BrandModel (0,"choose");
                 brandDao.insert(brand);
 
 

@@ -7,8 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
+import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
@@ -162,16 +163,16 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
         try
         {
-            session.saveUserModel(userModel);
+           // session.saveUserModel(userModel);
 
-            if(updateNotificatinModelList != null) {
-                session.saveUpdateNotidicationModel(updateNotificatinModelList.get(0));
-            }
+          //  if(updateNotificatinModelList != null) {
+           //     session.saveUpdateNotidicationModel(updateNotificatinModelList.get(0));
+            //}
 
-            //contextService.startActivity(new Intent(contextService, ActivityHome.class));
+
             //Get Update Notification
-            //UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService);
-            //updateNotificaionBussines.CalculateAlarmNotification();
+            NotificaionBussines noti = new NotificaionBussines(contextService);
+            noti.CalculateAlarmNotification();
         }
         catch(Exception e) {
              e.getMessage();

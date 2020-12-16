@@ -40,13 +40,14 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     boolean IsParse=false;
     List<BrandModel>brandList =new ArrayList<>();
     ProgressDialog progressDialog;
+    BrandViewModel  brandViewModel;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public GetBrand(Context context, AppCompatSpinner spinnerBrand )
+    public GetBrand(Context context, AppCompatSpinner spinnerBrand ,BrandViewModel brandViewModel)
     {
         contextService = context;
         this.spinnerBrand=spinnerBrand;
-
+        this.brandViewModel=brandViewModel;
         progressDialog= new ProgressDialog(contextService);
     }
 
@@ -124,7 +125,13 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
                 brandModelItem.idBrand = Integer.parseInt(brandJson.getString("idBrand")) ;
                 brandModelItem.name =brandJson.getString("name");
 
+
+
                 brandList.add(brandModelItem);
+
+
+
+                brandViewModel.insert(brandModelItem);
 
             }
 
@@ -142,16 +149,13 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     protected void onPostExecute(String result){
 
         ArrayAdapter<BrandModel> comboAdapterSql;
-
-
-
         super.onPostExecute(result);
         if( IsParse) {
             //Implemento el adapter con el contexto, layout, listaPaisesSql
-            comboAdapterSql = new ArrayAdapter<>(contextService, android.R.layout.simple_spinner_item, brandList);
+          comboAdapterSql = new ArrayAdapter<>(contextService, android.R.layout.simple_spinner_item, brandList);
             //Cargo el spinner con los datos
             spinnerBrand.setAdapter(comboAdapterSql);
-            spinnerBrand.getItemAtPosition(0);
+          spinnerBrand.getItemAtPosition(0);
         }
         else
         {

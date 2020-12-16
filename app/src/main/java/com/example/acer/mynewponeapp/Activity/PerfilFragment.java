@@ -77,10 +77,16 @@ public class PerfilFragment extends Fragment {
 
     public void GetUpdateNotification()
     {
-        this.updateNotificationModel=session.GetUserModel().getListNotificationModelList().get(0);
+        if(session.GetUserModel().getListNotificationModelList().size() != 0) {
+            this.updateNotificationModel = session.GetUserModel().getListNotificationModelList().get(0);
+        }
+
+        PerfilFragmentBusiness perfil=new PerfilFragmentBusiness(getContext(),session);
+        perfil.GetUpdateNotification();
     }
     public void GetProductBussiness()
     {
         productBussnes= new ProductBussnes(userModel.getProduct(),updateNotificationModel);
+
     }
 }

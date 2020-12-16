@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.acer.mynewponeapp.Activity.MainActivity;
+import com.example.acer.mynewponeapp.Bussines.Interfaces.INotificationBusiness;
+import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
 import com.example.acer.mynewponeapp.DataBase.GetUpdateNotificationAsync;
 import com.example.acer.mynewponeapp.DataBase.UpdateNotificationAsync;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
@@ -16,30 +18,31 @@ import java.util.Date;
 
 import static android.content.Context.ALARM_SERVICE;
 
-public class UpdateNotificaionBussines {
+public class NotificaionBussines implements INotificationBusiness {
 
     private Date dateNotification;
+    private UpdateNotificationAsync updateNotificationAsync;
     Context context;
     UserModel userModel;
     Session session;
     UpdateNotificationModel updateNotificationModel;
-    UpdateNotificationAsync updateNotificationAsync;
     Date newDayUpdate;
     Calendar dayOfNotification;
     int days;
 
-    public UpdateNotificaionBussines(Context context)
+    public NotificaionBussines(Context context)
     {
+
         this.context=context;
         session = new Session(context);
        // GetSessionUser();
-        GetLastNotification();
     }
-    public UpdateNotificaionBussines(Context context, UpdateNotificationModel updateNotificationModel)
+    public NotificaionBussines(Context context, UpdateNotificationModel updateNotificationModel)
     {
         session = new Session(context);
         this.context=context;
        this.updateNotificationModel=updateNotificationModel;
+
     }
     //private void GetSessionUser()
     //{
@@ -100,10 +103,26 @@ public class UpdateNotificaionBussines {
 
 
 
-    private void GetLastNotification()
-    {
+
+    @Override
+    public void getLastNotification() {
+
         GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
         updateAsync.execute();
-        //updateNotificationModel= session.GetNotificationModel();
+    }
+
+
+    @Override
+    public void updateNotification() {
+
+        UpdateNotificationAsync updateNotificationAsync= new UpdateNotificationAsync(context,updateNotificationModel);
+        updateNotificationAsync.execute();
+    }
+
+    //Lenar la lista de notificaciones
+    @Override
+    public void getListNotificationByUser() {
+        GetNotificationByUserAsync getNotificationByUserAsync= new GetNotificationByUserAsync(context);
+        getNotificationByUserAsync.execute();
     }
 }

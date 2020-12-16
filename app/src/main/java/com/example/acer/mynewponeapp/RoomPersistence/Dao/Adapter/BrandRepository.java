@@ -2,6 +2,7 @@ package com.example.acer.mynewponeapp.RoomPersistence.Dao.Adapter;
 
 import android.app.Application;
 
+import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
@@ -14,11 +15,11 @@ public class BrandRepository {
 
     private BrandDao brandDao;
 
-    private LiveData<List<Brand>> brands;
+    private LiveData<List<BrandModel>> brands;
 
-    private LiveData<Brand> BrandLiveData;
+    private LiveData<BrandModel> BrandLiveData;
 
-    private  List<Brand> brandList;
+    private  List<BrandModel> brandList;
 
     AnimaliaDataBase db;
 
@@ -34,15 +35,15 @@ public class BrandRepository {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<Brand>> getAllBrand() {
+    public LiveData<List<BrandModel>> getAllBrand() {
         return   brands = db.BrandDao().getBrandAll();
     }
 
-    public List<Brand> getAllBrandList() {
+    public List<BrandModel> getAllBrandList() {
         return  brandDao.getBrandAllList();
     }
 
-    public void insert(Brand brand) {
+    public void insert(BrandModel brand) {
         AnimaliaDataBase.databaseWriteExecutor.execute(() -> {
             brandDao.insert(brand);
         });

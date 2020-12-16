@@ -24,8 +24,9 @@ import java.util.List;
 
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
+import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
@@ -61,7 +62,7 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
             }
         }
 
-
+  //Get Last Notification
     @Override
     protected String doInBackground(Void... voids) {
         try {
@@ -160,9 +161,6 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
 
         @Override
         protected void onPostExecute(String result) {
-
-
-
             if(IsAlarmSet)
             {
                 updateNotificatinModel.setDateUpdate(new Date());
@@ -174,12 +172,11 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
             }
             else {
                 listUpdateNotificationModel=new ArrayList<UpdateNotificationModel>();
-
                 session.saveUpdateNotidicationModel(updateNotificatinModel);
                 listUpdateNotificationModel.add(updateNotificatinModel);
                 userModel.setListNotificationModel(listUpdateNotificationModel);
                 session.saveUserModel(userModel);
-                UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(contextService, updateNotificatinModel);
+                NotificaionBussines updateNotificaionBussines = new NotificaionBussines(contextService, updateNotificatinModel);
                 updateNotificaionBussines.CalculateAlarmNotification();
                 contextService.startActivity(new Intent(contextService, ActivityHome.class));
             }

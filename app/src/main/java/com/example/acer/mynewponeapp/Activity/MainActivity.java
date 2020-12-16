@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
 
+import com.example.acer.mynewponeapp.Bussines.CreateUserBusiness;
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.DataBase.GetBrand;
 import com.example.acer.mynewponeapp.DataBase.GetBreedAsync;
@@ -64,11 +66,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private UserModel user;
     public boolean saveUser=false;
     private BrandViewModel brandViewModel;
+    private CreateUserBusiness createUserBusiness;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        createUserBusiness=new CreateUserBusiness(this);
         super.onCreate(savedInstanceState);
 
         sessionUser = new Session(this);
@@ -85,22 +89,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             SetValuesIU();
 
+            brandViewModel = new ViewModelProvider(this).get(BrandViewModel.class);
+
             GetBrand();
 
-          //  GetBreed();
+            GetBreed();
 
+       //     GetBrandRoom();
 
-
-
-            GetBrandRoom();
-
-            //     RetrievedBrand();
+            //  RetrievedBrand();
 
             setValuesToolbar();
 
             Channel.createNotificationChannel(this);
+
+
         }
-        // usuarioViewModel = new UsuarioViewModel(getApplication());
+
 
     }
 
@@ -193,22 +198,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            String repetPassword= repitPasswordtxt.getText().toString();
 
 
-        //    AlarmManager alarm= (AlarmManager) getSystemService(ALARM_SERVICE);
-            //set timer you want alarm to work (here I have set it to 7.20pm)
-          //  Calendar dayOfNotification = Calendar.getInstance();
-            //long time= System.currentTimeMillis();
-            //long timeseconf=1000*10;
-             //dayOfNotification.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dia));
-             //long time2=dayOfNotification.getTimeInMillis();
-            //Date after adding the days to the given date
-
-            //Displaying the new Date after addition of Days
-
-
-           // alarm.set(AlarmManager.RTC_WAKEUP,time2,pending);
-            //alarm.set(AlarmManager.RTC_WAKEUP, 60000, pending);
-
-
            if (!Validation.IsEmptyRegister(nombre, direccion, phone, dia, mail,password)) {
                 Toast.makeText(this,R.string.requeridField, Toast.LENGTH_SHORT).show();
                 return;
@@ -239,25 +228,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-
+///Get Brand
     private void GetBrand()
     {
         try {
 
-           GetBrand brand = new GetBrand(this,spinnerBrand);
-           brand.execute();
+            createUserBusiness.getBrand(spinnerBrand,brandViewModel);
         }
         catch (Exception e) {
           Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    //GetBread
     private void GetBreed()
     {
         try {
-
-            GetBreedAsync breed = new GetBreedAsync(this,breedSpinner);
-            breed.execute();
+            createUserBusiness.getBreed(breedSpinner);
         }
         catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -266,35 +253,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void GetBrandRoom()
     {
         try {
-            ArrayAdapter<Brand> comboAdapterSql;
-            // Get a new or existing ViewModel from the ViewModelProvider.
-            brandViewModel = new ViewModelProvider(this).get(BrandViewModel.class);
-            Brand word = new Brand(1,"test1","test2");
-            brandViewModel.insert(word);
-            brandViewModel.getAllBrand();
-            LiveData<List<Brand>> brand =brandViewModel.getAllBrand();
-            Toast.makeText(this, brand.getValue().size(), Toast.LENGTH_SHORT).show();
-          //  comboAdapterSql = new ArrayAdapter<Brand>(getApplicationContext(), android.R.layout.simple_spinner_item, (List<Brand>) brand);
-            //Cargo el spinner con los datos
-       //     spinnerBrand.setAdapter(comboAdapterSql);
-       //     spinnerBrand.getItemAtPosition(0);
+
+
         }
         catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    ///Inser User DataBase
         private void insertUserDataBase(String nombre,String telefono,String direccion,String mascota,String mail ,String dia,String password)
         {
             try {
 
-
                UserModel user = new UserModel(0,nombre,mail, parseInt(dia),productItem, password, mascota,telefono,direccion,brandItem,breedItem);
-
-               backGround bc = new backGround(this,user);
-               // bc.execute(user.getName().toString(), user.getTelephone().toString(), user.getAdress().toString() , user.getProduct().getIdProduct().toString(), user.getMail().toString(),user.getPassword().toString(),
-                    //    String.valueOf(user.getDiasCount()),user.getPet(),String.valueOf( brandItem.idBrand),String.valueOf(breedItem.breedId) );
-                bc.execute();
+               createUserBusiness.insertUserDataBase(user);
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

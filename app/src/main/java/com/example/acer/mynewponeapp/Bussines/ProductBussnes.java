@@ -39,16 +39,10 @@ public class ProductBussnes implements IproductBussnes {
 
             int days = updateNotificationModel.getCountDays();
             Date dateNow =Calendar.getInstance().getTime();
-
-
             Calendar calendarNow = Calendar.getInstance();
-
             calendarNow.setTime(dateStart);
-
             calendarNow.add(Calendar.DAY_OF_YEAR, days);
-
             Date dateFinish =calendarNow.getTime();
-
             if(dateFinish.getTime() < dateNow.getTime())
             {
                 return 0 ;
@@ -64,7 +58,6 @@ public class ProductBussnes implements IproductBussnes {
             }
         }
         return 0;
-
     }
 
 

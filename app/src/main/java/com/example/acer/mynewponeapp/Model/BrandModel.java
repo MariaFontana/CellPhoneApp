@@ -2,9 +2,19 @@ package com.example.acer.mynewponeapp.Model;
 
 import java.math.BigInteger;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "brand")
 public class BrandModel  {
 
+    @NonNull
+    @PrimaryKey
     public int idBrand;
+
+    @ColumnInfo(name = "name")
     public String name;
 
 

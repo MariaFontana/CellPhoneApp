@@ -31,7 +31,8 @@ public class PerfilFragmentBusiness implements IPerfilFragmentBusiness {
 
     @Override
     public void GetUpdateNotification() {
-
+      //  UpdateNotificaionBussines updateNotificaionBussines = new UpdateNotificaionBussines(context);
+        //updateNotificaionBussines.CalculateAlarmNotification();
     }
 
     @Override

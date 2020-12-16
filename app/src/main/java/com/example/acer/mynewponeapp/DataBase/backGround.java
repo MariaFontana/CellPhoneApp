@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Activity.ListProductActivity;
+import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Bussines.UpdateNotificaionBussines;
+
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 
@@ -146,8 +147,10 @@ public class backGround extends AsyncTask<Void,Void,String> {
             session.saveUserModel(userModel);
             Toast.makeText(contextService, R.string.userSave, Toast.LENGTH_LONG).show();
             UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null, Calendar.getInstance().getTime(),userModel.getDiasCount(),userModel);
-            updateNotificationAsync= new UpdateNotificationAsync(contextService,updateNotificationModelNew);
-            updateNotificationAsync.execute();
+            NotificaionBussines noti= new NotificaionBussines(contextService,updateNotificationModelNew);
+            noti.updateNotification();
+            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+
 
         }
         if (this.progressDialog.isShowing()) {

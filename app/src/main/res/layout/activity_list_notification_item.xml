@@ -48,7 +48,8 @@
 
 
                 <TextView
-                    android:id="@+id/txtdateNotification"
+                    android:id="@+id/daysNextNotification"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -70,7 +71,7 @@
 
 
                 <TextView
-                    android:id="@+id/daysNextNotification"
+                    android:id="@+id/txtdateNotification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"

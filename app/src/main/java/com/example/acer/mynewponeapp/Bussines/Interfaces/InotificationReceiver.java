@@ -4,5 +4,5 @@ public interface InotificationReceiver {
 
     public void CreateNotificationBody();
 
-    public void UpdateNotificationAsync();
+
 }
