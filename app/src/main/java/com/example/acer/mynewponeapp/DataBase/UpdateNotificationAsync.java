@@ -111,7 +111,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
         }
         else
         {
-            NotificaionBussines noti=new NotificaionBussines(contextService);
+           NotificaionBussines noti=new NotificaionBussines(contextService);
             noti.getListNotificationByUser();
 
         }

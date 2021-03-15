@@ -149,7 +149,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
             UpdateNotificationModel updateNotificationModelNew= new UpdateNotificationModel(null, Calendar.getInstance().getTime(),userModel.getDiasCount(),userModel);
             NotificaionBussines noti= new NotificaionBussines(contextService,updateNotificationModelNew);
             noti.updateNotification();
-            contextService.startActivity(new Intent(contextService, ActivityHome.class));
+           // contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
 
         }

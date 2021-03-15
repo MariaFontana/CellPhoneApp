@@ -17,6 +17,7 @@ import com.example.acer.mynewponeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import androidx.fragment.app.Fragment;
@@ -58,8 +59,17 @@ public class PerfilFragment extends Fragment {
         String urlImage =userModel.getProduct().getPhotoId().toString();
         Picasso.with(getContext()).load(urlImage).into(photo);
         description.setText(userModel.getProduct().description.toString());
-        daysRemaining.setText("Te quedan " + days + " días de alimento");
-         Date dateNew= updateNotificationModel.getDateUpdate();
+        Date dateNew= updateNotificationModel.getDateUpdate();
+        //fecha de hoy
+        Calendar calendarNow = Calendar.getInstance();
+       long starTime= dateNew.getTime();
+       long finishTime= calendarNow.getTime().getTime();
+
+        long diffTime = finishTime -starTime;
+        long diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+        daysRemaining.setText("Te quedan " + diffDays + " días de alimento");
+
         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dateNew);
         dateBuy.setText("última compra " + formattedDate);
         duration.setText("Duración alimento" + updateNotificationModel.getCountDays() + " días" );
@@ -86,7 +96,7 @@ public class PerfilFragment extends Fragment {
     }
     public void GetProductBussiness()
     {
-        productBussnes= new ProductBussnes(userModel.getProduct(),updateNotificationModel);
+        productBussnes= new ProductBussnes(userModel);
 
     }
 }

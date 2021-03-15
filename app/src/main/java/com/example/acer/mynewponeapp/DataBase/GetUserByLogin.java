@@ -20,6 +20,7 @@ import com.example.acer.mynewponeapp.Util.constant;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,6 +41,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     private String passwordUser;
     private String nombreUser;
     static JSONArray userJsonArray = null;
+    static JSONArray userJsonArray1 = null;
     UserModel  userModel ;
     ProductModel product;
     UpdateNotificationModel updateNotificationModel;
@@ -67,8 +69,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             String password = strings[1];
 
 
-            String link = constant.url+"/getUserLogin.php";
-
+           // String link = constant.url+"/getUserLogin.php";
+            String link = constant.url+"/getUserLoginAndNotification.php";
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
                     URLEncoder.encode(mail, "UTF-8");
@@ -98,15 +100,32 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
                 json = sb.toString();
 
-                userJsonArray = CreateJson(json);
-                parse();
+                JSONObject jsonttt = new JSONObject(json);
+
+                JSONObject json1 = (JSONObject) new JSONTokener(json).nextValue();
+
+//Obtenemos un array de JSON
+                JSONArray destinatarios = json1.getJSONArray("user");
+                JSONArray destinatarios1 = json1.getJSONArray("notification");
+                userJsonArray = new JSONArray(json);
+
+
+
+
+                userJsonArray1=userJsonArray.getJSONArray(0);
+                userJsonArray1=userJsonArray.getJSONArray(1);
+
+
+
+               // userJsonArray = CreateJson(json);
+             //   parse();
             }
 
 
 
         }
-        catch(Exception e){
-            return new String("Exception: " + e.getMessage());
+        catch(Exception e){return new String("Exception: " + e.getMessage());
+
 
         }
         return userJsonArray.toString();
@@ -116,8 +135,10 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
     protected JSONArray CreateJson(String json) {
         try {
+            JSONObject jsonObject1 = new JSONObject(json);
+            //JSONArray jsonArray2 = jsonObject1.getJSONArray("DatosUsuario");
 
-            userJsonArray = new JSONArray(json);
+            //userJsonArray = new JSONArray(json);
 
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
@@ -131,6 +152,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     {
         try
         {
+
 
             JSONObject UserJson;
 

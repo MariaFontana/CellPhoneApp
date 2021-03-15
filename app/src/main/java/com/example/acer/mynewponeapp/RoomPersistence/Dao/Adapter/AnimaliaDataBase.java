@@ -6,8 +6,10 @@ import android.content.Context;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.UpdateNotificationEntity;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.user;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
+import com.example.acer.mynewponeapp.RoomPersistence.Dao.UpdateNotificationDao;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.UserDao;
 
 import java.util.concurrent.ExecutorService;
@@ -19,12 +21,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {BrandModel.class}, version = 1, exportSchema = false)
+@Database(entities = {BrandModel.class,user.class, UpdateNotificationEntity.class}, version = 3, exportSchema = false)
 
     abstract public class AnimaliaDataBase extends RoomDatabase {
 
-       // abstract UserDao UserDao();
+        abstract UserDao UserDao();
         abstract BrandDao BrandDao();
+        abstract UpdateNotificationDao updateNotificationDao();
 
         // marking the instance as volatile to ensure atomic access to the variable
         private static volatile AnimaliaDataBase INSTANCE;
@@ -57,7 +60,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
     
                 //If you want to start with more words, just add them.
               BrandDao brandDao = INSTANCE.BrandDao();
-                brandDao.deleteAll();
+              brandDao.deleteAll();
 
                 BrandModel brand = new BrandModel (0,"choose");
                 brandDao.insert(brand);

@@ -3,6 +3,7 @@ package com.example.acer.mynewponeapp.Bussines;
 import com.example.acer.mynewponeapp.Bussines.Interfaces.IproductBussnes;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,10 +19,12 @@ public class ProductBussnes implements IproductBussnes {
 
     }
 
-    public ProductBussnes(ProductModel productModel, UpdateNotificationModel updateNotificationModel)
+    public ProductBussnes(UserModel userModel)
     {
-        this.productModel = productModel;
-        this.updateNotificationModel=updateNotificationModel;
+        this.productModel = userModel.getProduct();
+        if(userModel.getListNotificationModelList()!= null) {
+            this.updateNotificationModel = userModel.getListNotificationModelList().get(0);
+        }
     }
     public ProductBussnes( UpdateNotificationModel updateNotificationModel)
     {

@@ -20,12 +20,12 @@ public class PerfilFragmentBusiness implements IPerfilFragmentBusiness {
     @Override
     public void GetUserModel() {
 
-        boolean status=false;
-        String mail=session.GetUserModel().getMail();
-        String password=session.GetUserModel().getPassword();
+       // boolean status=false;
+        //String mail=session.GetUserModel().getMail();
+        //String password=session.GetUserModel().getPassword();
 
-        GetUserByLogin getUser = new GetUserByLogin(context, mail, password);
-        getUser.execute();
+       // GetUserByLogin getUser = new GetUserByLogin(context, mail, password);
+        //getUser.execute();
 
     }
 

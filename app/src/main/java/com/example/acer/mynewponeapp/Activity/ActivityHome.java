@@ -81,7 +81,9 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 });
 
             ActivityHomeBussine activityHomeBussine= new ActivityHomeBussine(this,userModel);
-            activityHomeBussine.GetLastNotification(userModel.getIdUser());
+            if(userModel.getListNotificationModelList() == null) {
+                activityHomeBussine.GetLastNotification(userModel.getIdUser());
+            }
             //First start (Inbox Fragment)
             setFragment(0);
         }

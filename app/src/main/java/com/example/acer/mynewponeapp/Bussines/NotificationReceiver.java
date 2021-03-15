@@ -16,9 +16,11 @@ import com.example.acer.mynewponeapp.Activity.LoginActivity;
 import com.example.acer.mynewponeapp.Bussines.Interfaces.InotificationReceiver;
 import com.example.acer.mynewponeapp.DataBase.GetUpdateNotificationAsync;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
+import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import androidx.core.app.NotificationCompat;
 
@@ -31,12 +33,14 @@ public class NotificationReceiver extends BroadcastReceiver implements Inotifica
     Context context;
     Intent intent;
     boolean IsAlarmSet=false;
-
+    private Session sessionUser ;
+    private UserModel userModel;
     @Override
     public void onReceive(Context context, Intent intent) {
 
         this.context=context;
         this.intent=intent;
+
         CreateNotificationBody();
 
         }
@@ -71,7 +75,26 @@ public class NotificationReceiver extends BroadcastReceiver implements Inotifica
 
         boolean IsAlarmSet=true;
 
+        sessionUser = new Session(context);
+
+        userModel= sessionUser.GetUserModel();
+
+        if(userModel.getListNotificationModelList().size()> 0) {
+
+            UpdateNotificationModel    updateNotificationModel = userModel.getListNotificationModelList().get(0);
+
+            updateNotificationModel.setUserModel(userModel);
+            updateNotificationModel.setDateUpdate(new Date());
+            if (updateNotificationModel != null) {
+                NotificaionBussines noti = new NotificaionBussines(context, updateNotificationModel);
+                noti.updateNotification();
+            }
+        }
+
     }
+
+
+
 
 
 }

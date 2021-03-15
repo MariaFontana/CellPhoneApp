@@ -161,14 +161,14 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
 
         @Override
         protected void onPostExecute(String result) {
-            if(IsAlarmSet)
-            {
-                updateNotificatinModel.setDateUpdate(new Date());
-                UpdateNotificationAsync update=new UpdateNotificationAsync(contextService,updateNotificatinModel);
-                updateNotificatinModel.setUserModel(userModel);
-                update.execute();
-                session.saveUpdateNotidicationModel(updateNotificatinModel);
-                IsAlarmSet=false;
+         if(IsAlarmSet)
+        {
+             updateNotificatinModel.setDateUpdate(new Date());
+              UpdateNotificationAsync update=new UpdateNotificationAsync(contextService,updateNotificatinModel);
+             updateNotificatinModel.setUserModel(userModel);
+            update.execute();
+             session.saveUpdateNotidicationModel(updateNotificatinModel);
+               IsAlarmSet=false;
             }
             else {
                 listUpdateNotificationModel=new ArrayList<UpdateNotificationModel>();
@@ -179,7 +179,7 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
                 NotificaionBussines updateNotificaionBussines = new NotificaionBussines(contextService, updateNotificatinModel);
                 updateNotificaionBussines.CalculateAlarmNotification();
                 contextService.startActivity(new Intent(contextService, ActivityHome.class));
-            }
+           }
 
         }
 

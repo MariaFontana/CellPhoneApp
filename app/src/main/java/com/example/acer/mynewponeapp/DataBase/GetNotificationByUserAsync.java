@@ -146,6 +146,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
             userModel.setListNotificationModel(updateNotificatinModelList);
 
+
             session.saveUserModel(userModel);
 
             return IsParse=false;
@@ -171,8 +172,11 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
 
             //Get Update Notification
-            NotificaionBussines noti = new NotificaionBussines(contextService);
-            noti.CalculateAlarmNotification();
+            if(updateNotificatinModelList != null && updateNotificatinModelList.size() > 0) {
+                NotificaionBussines noti = new NotificaionBussines(contextService,updateNotificatinModelList.get(0) );
+                noti.CalculateAlarmNotification();
+            }
+            contextService.startActivity(new Intent(contextService, ActivityHome.class));
         }
         catch(Exception e) {
              e.getMessage();

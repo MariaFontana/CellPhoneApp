@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import com.example.acer.mynewponeapp.Activity.MainActivity;
 import com.example.acer.mynewponeapp.Bussines.Interfaces.INotificationBusiness;
@@ -15,6 +16,9 @@ import com.example.acer.mynewponeapp.Model.UserModel;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+
+import androidx.annotation.RequiresApi;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -104,12 +108,12 @@ public class NotificaionBussines implements INotificationBusiness {
 
 
 
-    @Override
-    public void getLastNotification() {
+   // @Override
+  //  public void getLastNotification() {
 
-        GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
-        updateAsync.execute();
-    }
+  //      GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
+  //      updateAsync.execute();
+ //   }
 
 
     @Override
@@ -120,9 +124,17 @@ public class NotificaionBussines implements INotificationBusiness {
     }
 
     //Lenar la lista de notificaciones
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void getListNotificationByUser() {
         GetNotificationByUserAsync getNotificationByUserAsync= new GetNotificationByUserAsync(context);
         getNotificationByUserAsync.execute();
+    }
+
+
+    public void CreateNotificationAlarmNew()
+    {
+        UserModel userModel=session.GetUserModel();
+
     }
 }

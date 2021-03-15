@@ -24,4 +24,6 @@ public class ActivityHomeBussine implements IActivityHomeBussines {
     public void GetLastNotification(int IdUser) {
        notificationBusiness.getListNotificationByUser();
     }
+
+
 }
