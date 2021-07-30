@@ -1,13 +1,6 @@
 package com.example.acer.mynewponeapp.Activity;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,32 +10,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Bussines.Channel;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.acer.mynewponeapp.Bussines.Channel;
 import com.example.acer.mynewponeapp.Bussines.CreateUserBusiness;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.DataBase.GetBrand;
-import com.example.acer.mynewponeapp.DataBase.GetBreedAsync;
+import com.example.acer.mynewponeapp.Bussines.Validation;
 import com.example.acer.mynewponeapp.DataBase.GetProductByIdBrand;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
-import com.example.acer.mynewponeapp.DataBase.backGround;
-import  com.example.acer.mynewponeapp.Bussines.Validation;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
-
-
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -94,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             GetBrand();
 
             GetBreed();
+
+
+
+
+
 
        //     GetBrandRoom();
 
@@ -240,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+
     //GetBread
     private void GetBreed()
     {
@@ -301,33 +295,35 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+       try {
 
-        switch(parent.getId()) {
+           switch(parent.getId()) {
 
-            case  R.id.brandSpinner: // for item 1
-                this.position = position;
+               case R.id.brandSpinner: // for item 1
+                   this.position = position;
 
-                selection = parent.getItemAtPosition(position).toString();
-                brandItem =(BrandModel)parent.getSelectedItem();
-                GetProductByBrand(brandItem.idBrand);
+                   selection = parent.getItemAtPosition(position).toString();
+                   brandItem = (BrandModel) parent.getSelectedItem();
+                   GetProductByBrand(brandItem.idBrand);
+                   //
+                   //  Toast.makeText(getApplicationContext(), categoriesList.get(position).getId() + " Selected" , Toast.LENGTH_LONG).show();
 
-              //
-                //  Toast.makeText(getApplicationContext(), categoriesList.get(position).getId() + " Selected" , Toast.LENGTH_LONG).show();
+                   break;
+               case R.id.productSpinner:
+                   productItem = (ProductModel) parent.getSelectedItem();
+                   break;
 
-                break;
-            case R.id.productSpinner:
-              productItem=  (ProductModel)parent.getSelectedItem();
-                break;
+               case R.id.breedSpinner:
+                   breedItem = (BreedModel) parent.getSelectedItem();
+                   break;
 
-            case R.id.breedSpinner:
-                breedItem=  (BreedModel)parent.getSelectedItem();
-                break;
-
-            /* you can have any number of case statements */
-            default :
-
+               /* you can have any number of case statements */
+               default:
+           }
+       }
+        catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
 

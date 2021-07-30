@@ -9,10 +9,8 @@ import android.widget.Toast;
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
-import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
@@ -27,7 +25,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
@@ -63,7 +60,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
                 String idUser = String.valueOf(userModel.getIdUser());
 
-                String link = constant.url +"/GetNotificationByUser.php";
+                String link = constant.url +"/php/GetNotificationByUser.php";
 
                 String data = URLEncoder.encode("idUser", "UTF-8") + "=" +
                         URLEncoder.encode(idUser, "UTF-8");

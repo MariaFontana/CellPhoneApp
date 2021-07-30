@@ -7,8 +7,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Model.BrandModel;
+import androidx.appcompat.widget.AppCompatSpinner;
+
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Util.constant;
@@ -27,11 +27,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import androidx.appcompat.widget.AppCompatSpinner;
-
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
-import static java.lang.Integer.parseInt;
 
 public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
 
@@ -67,7 +63,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
     protected String doInBackground(String... strings) {
         try {
             String idBrand = strings[0];
-            String link = constant.url+"/getproductbybrand.php";
+            String link = constant.url+"/php/getproductbybrand.php";
 
             String data = URLEncoder.encode("idBrand", "UTF-8") + "=" +
                     URLEncoder.encode(idBrand, "UTF-8");
@@ -147,7 +143,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
                 productItem.precio= Double.parseDouble(productJson.getString("precio"));
                 productItem.cantidad= Integer.parseInt(productJson.getString("cantidad"));
                 productItem.idBrand=Integer.parseInt(productJson.getString("idBrand"));
-                productItem.photoId=productJson.getString("image");
+              //  productItem.photoId=productJson.getString("image");
                 productList.add(productItem);
 
             }

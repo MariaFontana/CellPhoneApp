@@ -1,12 +1,12 @@
 package com.example.acer.mynewponeapp.DataBase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Activity.ListProductActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.acer.mynewponeapp.Activity.ProductAdapter;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Util.constant;
@@ -22,8 +22,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class GetProduct extends AsyncTask< String ,Void,String> {
 
@@ -46,7 +44,7 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
     protected String doInBackground(String... strings) {
 
         try {
-            String link = constant.url+"/getProduct.php";
+            String link = constant.url+"/php/getProduct.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -108,8 +106,8 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 String description =productJson.getString("description");
                 Double precio = Double.parseDouble(productJson.getString("precio"));
                 int cantidad = Integer.parseInt(productJson.getString("cantidad"));
-                String image =productJson.getString("image");
-                int idBrand = Integer.parseInt(productJson.getString("idBrand"));
+                String image =productJson.getString("photoId");
+                int idBrand = Integer.parseInt(productJson.getString("idbrand"));
                 
 
                 ProductModel product=new ProductModel(name,precio,description,cantidad,image,idBrand);

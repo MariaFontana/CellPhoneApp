@@ -1,8 +1,6 @@
 package com.example.acer.mynewponeapp.DataBase;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -12,12 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -55,7 +47,7 @@ public class UpdateNotificationBuyFeed extends AsyncTask<String,Void,String>  {
             String date = strings[2];
 
 
-            String link = "http://192.168.0.114:8080/insertUser2.php";
+            String link = "/php/insertUser2.php";
 
             String data = URLEncoder.encode("idUser", "UTF-8") + "=" +
                     URLEncoder.encode(idUser, "UTF-8");

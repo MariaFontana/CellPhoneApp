@@ -7,7 +7,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Model.BrandModel;
+import androidx.appcompat.widget.AppCompatSpinner;
+
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
@@ -22,8 +23,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.appcompat.widget.AppCompatSpinner;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
 
@@ -52,7 +51,7 @@ public class GetBreedAsync extends AsyncTask<String,Void,String>
         protected String doInBackground(String... strings) {
         try
         {
-            String link = constant.url+"/getBreed.php";
+            String link = constant.url+"/php/getBreed.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();

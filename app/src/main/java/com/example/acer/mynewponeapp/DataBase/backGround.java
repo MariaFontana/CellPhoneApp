@@ -2,36 +2,23 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Activity.ActivityHome;
-import com.example.acer.mynewponeapp.Activity.ListProductActivity;
 import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
+import com.example.acer.mynewponeapp.R;
+import com.example.acer.mynewponeapp.Util.constant;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
-
-import com.example.acer.mynewponeapp.R;
-import com.example.acer.mynewponeapp.Util.constant;
-
-import static java.lang.Integer.parseInt;
 
 public class backGround extends AsyncTask<Void,Void,String> {
     boolean running;
@@ -76,7 +63,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
                     String idBreed = String.valueOf(userModel.getBreedItem().getBreedId());
 
 
-                   final String link = constant.url +"/insertUser2.php";
+                   final String link = constant.url +"/php/insertUser2.php";
 
                     String data = URLEncoder.encode("name", "UTF-8") + "=" +
                             URLEncoder.encode(name, "UTF-8");
@@ -124,7 +111,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
 
             catch (Exception e) {
 
-                return new String("");
+                return new String(sb.toString());
             }
         }
 

@@ -6,27 +6,24 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatSpinner;
+
 import com.example.acer.mynewponeapp.Model.BrandModel;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.BrandDao;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.Entidades.Brand;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 import com.example.acer.mynewponeapp.Util.constant;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.appcompat.widget.AppCompatSpinner;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
 
@@ -55,7 +52,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     protected String doInBackground(String... strings) {
         try
         {
-            String link = constant.url+"/getBrand.php";
+            String link = constant.url+"/php/getBrand.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -122,7 +119,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
                 brandJson =brandJsonArray.getJSONObject(i);
                 BrandModel brandModelItem=new BrandModel();
 
-                brandModelItem.idBrand = Integer.parseInt(brandJson.getString("idBrand")) ;
+                brandModelItem.idBrand = Integer.parseInt(brandJson.getString("idbrand")) ;
                 brandModelItem.name =brandJson.getString("name");
 
 

@@ -1,28 +1,18 @@
 package com.example.acer.mynewponeapp.DataBase;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
-import com.example.acer.mynewponeapp.Bussines.Session;
-
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
-import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -62,7 +52,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
 
                 String idUser = String.valueOf(updateNotificationModel.getUserModel().getIdUser());
 
-                String link = constant.url +"/updateNotification.php";
+                String link = constant.url +"/php/updateNotification.php";
 
                 String data = URLEncoder.encode("countDay", "UTF-8") + "=" +
                         URLEncoder.encode(countDay, "UTF-8");

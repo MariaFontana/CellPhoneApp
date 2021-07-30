@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-import com.example.acer.mynewponeapp.Activity.PromoAdapter;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.acer.mynewponeapp.Activity.PromoAdapter;
 import com.example.acer.mynewponeapp.Model.PromoModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
@@ -20,8 +22,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class GetPromoAsync extends AsyncTask< String ,Void,String> {
 
@@ -43,7 +43,7 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
     protected String doInBackground(String... strings) {
 
         try {
-            String link = constant.url+"/GetPromo.php";
+            String link = constant.url+"/php/GetPromo.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();

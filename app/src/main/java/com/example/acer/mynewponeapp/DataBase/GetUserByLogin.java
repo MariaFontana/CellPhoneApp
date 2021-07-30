@@ -70,7 +70,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
 
            // String link = constant.url+"/getUserLogin.php";
-            String link = constant.url+"/getUserLoginAndNotification.php";
+            String link = constant.url+"/php/getUserLoginAndNotification.php";
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
                     URLEncoder.encode(mail, "UTF-8");

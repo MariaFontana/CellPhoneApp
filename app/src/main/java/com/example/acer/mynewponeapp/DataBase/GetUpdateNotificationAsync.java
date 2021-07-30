@@ -2,31 +2,12 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.content.Context;
 import android.content.Intent;
-
-import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.math.BigInteger;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.sql.Time;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 
 import com.example.acer.mynewponeapp.Activity.ActivityHome;
 import com.example.acer.mynewponeapp.Bussines.NotificaionBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
-
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
@@ -35,7 +16,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.annotation.RequiresApi;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class GetUpdateNotificationAsync extends AsyncTask<Void,Void,String> {
@@ -71,7 +61,7 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
 
         String idUser = String.valueOf(userModel.getIdUser());
 
-        String link = constant.url +"/getLastNotification.php";
+        String link = constant.url +"/php/getLastNotification.php";
 
         String data = URLEncoder.encode("idUser", "UTF-8") + "=" +
         URLEncoder.encode(idUser, "UTF-8");
