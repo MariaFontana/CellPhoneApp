@@ -132,7 +132,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
                 String idUpdateNotification =updateNotificationJson.getString("idUpdateNotification");
                 String dateUpdate =updateNotificationJson.getString("dateUpdate");
-                String countDay = updateNotificationJson.getString("countDay");
+                String countDay = updateNotificationJson.getString("countDays");
                 String idUser = updateNotificationJson.getString("idUser");
 
                 updateNotificatinModel=new UpdateNotificationModel(BigInteger.valueOf(Long.parseLong(idUpdateNotification)) , dateUpdate, Integer.parseInt(countDay));

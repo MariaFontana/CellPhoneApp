@@ -143,7 +143,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
                 productItem.precio= Double.parseDouble(productJson.getString("precio"));
                 productItem.cantidad= Integer.parseInt(productJson.getString("cantidad"));
                 productItem.idBrand=Integer.parseInt(productJson.getString("idBrand"));
-              //  productItem.photoId=productJson.getString("image");
+               productItem.photoId= constant.url +"/php/image/"+ productJson.getString("photoId");
                 productList.add(productItem);
 
             }

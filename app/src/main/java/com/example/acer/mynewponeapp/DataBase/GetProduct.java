@@ -107,6 +107,7 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 Double precio = Double.parseDouble(productJson.getString("precio"));
                 int cantidad = Integer.parseInt(productJson.getString("cantidad"));
                 String image =productJson.getString("photoId");
+                image= constant.url +"/php/image/"+ image;
                 int idBrand = Integer.parseInt(productJson.getString("idbrand"));
                 
 

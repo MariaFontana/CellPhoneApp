@@ -7,10 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.acer.mynewponeapp.Bussines.PerfilFragmentBusiness;
 import com.example.acer.mynewponeapp.Bussines.ProductBussnes;
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
@@ -19,8 +20,6 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import androidx.fragment.app.Fragment;
 
 
 public class PerfilFragment extends Fragment {
@@ -56,8 +55,10 @@ public class PerfilFragment extends Fragment {
         final TextView daysRemaining =(TextView)view.findViewById(R.id.textDaysRemaining);
 
         precio.setText(userModel.getProduct().getPrecio().toString());
-        String urlImage =userModel.getProduct().getPhotoId().toString();
-        Picasso.with(getContext()).load(urlImage).into(photo);
+        if(userModel.getProduct().getPhotoId()!=null) {
+            String urlImage = userModel.getProduct().getPhotoId().toString();
+            Picasso.with(getContext()).load(urlImage).into(photo);
+        }
         description.setText(userModel.getProduct().description.toString());
         Date dateNew= updateNotificationModel.getDateUpdate();
         //fecha de hoy
