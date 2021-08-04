@@ -6,19 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.example.acer.mynewponeapp.Activity.MainActivity;
+import androidx.annotation.RequiresApi;
+
 import com.example.acer.mynewponeapp.Bussines.Interfaces.INotificationBusiness;
 import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
-import com.example.acer.mynewponeapp.DataBase.GetUpdateNotificationAsync;
 import com.example.acer.mynewponeapp.DataBase.UpdateNotificationAsync;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
-
-import androidx.annotation.RequiresApi;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -46,7 +43,6 @@ public class NotificaionBussines implements INotificationBusiness {
         session = new Session(context);
         this.context=context;
        this.updateNotificationModel=updateNotificationModel;
-
     }
     //private void GetSessionUser()
     //{

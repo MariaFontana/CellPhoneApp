@@ -1,31 +1,18 @@
 package com.example.acer.mynewponeapp.Activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Bussines.NotificationReceiver;
-import com.example.acer.mynewponeapp.Bussines.Session;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.Validation;
 import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
-import com.example.acer.mynewponeapp.DataBase.backGround;
 import com.example.acer.mynewponeapp.R;
-
-
-import java.util.Calendar;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

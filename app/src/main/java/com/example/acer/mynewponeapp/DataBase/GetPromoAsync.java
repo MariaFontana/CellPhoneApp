@@ -104,7 +104,7 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
                 String name=productJson.getString("name");
                 String startPromo =productJson.getString("startPromo");
                 String finishPromo = productJson.getString("finishPromo");
-                String image =productJson.getString("image");
+                String image = constant.url+"/php/promo/" + productJson.getString("image");
 
                 PromoModel promo =new PromoModel(idPromo,name,startPromo,finishPromo,image);
                 listPromo.add(promo);
