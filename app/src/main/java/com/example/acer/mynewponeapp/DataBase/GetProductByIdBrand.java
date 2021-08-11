@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -126,7 +125,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
         {
             JSONObject productJson;
             ProductModel productItemSelect= new ProductModel();
-            BigInteger idProductSelect = new BigInteger("0");
+            Integer idProductSelect = new Integer("0");
             productItemSelect.idProduct=idProductSelect;
             productItemSelect.name="Seleccione un Producto";
             productList.add(productItemSelect);
@@ -135,7 +134,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
             {
                 productJson =productJsonArray.getJSONObject(i);
                 ProductModel productItem= new ProductModel();
-                BigInteger idProduct = new BigInteger(productJson.getString("idProduct"));
+                Integer idProduct = new Integer(productJson.getString("idProduct"));
 
                 productItem.idProduct = idProduct ;
                 productItem.name =productJson.getString("name");

@@ -59,21 +59,32 @@ public class PerfilFragment extends Fragment {
             String urlImage = userModel.getProduct().getPhotoId().toString();
             Picasso.with(getContext()).load(urlImage).into(photo);
         }
+
         description.setText(userModel.getProduct().description.toString());
-        Date dateNew= updateNotificationModel.getDateUpdate();
+
+        Calendar dayOfNotification = Calendar.getInstance();
+        Date date = updateNotificationModel.getDateUpdate();
+        dayOfNotification.setTime(date);
+        dayOfNotification.add(Calendar.DAY_OF_YEAR, updateNotificationModel.getCountDays());
+
+        //Date dateNew= updateNotificationModel.getDateUpdate();
+
         //fecha de hoy
         Calendar calendarNow = Calendar.getInstance();
-       long starTime= dateNew.getTime();
+        //fecha guard
+       long starTime= dayOfNotification.getTime().getTime();
+
        long finishTime= calendarNow.getTime().getTime();
 
-        long diffTime = finishTime -starTime;
+        long diffTime = starTime - finishTime;
+
         long diffDays = diffTime / (1000 * 60 * 60 * 24);
 
-        daysRemaining.setText("Te quedan " + diffDays + " días de alimento");
+        daysRemaining.setText("Te quedan " + diffDays + " días de alimento ");
 
-        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dateNew);
+        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
         dateBuy.setText("última compra " + formattedDate);
-        duration.setText("Duración alimento" + updateNotificationModel.getCountDays() + " días" );
+        duration.setText("Duración alimento " + updateNotificationModel.getCountDays() + " días" );
 
         return view;
     }

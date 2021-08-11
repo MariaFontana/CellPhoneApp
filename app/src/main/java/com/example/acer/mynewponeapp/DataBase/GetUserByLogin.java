@@ -2,30 +2,23 @@ package com.example.acer.mynewponeapp.DataBase;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.acer.mynewponeapp.Activity.ActivityHome;
-
 import com.example.acer.mynewponeapp.Bussines.Session;
-
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -41,7 +34,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     private String passwordUser;
     private String nombreUser;
     static JSONArray userJsonArray = null;
-    static JSONArray userJsonArray1 = null;
+
     UserModel  userModel ;
     ProductModel product;
     UpdateNotificationModel updateNotificationModel;
@@ -70,7 +63,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
 
            // String link = constant.url+"/getUserLogin.php";
-            String link = constant.url+"/php/getUserLoginAndNotification.php";
+            String link = constant.url+"/php/getUserLogin.php";
 
             String data = URLEncoder.encode("mail", "UTF-8") + "=" +
                     URLEncoder.encode(mail, "UTF-8");
@@ -100,22 +93,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
                 json = sb.toString();
 
-                JSONObject jsonttt = new JSONObject(json);
-
-                JSONObject json1 = (JSONObject) new JSONTokener(json).nextValue();
-
-//Obtenemos un array de JSON
-                JSONArray destinatarios = json1.getJSONArray("user");
-                JSONArray destinatarios1 = json1.getJSONArray("notification");
-                userJsonArray = new JSONArray(json);
-
-
-
-
-                userJsonArray1=userJsonArray.getJSONArray(0);
-                userJsonArray1=userJsonArray.getJSONArray(1);
-
-
+                userJsonArray   = CreateJson(json);
+                parse();
 
                // userJsonArray = CreateJson(json);
              //   parse();
@@ -135,10 +114,8 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
 
     protected JSONArray CreateJson(String json) {
         try {
-            JSONObject jsonObject1 = new JSONObject(json);
-            //JSONArray jsonArray2 = jsonObject1.getJSONArray("DatosUsuario");
+            userJsonArray = new JSONArray(json);
 
-            //userJsonArray = new JSONArray(json);
 
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
@@ -161,17 +138,19 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
             {
                 UserJson=userJsonArray.getJSONObject(i);
 
-                String name=UserJson.getString("name");
+                String name=UserJson.getString("nameUser");
                 String password =UserJson.getString("password");
                 String mail = UserJson.getString("mail");
                 String productName = UserJson.getString("product");
                 String productPrecio = UserJson.getString("precio");
-                String productImage = UserJson.getString("image");
+                String productImage = UserJson.getString("photoId");
                 String productDescription=UserJson.getString("description");
                 String idUser=UserJson.getString("idUser");
+                String idProduct=UserJson.getString("idProduct");
 
 
-                product=new ProductModel(productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
+
+                product=new ProductModel(Integer.parseInt(idProduct) ,productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
 
                 userModel= new UserModel(Integer.parseInt(idUser) ,name,mail,password,product);
 
@@ -203,7 +182,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
                 getNotification.execute();
 
-                contextService.startActivity(new Intent(contextService, ActivityHome.class));
+              //  contextService.startActivity(new Intent(contextService, ActivityHome.class));
 
 
 

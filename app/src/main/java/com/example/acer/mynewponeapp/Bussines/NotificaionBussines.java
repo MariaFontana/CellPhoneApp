@@ -101,22 +101,25 @@ public class NotificaionBussines implements INotificationBusiness {
 
     }
 
-
-
-
-   // @Override
-  //  public void getLastNotification() {
-
-  //      GetUpdateNotificationAsync updateAsync= new GetUpdateNotificationAsync(context,false);
-  //      updateAsync.execute();
- //   }
-
-
     @Override
     public void updateNotification() {
 
         UpdateNotificationAsync updateNotificationAsync= new UpdateNotificationAsync(context,updateNotificationModel);
         updateNotificationAsync.execute();
+    }
+
+
+    public  Calendar CalculateDateNotification( Calendar dayUpdate,int daysRemining)
+    {
+
+        Date date = dayUpdate.getTime();
+        dayUpdate.setTime(date);
+        dayUpdate.add(Calendar.DAY_OF_YEAR, daysRemining );
+        //long diffTime = dayUpdate - date;
+      //  long diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+
+        return dayUpdate;
     }
 
     //Lenar la lista de notificaciones
@@ -128,9 +131,5 @@ public class NotificaionBussines implements INotificationBusiness {
     }
 
 
-    public void CreateNotificationAlarmNew()
-    {
-        UserModel userModel=session.GetUserModel();
 
-    }
 }

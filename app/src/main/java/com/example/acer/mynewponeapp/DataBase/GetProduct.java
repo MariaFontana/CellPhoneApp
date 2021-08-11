@@ -109,9 +109,10 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 String image =productJson.getString("photoId");
                 image= constant.url +"/php/image/"+ image;
                 int idBrand = Integer.parseInt(productJson.getString("idbrand"));
+                int idproduct = Integer.parseInt(productJson.getString("idProduct"));
                 
 
-                ProductModel product=new ProductModel(name,precio,description,cantidad,image,idBrand);
+                ProductModel product=new ProductModel(idproduct,name,precio,description,cantidad,image,idBrand);
 
                 listProduct.add(product);
             }

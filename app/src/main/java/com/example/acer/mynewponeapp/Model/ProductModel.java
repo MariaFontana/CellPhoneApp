@@ -1,9 +1,5 @@
 package com.example.acer.mynewponeapp.Model;
 
-import android.content.Intent;
-
-import java.math.BigInteger;
-
 public class ProductModel {
     public String name;
     public double precio;
@@ -11,7 +7,7 @@ public class ProductModel {
     public String description;
     public int cantidad;
     public Integer idBrand;
-    public BigInteger idProduct;
+    public Integer idProduct;
 
     public String getPhotoId() {
         return photoId;
@@ -28,13 +24,14 @@ public class ProductModel {
 
     }
 
-    public ProductModel(String name, double precio, String description,int cantidad,String photoId,Integer idBrand ) {
+    public ProductModel(Integer idProduct, String name, double precio, String description,int cantidad,String photoId,Integer idBrand ) {
         this.name = name;
         this.precio = precio;
         this.description = description;
         this.photoId=photoId;
         this.cantidad=cantidad;
         this.idBrand=idBrand;
+        this.idProduct=idProduct;
     }
 
 
@@ -46,7 +43,7 @@ public class ProductModel {
     public void setIdBrand(Integer idBrand) {
         this.idBrand = idBrand;
     }
-    public void setIdProduct(BigInteger idProduct) {
+    public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
 
@@ -74,7 +71,7 @@ public class ProductModel {
     public Integer getIdBrand() {
         return idBrand;
     }
-    public BigInteger getIdProduct() {
+    public Integer getIdProduct() {
         return this.idProduct;
     }
     public Double getPrecio() {
