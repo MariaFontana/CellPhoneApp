@@ -9,6 +9,16 @@ public class ProductModel {
     public Integer idBrand;
     public Integer idProduct;
 
+    public Integer getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public Integer idCategory;
+
     public String getPhotoId() {
         return photoId;
     }
@@ -24,7 +34,7 @@ public class ProductModel {
 
     }
 
-    public ProductModel(Integer idProduct, String name, double precio, String description,int cantidad,String photoId,Integer idBrand ) {
+    public ProductModel(Integer idProduct, String name, double precio, String description,int cantidad,String photoId,Integer idBrand,Integer idCategory ) {
         this.name = name;
         this.precio = precio;
         this.description = description;
@@ -32,6 +42,7 @@ public class ProductModel {
         this.cantidad=cantidad;
         this.idBrand=idBrand;
         this.idProduct=idProduct;
+        this.idCategory=idCategory;
     }
 
 

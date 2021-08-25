@@ -27,7 +27,7 @@ public class backGround extends AsyncTask<Void,Void,String> {
     private Session session;
     private UserModel userModel;
     StringBuilder  sb;
-    private UpdateNotificationAsync updateNotificationAsync;
+    private NotificationUpdateAsync notificationUpdateAsync;
 
     //flag 0 means get and 1 means post.(By default it is get.)
     public backGround(Context context,UserModel userModel ) {

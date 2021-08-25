@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.example.acer.mynewponeapp.Model.BrandModel;
+import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
@@ -27,7 +28,7 @@ import java.util.List;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
 
-public class GetBrand extends AsyncTask<String,Void,String>  {
+public class BrandAsync extends AsyncTask<String,Void,String>  {
 
     Context contextService;
     static JSONArray brandJsonArray = null;
@@ -40,11 +41,10 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
     BrandViewModel  brandViewModel;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public GetBrand(Context context, AppCompatSpinner spinnerBrand ,BrandViewModel brandViewModel)
+    public BrandAsync(Context context,AppCompatSpinner spinnerBrand )
     {
         contextService = context;
         this.spinnerBrand=spinnerBrand;
-        this.brandViewModel=brandViewModel;
         progressDialog= new ProgressDialog(contextService);
     }
 
@@ -84,7 +84,7 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
         }
 
          catch (Exception e) {
-            new String("Exception: " + e.getMessage());
+             System.out.println("problemas con la conexion!");
 
         }
         return null;
@@ -126,10 +126,6 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
 
                 brandList.add(brandModelItem);
 
-
-
-                brandViewModel.insert(brandModelItem);
-
             }
 
             IsParse=true;
@@ -152,11 +148,11 @@ public class GetBrand extends AsyncTask<String,Void,String>  {
           comboAdapterSql = new ArrayAdapter<>(contextService, android.R.layout.simple_spinner_item, brandList);
             //Cargo el spinner con los datos
             spinnerBrand.setAdapter(comboAdapterSql);
-          spinnerBrand.getItemAtPosition(0);
+            spinnerBrand.getItemAtPosition(0);
         }
         else
         {
-            Toast.makeText(contextService, "error sppinerbrand", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService, R.string.errorConexion, Toast.LENGTH_SHORT).show();
         }
 
     }

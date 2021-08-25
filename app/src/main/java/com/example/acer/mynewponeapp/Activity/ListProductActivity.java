@@ -2,18 +2,11 @@ package com.example.acer.mynewponeapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.icu.lang.UProperty;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,18 +20,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.DataBase.GetProduct;
-import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
-import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.DataBase.ProductAsync;
 import com.example.acer.mynewponeapp.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.example.acer.mynewponeapp.Util.verticalSpacignDecorator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListProductActivity extends AppCompatActivity implements FloatingActionButton.OnClickListener{
     private RecyclerView recyclerViewProduct;
@@ -102,7 +89,7 @@ public class ListProductActivity extends AppCompatActivity implements FloatingAc
                 verticalSpacignDecorator spacingRecicler= new verticalSpacignDecorator(1);
                 recyclerViewProduct.addItemDecoration(spacingRecicler);
 
-                GetProduct ListProduct = new GetProduct(this, recyclerViewProduct);
+                ProductAsync ListProduct = new ProductAsync(this, recyclerViewProduct);
                 ListProduct.execute();
 
                 // specify an adapter with the list to show

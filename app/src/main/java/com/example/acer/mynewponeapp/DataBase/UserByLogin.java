@@ -24,7 +24,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 
-public class GetUserByLogin extends AsyncTask< String ,Void,String>
+public class UserByLogin extends AsyncTask< String ,Void,String>
 {
     ProgressDialog progressDialog;
     Context contextService;
@@ -41,7 +41,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
     String json = "";
     boolean IsParse=false;
 
-    public GetUserByLogin(Context context,String mailUser,String passwordUser) {
+    public UserByLogin(Context context, String mailUser, String passwordUser) {
         contextService = context;
         progressDialog= new ProgressDialog(contextService);
         this.passwordUser=passwordUser;
@@ -147,10 +147,11 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 String productDescription=UserJson.getString("description");
                 String idUser=UserJson.getString("idUser");
                 String idProduct=UserJson.getString("idProduct");
+                String idCategory=UserJson.getString("idCategory");
 
 
 
-                product=new ProductModel(Integer.parseInt(idProduct) ,productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null);
+                product=new ProductModel(Integer.parseInt(idProduct) ,productName,Double.parseDouble(productPrecio),productDescription,0,productImage,null,Integer.parseInt(idCategory) );
 
                 userModel= new UserModel(Integer.parseInt(idUser) ,name,mail,password,product);
 
@@ -179,7 +180,7 @@ public class GetUserByLogin extends AsyncTask< String ,Void,String>
                 //Save User
                 session.saveUserModel(userModel);
 
-                GetNotificationByUserAsync getNotification = new GetNotificationByUserAsync(contextService);
+                NotificationByUserAsync getNotification = new NotificationByUserAsync(contextService);
                 getNotification.execute();
 
               //  contextService.startActivity(new Intent(contextService, ActivityHome.class));

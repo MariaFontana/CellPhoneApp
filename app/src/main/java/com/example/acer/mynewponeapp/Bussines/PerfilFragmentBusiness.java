@@ -1,11 +1,8 @@
 package com.example.acer.mynewponeapp.Bussines;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.example.acer.mynewponeapp.Bussines.Interfaces.IPerfilFragmentBusiness;
-import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
-import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
 
 public class PerfilFragmentBusiness implements IPerfilFragmentBusiness {
 

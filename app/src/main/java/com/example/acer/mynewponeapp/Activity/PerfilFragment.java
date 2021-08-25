@@ -10,16 +10,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.acer.mynewponeapp.Bussines.PerfilFragmentBusiness;
-import com.example.acer.mynewponeapp.Bussines.ProductBussnes;
+import com.example.acer.mynewponeapp.Bussines.ProductBussines;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Factory.ProductFactory;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class PerfilFragment extends Fragment {
@@ -27,7 +26,7 @@ public class PerfilFragment extends Fragment {
     private UserModel userModel;
     private Session session;
     private UpdateNotificationModel updateNotificationModel;
-    ProductBussnes productBussnes;
+    ProductBussines productBussines;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,14 +35,16 @@ public class PerfilFragment extends Fragment {
 
         this.userModel  =session.GetUserModel();
         GetUpdateNotification();
+        ProductFactory productFactory=new ProductFactory();
         // Inflate the layout for this fragment
 
     //    GetUserModel();
         //GetUpdateNotification();
-       GetProductBussiness();
+       //GetProductBussiness();
 
-       long days= productBussnes.CalculationDurationFeed();
+        productBussines = productFactory.ProductBussiness(updateNotificationModel);
 
+        long  days=productBussines.CalculationDurationFeed();
         final View view = inflater.inflate(R.layout.perfil_fragment, container, false);
         final TextView precio = (TextView) view.findViewById(R.id.textPrecio);
         final TextView duration = (TextView) view.findViewById(R.id.duration);
@@ -62,28 +63,28 @@ public class PerfilFragment extends Fragment {
 
         description.setText(userModel.getProduct().description.toString());
 
-        Calendar dayOfNotification = Calendar.getInstance();
-        Date date = updateNotificationModel.getDateUpdate();
-        dayOfNotification.setTime(date);
-        dayOfNotification.add(Calendar.DAY_OF_YEAR, updateNotificationModel.getCountDays());
+       // Calendar dayOfNotification = Calendar.getInstance();
+        //Date date = updateNotificationModel.getDateUpdate();
+        //dayOfNotification.setTime(date);
+        //dayOfNotification.add(Calendar.DAY_OF_YEAR, updateNotificationModel.getCountDays());
 
         //Date dateNew= updateNotificationModel.getDateUpdate();
 
         //fecha de hoy
         Calendar calendarNow = Calendar.getInstance();
         //fecha guard
-       long starTime= dayOfNotification.getTime().getTime();
+       //long starTime= dayOfNotification.getTime().getTime();
 
        long finishTime= calendarNow.getTime().getTime();
 
-        long diffTime = starTime - finishTime;
+      //  long diffTime = starTime - finishTime;
 
-        long diffDays = diffTime / (1000 * 60 * 60 * 24);
+       // long diffDays = diffTime / (1000 * 60 * 60 * 24);
 
-        daysRemaining.setText("Te quedan " + diffDays + " días de alimento ");
+        daysRemaining.setText("Te quedan " + days + " días de alimento ");
 
-        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
-        dateBuy.setText("última compra " + formattedDate);
+        //String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        dateBuy.setText("última compra " + productBussines.formattedDate);
         duration.setText("Duración alimento " + updateNotificationModel.getCountDays() + " días" );
 
         return view;
@@ -106,9 +107,5 @@ public class PerfilFragment extends Fragment {
         PerfilFragmentBusiness perfil=new PerfilFragmentBusiness(getContext(),session);
         perfil.GetUpdateNotification();
     }
-    public void GetProductBussiness()
-    {
-        productBussnes= new ProductBussnes(userModel);
 
-    }
 }

@@ -7,8 +7,9 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.acer.mynewponeapp.Activity.PromoAdapter;
-import com.example.acer.mynewponeapp.Model.PromoModel;
+import com.example.acer.mynewponeapp.Activity.ProductAdapter;
+import com.example.acer.mynewponeapp.Model.ProductModel;
+import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
@@ -23,19 +24,20 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetPromoAsync extends AsyncTask< String ,Void,String> {
+public class ProductAsync extends AsyncTask< String ,Void,String> {
 
     Context contextService;
     static JSONArray ProductJsonArray = null;
     String json = "";
     private RecyclerView.Adapter mAdapter;
-    List<PromoModel> listPromo = new ArrayList<>();
-    RecyclerView recyclerViewPromo;
+    List<ProductModel> listProduct = new ArrayList<>();
+    RecyclerView recyclerViewProduct;
     boolean IsParse=false;
 
-    public GetPromoAsync(Context context, RecyclerView recyclerView) {
+    public ProductAsync(Context context, RecyclerView recyclerView) {
         contextService = context;
-        this.recyclerViewPromo=recyclerView;
+        this.recyclerViewProduct=recyclerView;
+
 
     }
 
@@ -43,7 +45,9 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
     protected String doInBackground(String... strings) {
 
         try {
-            String link = constant.url+"/php/GetPromo.php";
+
+            //conecting Api
+            String link = constant.url+"/php/getProduct.php";
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -100,14 +104,21 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
             for (int i=0;i< ProductJsonArray.length();i++)
             {
                 productJson=ProductJsonArray.getJSONObject(i);
-                int idPromo = Integer.parseInt(productJson.getString("idPromo"));
-                String name=productJson.getString("name");
-                String startPromo =productJson.getString("startPromo");
-                String finishPromo = productJson.getString("finishPromo");
-                String image = constant.url+"/php/promo/" + productJson.getString("image");
 
-                PromoModel promo =new PromoModel(idPromo,name,startPromo,finishPromo,image);
-                listPromo.add(promo);
+                String name=productJson.getString("name");
+                String description =productJson.getString("description");
+                Double precio = Double.parseDouble(productJson.getString("precio"));
+                int cantidad = Integer.parseInt(productJson.getString("cantidad"));
+                String image =productJson.getString("photoId");
+                image= constant.url +"/php/image/"+ image;
+                int idBrand = Integer.parseInt(productJson.getString("idbrand"));
+                int idproduct = Integer.parseInt(productJson.getString("idProduct"));
+                int idCategory = Integer.parseInt(productJson.getString("idCategory"));
+                
+
+                ProductModel product=new ProductModel(idproduct,name,precio,description,cantidad,image,idBrand,idCategory);
+
+                listProduct.add(product);
             }
 
             return IsParse=true;
@@ -124,13 +135,17 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
             super.onPostExecute(result);
             if (IsParse) {
 
-                mAdapter = new PromoAdapter(listPromo, contextService);
-                recyclerViewPromo.setAdapter(mAdapter);
-
+                mAdapter = new ProductAdapter(listProduct, contextService);
+                recyclerViewProduct.setAdapter(mAdapter);
             } else {
-                Toast.makeText(contextService, "Unable To Parse,Check Your Log output", Toast.LENGTH_SHORT).show();
+                Toast.makeText(contextService, R.string.errorConexion, Toast.LENGTH_SHORT).show();
             }
 
+            //super.onPostExecute(result);
+            //Intent intent = new Intent(contextService, ListProductActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //  contextService.startActivity(new Intent(contextService, ListProductActivity.class));
+            //contextService.startActivity(intent);
         }
         catch (Exception e) {
             e.getMessage();
@@ -138,3 +153,6 @@ public class GetPromoAsync extends AsyncTask< String ,Void,String> {
     }
 
 }
+
+    
+

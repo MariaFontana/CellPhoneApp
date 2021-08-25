@@ -2,27 +2,19 @@ package com.example.acer.mynewponeapp.Bussines;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.RemoteInput;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.widget.RemoteViews;
-import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
 
-import com.example.acer.mynewponeapp.Activity.LoginActivity;
 import com.example.acer.mynewponeapp.Bussines.Interfaces.InotificationReceiver;
-import com.example.acer.mynewponeapp.DataBase.GetUpdateNotificationAsync;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
 
-import java.util.Calendar;
 import java.util.Date;
-
-import androidx.core.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

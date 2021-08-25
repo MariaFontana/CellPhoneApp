@@ -116,6 +116,11 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 setFragment(2);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
+            case R.id.accesorioMenu:
+                menuItem.setChecked(true);
+                setFragment(3);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
             case R.id.nav_item_out:
                 sessionUser.LogOut();
                 //  menuItem.setChecked(true);
@@ -160,6 +165,14 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction = fragmentManager.beginTransaction();
                 PromoFragment promoFragment = new PromoFragment();
                 fragmentTransaction.replace(R.id.fragment, promoFragment);
+                fragmentTransaction.commit();
+                break;
+
+            case 3:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                AccesorioFragment accesorioFragmnt = new AccesorioFragment();
+                fragmentTransaction.replace(R.id.fragment, accesorioFragmnt);
                 fragmentTransaction.commit();
                 break;
         }

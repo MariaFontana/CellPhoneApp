@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.acer.mynewponeapp.Bussines.Session;
 import com.example.acer.mynewponeapp.Bussines.Validation;
-import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
+import com.example.acer.mynewponeapp.DataBase.UserByLogin;
 import com.example.acer.mynewponeapp.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         try {
 
-            GetUserByLogin loginUser = new GetUserByLogin(this,mailUser, passwordUser);
+            UserByLogin loginUser = new UserByLogin(this,mailUser, passwordUser);
             loginUser.execute(mailUser, passwordUser);
         }
 

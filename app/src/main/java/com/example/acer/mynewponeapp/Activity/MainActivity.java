@@ -18,32 +18,29 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.acer.mynewponeapp.Bussines.Channel;
-import com.example.acer.mynewponeapp.Bussines.CreateUserBusiness;
 import com.example.acer.mynewponeapp.Bussines.Session;
+import com.example.acer.mynewponeapp.Bussines.UserBussiness;
 import com.example.acer.mynewponeapp.Bussines.Validation;
-import com.example.acer.mynewponeapp.DataBase.GetProductByIdBrand;
+import com.example.acer.mynewponeapp.Factory.UserFactory;
 import com.example.acer.mynewponeapp.Model.BrandModel;
 import com.example.acer.mynewponeapp.Model.BreedModel;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
-import com.example.acer.mynewponeapp.RoomPersistence.Dao.ViewModel.BrandViewModel;
 
 import static java.lang.Integer.parseInt;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-
-
     EditText nametext, phonetext, direccionTxt, mascotaTxt, alimentoTxt, diaTxt, mailTxt, passwordtxt, repitPasswordtxt;
     private Button buttonRegistre;
-    AppCompatSpinner spinnerBrand;
-    AppCompatSpinner spinnerProduct;
+    AppCompatSpinner brandSpinner;
+    AppCompatSpinner productSpinner;
     AppCompatSpinner breedSpinner;
+    AppCompatSpinner spinner;
 
     private Session sessionUser;
     private int position;
@@ -53,14 +50,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     BrandModel brandItem;
     private UserModel user;
     public boolean saveUser=false;
-    private BrandViewModel brandViewModel;
-    private CreateUserBusiness createUserBusiness;
+    private UserBussiness userBussiness;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        createUserBusiness=new CreateUserBusiness(this);
+        UserFactory factory= new UserFactory(this);
+
+        userBussiness = new UserBussiness(this,factory);
+
         super.onCreate(savedInstanceState);
 
         sessionUser = new Session(this);
@@ -77,16 +76,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             SetValuesIU();
 
-            brandViewModel = new ViewModelProvider(this).get(BrandViewModel.class);
-
             GetBrand();
 
             GetBreed();
-
-
-
-
-
 
        //     GetBrandRoom();
 
@@ -114,11 +106,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             passwordtxt= (EditText)findViewById(R.id.contraseña);
             repitPasswordtxt= (EditText)findViewById(R.id.RepetPassword);
             buttonRegistre=findViewById(R.id.buttonLogin);
-            spinnerBrand = (AppCompatSpinner) findViewById(R.id.brandSpinner);
+            brandSpinner = (AppCompatSpinner) findViewById(R.id.brandSpinner);
             breedSpinner = (AppCompatSpinner) findViewById(R.id.breedSpinner);
-            spinnerProduct = (AppCompatSpinner) findViewById(R.id.productSpinner);
-            spinnerBrand.setOnItemSelectedListener(this);
-            spinnerProduct.setOnItemSelectedListener(this);
+            productSpinner = (AppCompatSpinner) findViewById(R.id.productSpinner);
+            brandSpinner.setOnItemSelectedListener(this);
+            productSpinner.setOnItemSelectedListener(this);
             breedSpinner.setOnItemSelectedListener(this);
 
         }
@@ -226,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     {
         try {
 
-            createUserBusiness.getBrand(spinnerBrand,brandViewModel);
+            userBussiness.getBrand(brandSpinner);
         }
         catch (Exception e) {
           Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -238,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void GetBreed()
     {
         try {
-            createUserBusiness.getBreed(breedSpinner);
+            userBussiness.getBreed(breedSpinner);
         }
         catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -261,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             try {
 
                UserModel user = new UserModel(0,nombre,mail, parseInt(dia),productItem, password, mascota,telefono,direccion,brandItem,breedItem);
-               createUserBusiness.insertUserDataBase(user);
+               userBussiness.insertUserDataBase(user);
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -284,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         {
             try {
 
-                GetProductByIdBrand prod = new GetProductByIdBrand(this,spinnerProduct);
-                prod.execute(idBrand.toString());
+                userBussiness.GetProductByBrand(idBrand,productSpinner);
+
             }
             catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

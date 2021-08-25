@@ -28,24 +28,24 @@ import java.util.List;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
 
-public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
+public class ProductByIdBrandAsync extends AsyncTask<String,Void,String>  {
 
     ProgressDialog progressDialog;
     Context contextService;
     static JSONArray productJsonArray = null;
     String json = "";
-    AppCompatSpinner spinnerProduct;
-    AppCompatSpinner breedSpinner;
+    AppCompatSpinner productSpinner;
+
 
     List<ProductModel>productList=new ArrayList<>();
 
     boolean IsParse=false;
 
 
-    public GetProductByIdBrand(Context context, AppCompatSpinner spinnerProduct )
+    public ProductByIdBrandAsync(Context context, AppCompatSpinner productSpinner )
     {
         contextService = context;
-        this.spinnerProduct=spinnerProduct;
+        this.productSpinner=productSpinner;
         progressDialog= new ProgressDialog(contextService);
 
 
@@ -168,7 +168,7 @@ public class GetProductByIdBrand extends AsyncTask<String,Void,String>  {
             //Implemento el adapter con el contexto, layout, listaPaisesSql
             comboAdapterSql = new ArrayAdapter<ProductModel>(contextService, android.R.layout.simple_spinner_item,productList );
             //Cargo el spinner con los datos
-            spinnerProduct.setAdapter(comboAdapterSql);
+            productSpinner.setAdapter(comboAdapterSql);
 
         }
         else

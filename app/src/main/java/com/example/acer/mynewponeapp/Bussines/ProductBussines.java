@@ -1,37 +1,70 @@
 package com.example.acer.mynewponeapp.Bussines;
 
-import com.example.acer.mynewponeapp.Bussines.Interfaces.IproductBussnes;
+import android.content.Context;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.acer.mynewponeapp.Bussines.Interfaces.IproductBussines;
+import com.example.acer.mynewponeapp.DataBase.ProductByCategoryAsync;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ProductBussnes implements IproductBussnes {
+public class ProductBussines implements IproductBussines {
 
     private ProductModel productModel;
     private List<ProductModel> listProductModel;
     private UpdateNotificationModel updateNotificationModel;
+    private RecyclerView recycleViewAccesorio;
+    private Context context;
+    public String formattedDate;
 
-    public ProductBussnes() {
+    public ProductBussines( RecyclerView recycleViewAccesorio, Context context) {
+
+        this.recycleViewAccesorio= recycleViewAccesorio;
+        this.context=context;
 
     }
 
-    public ProductBussnes(UserModel userModel)
+    public ProductBussines(UserModel userModel, RecyclerView recycleViewAccesorio, Context context)
     {
         this.productModel = userModel.getProduct();
         if(userModel.getListNotificationModelList()!= null) {
             this.updateNotificationModel = userModel.getListNotificationModelList().get(0);
         }
+
+        this.context=context;
     }
-    public ProductBussnes( UpdateNotificationModel updateNotificationModel)
+
+    public ProductBussines(UserModel userModel, Context context)
+    {
+        this.productModel = userModel.getProduct();
+        if(userModel.getListNotificationModelList()!= null) {
+            this.updateNotificationModel = userModel.getListNotificationModelList().get(0);
+        }
+
+        this.context=context;
+    }
+
+
+    public ProductBussines(UpdateNotificationModel updateNotificationModel)
     {
 
         this.updateNotificationModel=updateNotificationModel;
     }
 
+    public List<ProductModel> GetAccesorios() {
+
+        ProductByCategoryAsync ListAccesorio= new ProductByCategoryAsync(context,recycleViewAccesorio);
+        ListAccesorio.execute();
+
+        return null;
+    }
 
     public long CalculationDurationFeed()
     {
@@ -39,6 +72,7 @@ public class ProductBussnes implements IproductBussnes {
         if(updateNotificationModel != null) {
 
             Date dateStart = updateNotificationModel.getDateUpdate();
+            formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dateStart);
 
             int days = updateNotificationModel.getCountDays();
             Date dateNow =Calendar.getInstance().getTime();

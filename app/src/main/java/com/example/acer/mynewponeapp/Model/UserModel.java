@@ -3,10 +3,6 @@ package com.example.acer.mynewponeapp.Model;
 import java.util.Date;
 import java.util.List;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
 public class UserModel {
 
     private int idUser;
@@ -27,11 +23,7 @@ public class UserModel {
 
     private ProductModel product;
 
-
-
     private BreedModel breedItem;
-
-
 
     private BrandModel brandItem;
 

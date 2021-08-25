@@ -27,7 +27,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
+public class NotificationByUserAsync extends AsyncTask<Void,Void,String> {
 
     private UserModel userModel;
     private Context contextService;
@@ -40,7 +40,7 @@ public class GetNotificationByUserAsync extends AsyncTask<Void,Void,String> {
     boolean IsParse=false;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public GetNotificationByUserAsync(Context context) {
+    public NotificationByUserAsync(Context context) {
 
         contextService = context;
         session= new Session(context);

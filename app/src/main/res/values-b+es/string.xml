@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+        <string name="app_name">Animalias</string>
+        <string name="direccion">Dirección</string>
+        <string name="nombre">Nombre Completo</string>
+        <string name="mascota">Mascota</string>
+
+        <string name="dia">¿Cuantos días te quedan de alimento?</string>
+        <string name="mail">Mail</string>
+        <string name="ingresar">Ingresar</string>
+        <string name="password">clave</string>
+        <string name="RepitPassword">Repita Conttraseña</string>
+        <string name="emailIsInvalid">El Mail no es válido</string>
+        <string name="login">Inicio</string>
+        <string name="contraseña">contraseña</string>
+        <string name="registrar">Registrar</string>
+        <string name="marca">Marca</string>
+        <string name="breed">Mordida</string>
+        <string name="product">Producto</string>
+
+        <string name="Salir">salir</string>
+        <string name="errorDia">día es un valor numerico</string>
+        <string name="requeridField"> Los Campos Nombre,phone,direccion,mail,alimento y días son requeridos</string>
+        <string name="passwordEqual"> Las password no cinciden</string>
+        <string name="messageWhatsApp">Hola necesito comprar el alimento de mi mascota.Muchas Gracias!!!</string>
+        <string name="phoneNumber">542615568504</string>
+        <string name="navigation_drawer_open">Drawer Open</string>
+        <string name="navigation_drawer_close">Drawer Closed</string>
+        <string name="Hola">Hola</string>
+        <string name="userExist">El Nombre de usuario ya existe</string>
+        <string name="userSave">El usuario se guardo exitosamente!!!!Felicitaciones!!</string>
+        <string name="diasRemaining">Te quedan</string>
+        <string name="diasAlimento"> días de alimento</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="errorConexion">Hay un error en la conexión, vuelva a intentarlo!</string>
+
+    </resources>
+

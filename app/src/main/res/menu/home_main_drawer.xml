@@ -13,7 +13,7 @@
         <item android:id="@+id/promoMenu"
             android:icon="@drawable/promo_24"
             android:title="Promos" />
-        <item android:id="@+id/nav_item_Accesorio"
+        <item android:id="@+id/accesorioMenu"
             android:icon="@drawable/tienda_24"
             android:title="Accesorios" />
     </group>

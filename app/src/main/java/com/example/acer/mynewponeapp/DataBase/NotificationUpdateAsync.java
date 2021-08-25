@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 
 
-public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
+public class NotificationUpdateAsync extends AsyncTask<Void,Void,String> {
 
     private UpdateNotificationModel updateNotificationModel;
     private Context contextService;
@@ -29,7 +29,7 @@ public class UpdateNotificationAsync extends AsyncTask<Void,Void,String> {
     static JSONArray userJsonArray = null;
 
     //flag 0 means get and 1 means post.(By default it is get.)
-    public UpdateNotificationAsync(Context context, UpdateNotificationModel updateNotificationModel ) {
+    public NotificationUpdateAsync(Context context, UpdateNotificationModel updateNotificationModel ) {
         contextService = context;
         this.updateNotificationModel=updateNotificationModel;
     }

@@ -9,8 +9,8 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.example.acer.mynewponeapp.Bussines.Interfaces.INotificationBusiness;
-import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
-import com.example.acer.mynewponeapp.DataBase.UpdateNotificationAsync;
+import com.example.acer.mynewponeapp.DataBase.NotificationByUserAsync;
+import com.example.acer.mynewponeapp.DataBase.NotificationUpdateAsync;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 
@@ -22,7 +22,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class NotificaionBussines implements INotificationBusiness {
 
     private Date dateNotification;
-    private UpdateNotificationAsync updateNotificationAsync;
+    private NotificationUpdateAsync notificationUpdateAsync;
     Context context;
     UserModel userModel;
     Session session;
@@ -104,8 +104,8 @@ public class NotificaionBussines implements INotificationBusiness {
     @Override
     public void updateNotification() {
 
-        UpdateNotificationAsync updateNotificationAsync= new UpdateNotificationAsync(context,updateNotificationModel);
-        updateNotificationAsync.execute();
+        NotificationUpdateAsync notificationUpdateAsync = new NotificationUpdateAsync(context,updateNotificationModel);
+        notificationUpdateAsync.execute();
     }
 
 
@@ -126,8 +126,8 @@ public class NotificaionBussines implements INotificationBusiness {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void getListNotificationByUser() {
-        GetNotificationByUserAsync getNotificationByUserAsync= new GetNotificationByUserAsync(context);
-        getNotificationByUserAsync.execute();
+        NotificationByUserAsync notificationByUserAsync = new NotificationByUserAsync(context);
+        notificationByUserAsync.execute();
     }
 
 

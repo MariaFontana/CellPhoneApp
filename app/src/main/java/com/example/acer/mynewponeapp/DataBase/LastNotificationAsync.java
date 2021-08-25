@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class GetUpdateNotificationAsync extends AsyncTask<Void,Void,String> {
+public class LastNotificationAsync extends AsyncTask<Void,Void,String> {
 
 private UserModel userModel;
 private Context contextService;
@@ -41,7 +41,7 @@ private Session session;
 private boolean IsAlarmSet=false;
 private List<UpdateNotificationModel> listUpdateNotificationModel;
 //flag 0 means get and 1 means post.(By default it is get.)
-public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
+public LastNotificationAsync(Context context, boolean isAlarmSet) {
 
             contextService = context;
             session= new Session(context);
@@ -154,7 +154,7 @@ public GetUpdateNotificationAsync(Context context,boolean isAlarmSet) {
          if(IsAlarmSet)
         {
              updateNotificatinModel.setDateUpdate(new Date());
-              UpdateNotificationAsync update=new UpdateNotificationAsync(contextService,updateNotificatinModel);
+              NotificationUpdateAsync update=new NotificationUpdateAsync(contextService,updateNotificatinModel);
              updateNotificatinModel.setUserModel(userModel);
             update.execute();
              session.saveUpdateNotidicationModel(updateNotificatinModel);

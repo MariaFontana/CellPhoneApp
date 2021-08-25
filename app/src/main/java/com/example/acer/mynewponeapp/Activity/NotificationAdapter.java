@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.acer.mynewponeapp.Bussines.ProductBussnes;
+import com.example.acer.mynewponeapp.Bussines.ProductBussines;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.R;
 
@@ -22,7 +22,7 @@ public class NotificationAdapter  extends RecyclerView.Adapter<NotificationAdapt
 
     private List<UpdateNotificationModel> updateNotificationModelsList;
     private Context context;
-    private ProductBussnes productBussnes;
+    private ProductBussines productBussines;
     public NotificationAdapter(List<UpdateNotificationModel> updateNotificationModelsList, Context context)
     {
         this.updateNotificationModelsList=updateNotificationModelsList;

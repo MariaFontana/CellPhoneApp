@@ -2,13 +2,13 @@ package com.example.acer.mynewponeapp.Bussines;
 
 import android.content.Context;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.acer.mynewponeapp.Bussines.Interfaces.IPromoBussines;
-import com.example.acer.mynewponeapp.DataBase.GetPromoAsync;
+import com.example.acer.mynewponeapp.DataBase.PromoAsync;
 import com.example.acer.mynewponeapp.Model.PromoModel;
 
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class PromoBussiness implements IPromoBussines {
 
@@ -24,7 +24,7 @@ public class PromoBussiness implements IPromoBussines {
     @Override
     public List<PromoModel> GetPromo() {
 
-        GetPromoAsync getPromo= new GetPromoAsync(context,recycleViewPromo);
+        PromoAsync getPromo= new PromoAsync(context,recycleViewPromo);
         getPromo.execute();
 
 

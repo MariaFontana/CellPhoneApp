@@ -4,11 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.example.acer.mynewponeapp.Bussines.Session;
-import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
-import com.example.acer.mynewponeapp.DataBase.GetUserByLogin;
 import com.example.acer.mynewponeapp.Model.UpdateNotificationModel;
 import com.example.acer.mynewponeapp.Model.UserModel;
 import com.example.acer.mynewponeapp.R;
@@ -17,7 +14,6 @@ import com.example.acer.mynewponeapp.Util.verticalSpacignDecorator;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

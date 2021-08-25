@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.acer.mynewponeapp.Activity.ProductAdapter;
+import com.example.acer.mynewponeapp.Activity.AccesorioAdapter;
 import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Util.constant;
 
@@ -16,49 +16,57 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetProduct extends AsyncTask< String ,Void,String> {
-
+public class ProductByCategoryAsync extends AsyncTask< String ,Void,String>
+{
     Context contextService;
     static JSONArray ProductJsonArray = null;
     String json = "";
     private RecyclerView.Adapter mAdapter;
     List<ProductModel> listProduct = new ArrayList<>();
-    RecyclerView recyclerViewProduct;
+    RecyclerView recyclerViewProductByCategory;
     boolean IsParse=false;
 
-    public GetProduct(Context context, RecyclerView recyclerView) {
+
+    public ProductByCategoryAsync(Context context, RecyclerView recyclerView)
+    {
         contextService = context;
-        this.recyclerViewProduct=recyclerView;
-
-
+        this.recyclerViewProductByCategory=recyclerView;
     }
 
     @Override
     protected String doInBackground(String... strings) {
 
-        try {
-            String link = constant.url+"/php/getProduct.php";
 
-            URL url = new URL(link);
-            URLConnection conn = url.openConnection();
+        try {
+
+            String link = constant.url+"/php/GetProductByCategory.php";
+
+            String idCategory = "1";
+
+            String data = URLEncoder.encode("idCategory", "UTF-8") + "=" +
+                    URLEncoder.encode(idCategory, "UTF-8");
+
+            URL url= new URL(link);
+            URLConnection conn= url.openConnection();
             conn.setDoOutput(true);
 
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.flush();
+            OutputStreamWriter write= new OutputStreamWriter(conn.getOutputStream());
+            write.flush();
+
             BufferedReader reader = new BufferedReader(new
                     InputStreamReader(conn.getInputStream()));
 
             StringBuilder sb = new StringBuilder();
             String line = null;
-
-            // Read Server Response
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append(line + "\n");
@@ -68,13 +76,11 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
                 ProductJsonArray   = CreateJson();
                 parse();
             }
-
-        } catch (Exception e) {
-            new String("Exception: " + e.getMessage());
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        return ProductJsonArray.toString();
+        return null;
     }
 
 
@@ -91,38 +97,37 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
         return ProductJsonArray;
     }
 
-    private Boolean parse()
-    {
-        try
-        {
+    private Boolean parse() {
+        try {
 
             JSONObject productJson;
 
-            for (int i=0;i< ProductJsonArray.length();i++)
-            {
-                productJson=ProductJsonArray.getJSONObject(i);
+            for (int i = 0; i < ProductJsonArray.length(); i++) {
+                productJson = ProductJsonArray.getJSONObject(i);
 
-                String name=productJson.getString("name");
-                String description =productJson.getString("description");
+                String name = productJson.getString("name");
+                String description = productJson.getString("description");
                 Double precio = Double.parseDouble(productJson.getString("precio"));
                 int cantidad = Integer.parseInt(productJson.getString("cantidad"));
-                String image =productJson.getString("photoId");
-                image= constant.url +"/php/image/"+ image;
-                int idBrand = Integer.parseInt(productJson.getString("idbrand"));
+                String image = productJson.getString("photoId");
+                image = constant.url + "/php/image/" + image;
+                int idBrand = Integer.parseInt(productJson.getString("idBrand"));
                 int idproduct = Integer.parseInt(productJson.getString("idProduct"));
-                
+                int idCategory = Integer.parseInt(productJson.getString("idCategory"));
 
-                ProductModel product=new ProductModel(idproduct,name,precio,description,cantidad,image,idBrand);
+                ProductModel product = new ProductModel(idproduct, name, precio, description, cantidad, image, idBrand,idCategory);
 
                 listProduct.add(product);
             }
 
-            return IsParse=true;
+            return IsParse = true;
 
         } catch (JSONException e) {
             e.printStackTrace();
-            return IsParse=false;
+            return IsParse = false;
         }
+
+
     }
 
     @Override
@@ -131,17 +136,13 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
             super.onPostExecute(result);
             if (IsParse) {
 
-                mAdapter = new ProductAdapter(listProduct, contextService);
-                recyclerViewProduct.setAdapter(mAdapter);
+                mAdapter = new AccesorioAdapter(listProduct, contextService);
+                recyclerViewProductByCategory.setAdapter(mAdapter);
+
             } else {
                 Toast.makeText(contextService, "Unable To Parse,Check Your Log output", Toast.LENGTH_SHORT).show();
             }
 
-            //super.onPostExecute(result);
-            //Intent intent = new Intent(contextService, ListProductActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //  contextService.startActivity(new Intent(contextService, ListProductActivity.class));
-            //contextService.startActivity(intent);
         }
         catch (Exception e) {
             e.getMessage();
@@ -149,6 +150,3 @@ public class GetProduct extends AsyncTask< String ,Void,String> {
     }
 
 }
-
-    
-

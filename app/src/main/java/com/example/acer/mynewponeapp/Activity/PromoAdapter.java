@@ -5,18 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.acer.mynewponeapp.Model.ProductModel;
 import com.example.acer.mynewponeapp.Model.PromoModel;
 import com.example.acer.mynewponeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 
     public class PromoAdapter extends RecyclerView.Adapter<com.example.acer.mynewponeapp.Activity.PromoAdapter.ViewHolder> {
@@ -57,7 +54,6 @@ import androidx.recyclerview.widget.RecyclerView;
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-
 
             ImageView photo;
             public ViewHolder(View v) {

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.example.acer.mynewponeapp.Model.BreedModel;
+import com.example.acer.mynewponeapp.R;
 import com.example.acer.mynewponeapp.Util.constant;
 
 import org.json.JSONArray;
@@ -26,7 +27,7 @@ import java.util.List;
 
 import static com.example.acer.mynewponeapp.DataBase.BussinessMysql.listJsonArray;
 
-public class GetBreedAsync extends AsyncTask<String,Void,String>
+public class BreedAsync extends AsyncTask<String,Void,String>
 
     {
 
@@ -39,7 +40,7 @@ public class GetBreedAsync extends AsyncTask<String,Void,String>
         ProgressDialog progressDialog;
 
         //flag 0 means get and 1 means post.(By default it is get.)
-    public GetBreedAsync(Context context, AppCompatSpinner spinnerBread )
+    public BreedAsync(Context context, AppCompatSpinner spinnerBread )
         {
             contextService = context;
             this.spinnerBread=spinnerBread;
@@ -156,7 +157,7 @@ public class GetBreedAsync extends AsyncTask<String,Void,String>
         }
         else
         {
-            Toast.makeText(contextService, "No se cargo la mordida ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contextService, R.string.errorConexion, Toast.LENGTH_SHORT).show();
         }
 
     }

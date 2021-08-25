@@ -1,9 +1,9 @@
 package com.example.acer.mynewponeapp.Bussines;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.example.acer.mynewponeapp.Bussines.Interfaces.IActivityHomeBussines;
-import com.example.acer.mynewponeapp.DataBase.GetNotificationByUserAsync;
 import com.example.acer.mynewponeapp.Model.UserModel;
 
 public class ActivityHomeBussine implements IActivityHomeBussines {
@@ -22,7 +22,9 @@ public class ActivityHomeBussine implements IActivityHomeBussines {
     //Obtiene todas las notificaciones del usuario
     @Override
     public void GetLastNotification(int IdUser) {
-       notificationBusiness.getListNotificationByUser();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            notificationBusiness.getListNotificationByUser();
+        }
     }
 
 
